@@ -14,6 +14,22 @@
 		9883234227B8A2A90052859D /* FinalFoodiesTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9883234127B8A2A90052859D /* FinalFoodiesTests.swift */; };
 		9883234C27B8A2A90052859D /* FinalFoodiesUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9883234B27B8A2A90052859D /* FinalFoodiesUITests.swift */; };
 		9883234E27B8A2A90052859D /* FinalFoodiesUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9883234D27B8A2A90052859D /* FinalFoodiesUITestsLaunchTests.swift */; };
+		9883235B27B8A2C30052859D /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9883235A27B8A2C30052859D /* LoginView.swift */; };
+		9883235D27B8A3330052859D /* AuthView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9883235C27B8A3330052859D /* AuthView.swift */; };
+		9883235F27B8A39C0052859D /* SignUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9883235E27B8A39C0052859D /* SignUpView.swift */; };
+		9883236227B8A4130052859D /* HomePage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9883236127B8A4130052859D /* HomePage.swift */; };
+		9883236427B8A51C0052859D /* DetailsPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9883236327B8A51C0052859D /* DetailsPage.swift */; };
+		9883236527B8A51C0052859D /* DetailsPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9883236327B8A51C0052859D /* DetailsPage.swift */; };
+		9883236627B8A51C0052859D /* DetailsPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9883236327B8A51C0052859D /* DetailsPage.swift */; };
+		9883236827B8A59A0052859D /* NointernetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9883236727B8A59A0052859D /* NointernetView.swift */; };
+		9883236927B8A59A0052859D /* NointernetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9883236727B8A59A0052859D /* NointernetView.swift */; };
+		9883236A27B8A59A0052859D /* NointernetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9883236727B8A59A0052859D /* NointernetView.swift */; };
+		9883236C27B999220052859D /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9883236B27B999220052859D /* SettingsView.swift */; };
+		9883236D27B999220052859D /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9883236B27B999220052859D /* SettingsView.swift */; };
+		9883236E27B999220052859D /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9883236B27B999220052859D /* SettingsView.swift */; };
+		9883237027B999D00052859D /* AlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9883236F27B999D00052859D /* AlertView.swift */; };
+		9883237127B999D00052859D /* AlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9883236F27B999D00052859D /* AlertView.swift */; };
+		9883237227B999D00052859D /* AlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9883236F27B999D00052859D /* AlertView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -44,6 +60,14 @@
 		9883234727B8A2A90052859D /* FinalFoodiesUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FinalFoodiesUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		9883234B27B8A2A90052859D /* FinalFoodiesUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FinalFoodiesUITests.swift; sourceTree = "<group>"; };
 		9883234D27B8A2A90052859D /* FinalFoodiesUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FinalFoodiesUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		9883235A27B8A2C30052859D /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
+		9883235C27B8A3330052859D /* AuthView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthView.swift; sourceTree = "<group>"; };
+		9883235E27B8A39C0052859D /* SignUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpView.swift; sourceTree = "<group>"; };
+		9883236127B8A4130052859D /* HomePage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomePage.swift; sourceTree = "<group>"; };
+		9883236327B8A51C0052859D /* DetailsPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsPage.swift; sourceTree = "<group>"; };
+		9883236727B8A59A0052859D /* NointernetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NointernetView.swift; sourceTree = "<group>"; };
+		9883236B27B999220052859D /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		9883236F27B999D00052859D /* AlertView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -98,6 +122,12 @@
 				9883233227B8A2A90052859D /* ContentView.swift */,
 				9883233427B8A2A90052859D /* Assets.xcassets */,
 				9883233627B8A2A90052859D /* Preview Content */,
+				9883236027B8A3F50052859D /* Authentication */,
+				9883236127B8A4130052859D /* HomePage.swift */,
+				9883236327B8A51C0052859D /* DetailsPage.swift */,
+				9883236727B8A59A0052859D /* NointernetView.swift */,
+				9883236B27B999220052859D /* SettingsView.swift */,
+				9883236F27B999D00052859D /* AlertView.swift */,
 			);
 			path = FinalFoodies;
 			sourceTree = "<group>";
@@ -125,6 +155,16 @@
 				9883234D27B8A2A90052859D /* FinalFoodiesUITestsLaunchTests.swift */,
 			);
 			path = FinalFoodiesUITests;
+			sourceTree = "<group>";
+		};
+		9883236027B8A3F50052859D /* Authentication */ = {
+			isa = PBXGroup;
+			children = (
+				9883235A27B8A2C30052859D /* LoginView.swift */,
+				9883235C27B8A3330052859D /* AuthView.swift */,
+				9883235E27B8A39C0052859D /* SignUpView.swift */,
+			);
+			path = Authentication;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -257,7 +297,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9883236827B8A59A0052859D /* NointernetView.swift in Sources */,
+				9883235B27B8A2C30052859D /* LoginView.swift in Sources */,
+				9883236227B8A4130052859D /* HomePage.swift in Sources */,
+				9883236C27B999220052859D /* SettingsView.swift in Sources */,
+				9883235F27B8A39C0052859D /* SignUpView.swift in Sources */,
+				9883237027B999D00052859D /* AlertView.swift in Sources */,
 				9883233327B8A2A90052859D /* ContentView.swift in Sources */,
+				9883236427B8A51C0052859D /* DetailsPage.swift in Sources */,
+				9883235D27B8A3330052859D /* AuthView.swift in Sources */,
 				9883233127B8A2A90052859D /* FinalFoodiesApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -266,7 +314,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9883237127B999D00052859D /* AlertView.swift in Sources */,
+				9883236927B8A59A0052859D /* NointernetView.swift in Sources */,
+				9883236D27B999220052859D /* SettingsView.swift in Sources */,
 				9883234227B8A2A90052859D /* FinalFoodiesTests.swift in Sources */,
+				9883236527B8A51C0052859D /* DetailsPage.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -274,8 +326,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9883236E27B999220052859D /* SettingsView.swift in Sources */,
+				9883236A27B8A59A0052859D /* NointernetView.swift in Sources */,
+				9883236627B8A51C0052859D /* DetailsPage.swift in Sources */,
 				9883234C27B8A2A90052859D /* FinalFoodiesUITests.swift in Sources */,
 				9883234E27B8A2A90052859D /* FinalFoodiesUITestsLaunchTests.swift in Sources */,
+				9883237227B999D00052859D /* AlertView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
