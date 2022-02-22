@@ -30,6 +30,15 @@
 		9883237027B999D00052859D /* AlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9883236F27B999D00052859D /* AlertView.swift */; };
 		9883237127B999D00052859D /* AlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9883236F27B999D00052859D /* AlertView.swift */; };
 		9883237227B999D00052859D /* AlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9883236F27B999D00052859D /* AlertView.swift */; };
+		9883237727C474A60052859D /* SearchResultsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9883237627C474A60052859D /* SearchResultsView.swift */; };
+		9883237827C474A60052859D /* SearchResultsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9883237627C474A60052859D /* SearchResultsView.swift */; };
+		9883237927C474A60052859D /* SearchResultsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9883237627C474A60052859D /* SearchResultsView.swift */; };
+		9883237B27C571870052859D /* FavoritesResultsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9883237A27C571870052859D /* FavoritesResultsView.swift */; };
+		9883237C27C571870052859D /* FavoritesResultsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9883237A27C571870052859D /* FavoritesResultsView.swift */; };
+		9883237D27C571870052859D /* FavoritesResultsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9883237A27C571870052859D /* FavoritesResultsView.swift */; };
+		9883237F27C572D30052859D /* NoSearchResultsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9883237E27C572D30052859D /* NoSearchResultsView.swift */; };
+		9883238027C572D30052859D /* NoSearchResultsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9883237E27C572D30052859D /* NoSearchResultsView.swift */; };
+		9883238127C572D30052859D /* NoSearchResultsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9883237E27C572D30052859D /* NoSearchResultsView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -68,6 +77,9 @@
 		9883236727B8A59A0052859D /* NointernetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NointernetView.swift; sourceTree = "<group>"; };
 		9883236B27B999220052859D /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		9883236F27B999D00052859D /* AlertView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertView.swift; sourceTree = "<group>"; };
+		9883237627C474A60052859D /* SearchResultsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultsView.swift; sourceTree = "<group>"; };
+		9883237A27C571870052859D /* FavoritesResultsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesResultsView.swift; sourceTree = "<group>"; };
+		9883237E27C572D30052859D /* NoSearchResultsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoSearchResultsView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -178,6 +190,8 @@
 				9883236127B8A4130052859D /* HomePage.swift */,
 				9883236327B8A51C0052859D /* DetailsPage.swift */,
 				9883236B27B999220052859D /* SettingsView.swift */,
+				9883237627C474A60052859D /* SearchResultsView.swift */,
+				9883237A27C571870052859D /* FavoritesResultsView.swift */,
 			);
 			path = MainScreens;
 			sourceTree = "<group>";
@@ -187,6 +201,7 @@
 			children = (
 				9883236727B8A59A0052859D /* NointernetView.swift */,
 				9883236F27B999D00052859D /* AlertView.swift */,
+				9883237E27C572D30052859D /* NoSearchResultsView.swift */,
 			);
 			path = Alerts;
 			sourceTree = "<group>";
@@ -326,10 +341,13 @@
 				9883236227B8A4130052859D /* HomePage.swift in Sources */,
 				9883236C27B999220052859D /* SettingsView.swift in Sources */,
 				9883235F27B8A39C0052859D /* SignUpView.swift in Sources */,
+				9883237B27C571870052859D /* FavoritesResultsView.swift in Sources */,
 				9883237027B999D00052859D /* AlertView.swift in Sources */,
 				9883233327B8A2A90052859D /* ContentView.swift in Sources */,
+				9883237727C474A60052859D /* SearchResultsView.swift in Sources */,
 				9883236427B8A51C0052859D /* DetailsPage.swift in Sources */,
 				9883235D27B8A3330052859D /* AuthView.swift in Sources */,
+				9883237F27C572D30052859D /* NoSearchResultsView.swift in Sources */,
 				9883233127B8A2A90052859D /* FinalFoodiesApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -339,7 +357,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				9883237127B999D00052859D /* AlertView.swift in Sources */,
+				9883237827C474A60052859D /* SearchResultsView.swift in Sources */,
+				9883237C27C571870052859D /* FavoritesResultsView.swift in Sources */,
 				9883236927B8A59A0052859D /* NointernetView.swift in Sources */,
+				9883238027C572D30052859D /* NoSearchResultsView.swift in Sources */,
 				9883236D27B999220052859D /* SettingsView.swift in Sources */,
 				9883234227B8A2A90052859D /* FinalFoodiesTests.swift in Sources */,
 				9883236527B8A51C0052859D /* DetailsPage.swift in Sources */,
@@ -352,8 +373,11 @@
 			files = (
 				9883236E27B999220052859D /* SettingsView.swift in Sources */,
 				9883236A27B8A59A0052859D /* NointernetView.swift in Sources */,
+				9883237927C474A60052859D /* SearchResultsView.swift in Sources */,
+				9883238127C572D30052859D /* NoSearchResultsView.swift in Sources */,
 				9883236627B8A51C0052859D /* DetailsPage.swift in Sources */,
 				9883234C27B8A2A90052859D /* FinalFoodiesUITests.swift in Sources */,
+				9883237D27C571870052859D /* FavoritesResultsView.swift in Sources */,
 				9883234E27B8A2A90052859D /* FinalFoodiesUITestsLaunchTests.swift in Sources */,
 				9883237227B999D00052859D /* AlertView.swift in Sources */,
 			);
