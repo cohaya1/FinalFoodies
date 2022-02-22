@@ -122,12 +122,7 @@
 				9883233227B8A2A90052859D /* ContentView.swift */,
 				9883233427B8A2A90052859D /* Assets.xcassets */,
 				9883233627B8A2A90052859D /* Preview Content */,
-				9883236027B8A3F50052859D /* Authentication */,
-				9883236127B8A4130052859D /* HomePage.swift */,
-				9883236327B8A51C0052859D /* DetailsPage.swift */,
-				9883236727B8A59A0052859D /* NointernetView.swift */,
-				9883236B27B999220052859D /* SettingsView.swift */,
-				9883236F27B999D00052859D /* AlertView.swift */,
+				9883237327C1F9580052859D /* Views */,
 			);
 			path = FinalFoodies;
 			sourceTree = "<group>";
@@ -165,6 +160,35 @@
 				9883235E27B8A39C0052859D /* SignUpView.swift */,
 			);
 			path = Authentication;
+			sourceTree = "<group>";
+		};
+		9883237327C1F9580052859D /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				9883236027B8A3F50052859D /* Authentication */,
+				9883237427C1F97A0052859D /* MainScreens */,
+				9883237527C1F9890052859D /* Alerts */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		9883237427C1F97A0052859D /* MainScreens */ = {
+			isa = PBXGroup;
+			children = (
+				9883236127B8A4130052859D /* HomePage.swift */,
+				9883236327B8A51C0052859D /* DetailsPage.swift */,
+				9883236B27B999220052859D /* SettingsView.swift */,
+			);
+			path = MainScreens;
+			sourceTree = "<group>";
+		};
+		9883237527C1F9890052859D /* Alerts */ = {
+			isa = PBXGroup;
+			children = (
+				9883236727B8A59A0052859D /* NointernetView.swift */,
+				9883236F27B999D00052859D /* AlertView.swift */,
+			);
+			path = Alerts;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
