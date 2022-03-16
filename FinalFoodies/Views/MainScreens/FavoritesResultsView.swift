@@ -18,9 +18,9 @@ struct FavoritesResultsView: View {
                 .fill(Color(#colorLiteral(red: 0.9607843160629272, green: 0.9607843160629272, blue: 0.9725490212440491, alpha: 1)))
             .frame(width: 454, height: 985)
             VStack {
-                resultsSearchLabel.padding(.top,80)
+                resultsSearchLabel.padding(.top,100)
                 
-                let twocolumns = [GridItem(.fixed(-20),spacing: 188.90),GridItem(.fixed(50),spacing: 95)]
+                let twocolumns = [GridItem(.fixed(-30),spacing: 188.90),GridItem(.fixed(20),spacing: 95)]
                 
                 ScrollView {
                    

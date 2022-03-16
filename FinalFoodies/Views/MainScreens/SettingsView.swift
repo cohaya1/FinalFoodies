@@ -36,11 +36,12 @@ struct SettingsView: View {
             
             }
             VStack{
-                signoutbutton.padding(.top,800)
+                signoutbutton.padding(.top,650)
             }
         }
     }
     var backarrow: some View {
+        
         Image("backarrowicon")
             .resizable()
             .frame(width: 6, height: 12)

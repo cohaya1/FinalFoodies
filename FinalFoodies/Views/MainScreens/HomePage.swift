@@ -9,6 +9,7 @@ import SwiftUI
 
 struct HomePage: View {
     @State private var searchText = ""
+    @StateObject var viewModel = RestaurantFetcher()
     
     var body: some View {
        
@@ -41,20 +42,26 @@ struct HomePage: View {
                 
                     ScrollView(Axis.Set.horizontal,showsIndicators: false) {
                         HStack(spacing:45){
-                            ForEach(1..<10) { _ in
-                              restauranttable
+                            ForEach(viewModel.restaurants, id:\.self) { restaurant in
+                            
+                                RestaurantTableItem(restaurant: restaurant)
                             }
+
                         }
+                       .onAppear(perform: viewModel.fetchAllRestaurants)
                         
                     }.background(Color(#colorLiteral(red: 0.949999988079071, green: 0.949999988079071, blue: 0.949999988079071, alpha: 1)))
                         .frame( height: 300)
                         .padding(.top,-2)
+                        
                     
-                }.padding(.top,500)
+                }.padding(.top,430)
                 .frame( height: 400)
         }
         
     }
+    
+    
     
     var settingsicon: some View {
         Image("settingsicon")
@@ -102,8 +109,12 @@ struct HomePage: View {
 }
 
    
-}
+
 var restauranttable: some View {
+    
+   // let restaurant : Restaurant
+    
+    
     ZStack {
        
         //Ellipse 2
@@ -133,14 +144,14 @@ var restauranttable: some View {
         .shadow(color: Color(#colorLiteral(red: 0, green: 0, blue: 0, alpha: 4)), radius:4, x:0, y:4)
         .padding(.bottom,200)
         VStack(spacing: 25){
-            Text("Veggie \ntomato mix").font(.system(size: 22, weight: .semibold, design: .rounded)).multilineTextAlignment(.center)
+            Text("viewModel.resta").font(.system(size: 22, weight: .semibold, design: .rounded)).multilineTextAlignment(.center)
         Text("N1,900").font(.system(size: 17, weight: .bold, design: .rounded)).foregroundColor(Color(#colorLiteral(red: 0.98, green: 0.29, blue: 0.05, alpha: 1))).multilineTextAlignment(.center)
        
         }.padding(.top,100)
     }
 
 }
-
+}
 struct HomePage_Previews: PreviewProvider {
     static var previews: some View {
         HomePage()

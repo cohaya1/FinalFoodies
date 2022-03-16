@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct AlertView: View {
+struct AlertView: View, Error {
     @State  var Alertselected : SwitchAlertOption?
     var body: some View {
         ZStack {
