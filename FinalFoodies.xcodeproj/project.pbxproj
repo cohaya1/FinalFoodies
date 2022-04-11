@@ -10,6 +10,9 @@
 		9802D84527E22E95006A7032 /* RestaurantTableItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9802D84427E22E95006A7032 /* RestaurantTableItem.swift */; };
 		9802D84627E22E95006A7032 /* RestaurantTableItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9802D84427E22E95006A7032 /* RestaurantTableItem.swift */; };
 		9802D84727E22E95006A7032 /* RestaurantTableItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9802D84427E22E95006A7032 /* RestaurantTableItem.swift */; };
+		985A893227F148DB00697F53 /* LocationAccessView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 985A893127F148DB00697F53 /* LocationAccessView.swift */; };
+		985A893327F148DB00697F53 /* LocationAccessView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 985A893127F148DB00697F53 /* LocationAccessView.swift */; };
+		985A893427F148DB00697F53 /* LocationAccessView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 985A893127F148DB00697F53 /* LocationAccessView.swift */; };
 		987A55A327E23FE900E44B77 /* ImageLoaderViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 987A55A227E23FE900E44B77 /* ImageLoaderViewModel.swift */; };
 		987A55A427E23FE900E44B77 /* ImageLoaderViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 987A55A227E23FE900E44B77 /* ImageLoaderViewModel.swift */; };
 		987A55A527E23FE900E44B77 /* ImageLoaderViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 987A55A227E23FE900E44B77 /* ImageLoaderViewModel.swift */; };
@@ -108,6 +111,7 @@
 
 /* Begin PBXFileReference section */
 		9802D84427E22E95006A7032 /* RestaurantTableItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantTableItem.swift; sourceTree = "<group>"; };
+		985A893127F148DB00697F53 /* LocationAccessView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationAccessView.swift; sourceTree = "<group>"; };
 		987A55A227E23FE900E44B77 /* ImageLoaderViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageLoaderViewModel.swift; sourceTree = "<group>"; };
 		9883232D27B8A2A90052859D /* FinalFoodies.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FinalFoodies.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9883233027B8A2A90052859D /* FinalFoodiesApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FinalFoodiesApp.swift; sourceTree = "<group>"; };
@@ -278,6 +282,7 @@
 				9883237A27C571870052859D /* FavoritesResultsView.swift */,
 				9883238227C575A20052859D /* TabView.swift */,
 				9802D84427E22E95006A7032 /* RestaurantTableItem.swift */,
+				985A893127F148DB00697F53 /* LocationAccessView.swift */,
 			);
 			path = MainScreens;
 			sourceTree = "<group>";
@@ -496,6 +501,7 @@
 				9883237727C474A60052859D /* SearchResultsView.swift in Sources */,
 				9883236427B8A51C0052859D /* DetailsPage.swift in Sources */,
 				9802D84527E22E95006A7032 /* RestaurantTableItem.swift in Sources */,
+				985A893227F148DB00697F53 /* LocationAccessView.swift in Sources */,
 				988323C627D7E5460052859D /* Restaurants.swift in Sources */,
 				9883235D27B8A3330052859D /* AuthView.swift in Sources */,
 				9883237F27C572D30052859D /* NoSearchResultsView.swift in Sources */,
@@ -520,6 +526,7 @@
 				988323C327D19DA50052859D /* FoodiezFeed.swift in Sources */,
 				988323D027DEC7100052859D /* FetchRestaurantsViewModel.swift in Sources */,
 				987A55A427E23FE900E44B77 /* ImageLoaderViewModel.swift in Sources */,
+				985A893327F148DB00697F53 /* LocationAccessView.swift in Sources */,
 				9802D84627E22E95006A7032 /* RestaurantTableItem.swift in Sources */,
 				9883236527B8A51C0052859D /* DetailsPage.swift in Sources */,
 			);
@@ -537,6 +544,7 @@
 				9883238127C572D30052859D /* NoSearchResultsView.swift in Sources */,
 				9883236627B8A51C0052859D /* DetailsPage.swift in Sources */,
 				9883234C27B8A2A90052859D /* FinalFoodiesUITests.swift in Sources */,
+				985A893427F148DB00697F53 /* LocationAccessView.swift in Sources */,
 				9883238A27D167950052859D /* AuthViewModel.swift in Sources */,
 				9802D84727E22E95006A7032 /* RestaurantTableItem.swift in Sources */,
 				988323D127DEC7100052859D /* FetchRestaurantsViewModel.swift in Sources */,
@@ -691,6 +699,11 @@
 				DEVELOPMENT_TEAM = 8QHSLQU2WK;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_LSApplicationCategoryType = "";
+				INFOPLIST_KEY_NSCameraUsageDescription = "Always Allow";
+				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "";
+				INFOPLIST_KEY_NSNearbyInteractionUsageDescription = allow;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -720,6 +733,11 @@
 				DEVELOPMENT_TEAM = 8QHSLQU2WK;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_LSApplicationCategoryType = "";
+				INFOPLIST_KEY_NSCameraUsageDescription = "Always Allow";
+				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "";
+				INFOPLIST_KEY_NSNearbyInteractionUsageDescription = allow;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;

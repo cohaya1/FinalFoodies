@@ -30,31 +30,29 @@ import Foundation
             
             print("scheme = \(endpoint.scheme)")
             print("url = \(endpoint.baseURL)")
-            print("parameter = \(endpoint.parameters)")
+          //  print("parameter = \(endpoint.parameters)")
             
 //            service.request(endpoint: endpoint) { result in
 //                print("result = \(result)")
 //            }
             service.request(endpoint: endpoint) {
-                [unowned self] result in
+                [weak self] result in
 
                 DispatchQueue.main.async {
 
                     switch result {
                     case.failure(let error):
-                        self.errorMessage = error.localizedDescription
+                        self?.errorMessage = error.localizedDescription
                         print(error)
                     case.success(let restaurants):
                         print("success with \(restaurants.count)")
-                        self.restaurants = restaurants
+                        self?.restaurants = restaurants
                     }
 
                 }
 
             }
         }
-        // fetch and cache for image loader
-        
 
     }
 //static func errorState() -> RestaurantFetcher {

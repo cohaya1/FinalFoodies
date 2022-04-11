@@ -22,6 +22,7 @@ enum StatusCodes:  Error {
         }
     }
 }
+
 enum HTTPMethod: String {
     case get = "GET"
     case post = "POST"
@@ -44,7 +45,7 @@ protocol API {
     var scheme: HTTPScheme{get}
    // var path: String {get}
     var baseURL: String {get}
-    var parameters:[URLQueryItem] {get}
+  //  var parameters:[URLQueryItem] {get}
     var method: HTTPMethod{get}
 }
 protocol FetchAPI {
@@ -74,22 +75,22 @@ enum FoodiezAPI: API {
         }
     }
     
-    var parameters: [URLQueryItem] {
-        switch self {
-        case.getRestaurants:
-            let params : [URLQueryItem] = []
-                //[  URLQueryItem(name: "restaurants_id ", value: "restaurants_id ")]
-            
-//            if let query = query{
-//                params.append(URLQueryItem(name: "keyword", value: query))
-//            }
-           return params
-            
-        }
-    
-       
-    }
-    
+//    var parameters: [URLQueryItem] {
+//        switch self {
+//        case.getRestaurants:
+//            let params : [URLQueryItem] = []
+//                //[  URLQueryItem(name: "restaurants_id ", value: "restaurants_id ")]
+//
+////            if let query = query{
+////                params.append(URLQueryItem(name: "keyword", value: query))
+////            }
+//           return params
+//
+//        }
+//
+//
+//    }
+//
     var method: HTTPMethod {
         switch self {
         case .getRestaurants:
@@ -116,7 +117,7 @@ struct NetworkManager: FetchAPI {
 //           return
 //       }
        // create urlrequest variable
-         //let url2 = "https://x8ki-letl-twmt.n7.xano.io/api:zmetZ6cP/restaurants"
+       
          
 //        var urlRequest = URLRequest(url: url)
 //       // assign the httpmethod need for URlRequest function
@@ -146,7 +147,9 @@ struct NetworkManager: FetchAPI {
            let json = try JSONSerialization.jsonObject(with: data, options: .mutableLeaves)
                print(json)
            }
-           catch{
+           
+           catch _ {
+               print("Failed to load: \(StatusCodes.failure)")
                
            }
            

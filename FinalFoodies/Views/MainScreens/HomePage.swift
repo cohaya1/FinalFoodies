@@ -12,7 +12,7 @@ struct HomePage: View {
     @StateObject var viewModel = RestaurantFetcher()
     
     var body: some View {
-       
+        NavigationView {
         ZStack {
             RoundedRectangle(cornerRadius: 20)
                 .fill(Color(#colorLiteral(red: 0.949999988079071, green: 0.949999988079071, blue: 0.949999988079071, alpha: 1)))
@@ -38,17 +38,19 @@ struct HomePage: View {
             })
             }.padding(.top,30)
             VStack {
-                
+              
                 
                     ScrollView(Axis.Set.horizontal,showsIndicators: false) {
-                        HStack(spacing:45){
+                        HStack(spacing:45){ // pass in restaurant object for view to show up in other view
                             ForEach(viewModel.restaurants, id:\.self) { restaurant in
-                            
+                                NavigationLink(destination: DetailsPage(restaurant:restaurant), label: {
                                 RestaurantTableItem(restaurant: restaurant)
-                            }
-
+                            })
+                                               
                         }
-                       .onAppear(perform: viewModel.fetchAllRestaurants)
+                            }
+                       .onAppear(perform: viewModel.fetchAllRestaurants
+                                 )
                         
                     }.background(Color(#colorLiteral(red: 0.949999988079071, green: 0.949999988079071, blue: 0.949999988079071, alpha: 1)))
                         .frame( height: 300)
@@ -58,10 +60,10 @@ struct HomePage: View {
                 }.padding(.top,430)
                 .frame( height: 400)
         }
-        
+        .navigationBarHidden(true)
+        }.navigationBarHidden(true)
+    
     }
-    
-    
     
     var settingsicon: some View {
         Image("settingsicon")

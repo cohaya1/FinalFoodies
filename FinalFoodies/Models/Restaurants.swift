@@ -22,10 +22,12 @@ struct Restaurant: Hashable, Decodable {
     let restaurantrating: Double
     let restaurantdescription: String
     let restaurantstypeID: Int
+    let restaurantlatitude: Int
+    let restaurantlongitude: Int
     let deepLinkURL: String?
-    let restaurantimage: Restaurantimage
+    let restaurantimage: Restaurantimage?
     
-    init(_ id:Int,_ createdAt:Int, _ restaurantname:String,_ restaurantlocation: String, _ restaurantrating: Double,_ restaurantdescription: String,_ restaurantstypeID: Int,_ deepLinkURL: String?,_ restaurantimage: Restaurantimage ){
+    init(_ id:Int,_ createdAt:Int, _ restaurantname:String,_ restaurantlocation: String, _ restaurantrating: Double,_ restaurantdescription: String,_ restaurantstypeID: Int,_ restaurantlatitude: Int,_ restaurantlongitude: Int, _ deepLinkURL: String?,_ restaurantimage: Restaurantimage ){
         self.id = id
         self.restaurantname = restaurantname
         self.restaurantlocation = restaurantlocation
@@ -35,6 +37,8 @@ struct Restaurant: Hashable, Decodable {
         self.restaurantdescription = restaurantdescription
         self.restaurantstypeID = restaurantstypeID
         self.createdAt = createdAt
+        self.restaurantlatitude = restaurantlatitude
+        self.restaurantlongitude = restaurantlongitude
     }
     
 //    init(from decoder: Decoder) throws {
@@ -62,6 +66,8 @@ struct Restaurant: Hashable, Decodable {
         case restaurantstypeID = "restaurantstype_id"
         case deepLinkURL = "DeepLinkURL"
         case restaurantimage = "Restaurantimage"
+        case restaurantlatitude = "Restaurantlatitude"
+        case restaurantlongitude = "Restaurantlongitude"
     }
     
 }

@@ -16,7 +16,7 @@ struct FinalFoodiesApp: App {
     
     var body: some Scene {
         WindowGroup {
-            TabViewUI()
+           TabViewUI()
         }
     }
 }

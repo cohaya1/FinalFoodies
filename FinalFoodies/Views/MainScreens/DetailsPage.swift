@@ -11,9 +11,11 @@ import MapKit
 import SwiftUI
 
 struct DetailsPage: View {
+    let restaurant: Restaurant
     @State private var mapCoordinate =
     MKCoordinateRegion()
     var body: some View {
+        NavigationView {
         ZStack {
             RoundedRectangle(cornerRadius: 20)
                 .fill(Color(#colorLiteral(red: 0.949999988079071, green: 0.949999988079071, blue: 0.949999988079071, alpha: 1)))
@@ -39,14 +41,18 @@ struct DetailsPage: View {
                 Text("Deliver to Me").font(.system(size: 17, weight: .semibold, design: .rounded)).foregroundColor(Color(#colorLiteral(red: 0.98, green: 0.29, blue: 0.05, alpha: 1))).multilineTextAlignment(.center)
                     .padding(.leading,25)
             }.padding(.top,600)
-        }
+        }.navigationBarHidden(true)
+       
+        }.navigationBarHidden(true )
     }
     var backarrowicon: some View {
+        NavigationLink(destination: HomePage(), label: {
             Image("backarrowicon")
                 .resizable()
                 .frame(width: 15, height: 24)
                 .scaledToFit()
-        }
+        })
+                       }
     var hearticon: some View {
         Image("hearticon")
             .resizable()
@@ -55,6 +61,7 @@ struct DetailsPage: View {
     }
     var dinnerplate: some View {
         ZStack {
+            
             Circle()
                 .fill(Color(#colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)))
                 .opacity(0.89)
@@ -62,7 +69,9 @@ struct DetailsPage: View {
 
             Circle()
                 .strokeBorder(Color(#colorLiteral(red: 0.949999988079071, green: 0.949999988079071, blue: 0.949999988079071, alpha: 0.25)), lineWidth: 1)
-                
+            if restaurant.restaurantimage?.url != nil {
+                URlImage(url: restaurant.restaurantimage!.url)
+            }
         }
         .compositingGroup()
         .frame(width: 281.21, height: 251.21)
@@ -70,11 +79,11 @@ struct DetailsPage: View {
     }
     var restaurantname: some View {
         //Veggie tomato mix
-        Text("Veggie tomato mix").font(.system(size: 28, weight: .semibold, design: .rounded)).multilineTextAlignment(.center)
+        Text(restaurant.restaurantname).font(.system(size: 28, weight: .semibold, design: .rounded)).multilineTextAlignment(.center)
     }
     var restaurantaddress: some View {
         //N1,900
-        Text("N1,900").font(.system(size: 22, weight: .bold, design: .rounded)).foregroundColor(Color(#colorLiteral(red: 0.98, green: 0.29, blue: 0.05, alpha: 1))).multilineTextAlignment(.center)
+        Text(restaurant.restaurantlocation).font(.system(size: 22, weight: .bold, design: .rounded)).foregroundColor(Color(#colorLiteral(red: 0.98, green: 0.29, blue: 0.05, alpha: 1))).multilineTextAlignment(.center)
     }
     var restaurantdescription: some View {
         VStack(spacing:10){
@@ -83,7 +92,7 @@ struct DetailsPage: View {
                 .foregroundColor(.black)
                 .padding(.trailing,220)
         //Delivered between monday a...
-        Text("This is a discription for the restaurant\nPlease be adviced").font(.system(size: 15, weight: .regular)).tracking(0.3)
+            Text(restaurant.restaurantdescription).font(.system(size: 15, weight: .regular)).tracking(0.3)
                 .foregroundColor(.gray)
                 .multilineTextAlignment(.leading)
         }
@@ -103,6 +112,6 @@ struct DetailsPage: View {
 
 struct DetailsPage_Previews: PreviewProvider {
     static var previews: some View {
-        DetailsPage()
+        DetailsPage(restaurant: Restaurant(0, 0, "", "", 0.0, "", 0,Int(0.0),Int(0.0), nil, Restaurantimage(path: "", name:"",type: .image, size: 0, mime: "", meta: Meta(width: 10, height: 10), url: "")))
     }
 }
