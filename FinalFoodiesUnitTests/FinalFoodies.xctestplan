@@ -1,0 +1,45 @@
+{
+  "configurations" : [
+    {
+      "id" : "29ADFE08-4A6B-4522-AF95-728976111B76",
+      "name" : "Configuration 1",
+      "options" : {
+
+      }
+    }
+  ],
+  "defaultOptions" : {
+    "targetForVariableExpansion" : {
+      "containerPath" : "container:FinalFoodies.xcodeproj",
+      "identifier" : "9883232C27B8A2A90052859D",
+      "name" : "FinalFoodies"
+    }
+  },
+  "testTargets" : [
+    {
+      "enabled" : false,
+      "target" : {
+        "containerPath" : "container:FinalFoodies.xcodeproj",
+        "identifier" : "9883234627B8A2A90052859D",
+        "name" : "FinalFoodiesUITests"
+      }
+    },
+    {
+      "enabled" : false,
+      "target" : {
+        "containerPath" : "container:FinalFoodies.xcodeproj",
+        "identifier" : "98C7F60129A1BE80005273D2",
+        "name" : "FinalFoodiesUnitTests"
+      }
+    },
+    {
+      "parallelizable" : true,
+      "target" : {
+        "containerPath" : "container:FinalFoodies.xcodeproj",
+        "identifier" : "9883233C27B8A2A90052859D",
+        "name" : "FinalFoodiesTests"
+      }
+    }
+  ],
+  "version" : 1
+}

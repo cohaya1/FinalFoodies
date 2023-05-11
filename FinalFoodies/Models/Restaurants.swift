@@ -22,12 +22,12 @@ struct Restaurant: Hashable, Decodable {
     let restaurantrating: Double
     let restaurantdescription: String
     let restaurantstypeID: Int
-    let restaurantlatitude: Int
-    let restaurantlongitude: Int
+    let restaurantlatitude: Double
+    let restaurantlongitude: Double
     let deepLinkURL: String?
     let restaurantimage: Restaurantimage?
     
-    init(_ id:Int,_ createdAt:Int, _ restaurantname:String,_ restaurantlocation: String, _ restaurantrating: Double,_ restaurantdescription: String,_ restaurantstypeID: Int,_ restaurantlatitude: Int,_ restaurantlongitude: Int, _ deepLinkURL: String?,_ restaurantimage: Restaurantimage ){
+    init(_ id:Int,_ createdAt:Int, _ restaurantname:String,_ restaurantlocation: String, _ restaurantrating: Double,_ restaurantdescription: String,_ restaurantstypeID: Int,_ restaurantlatitude: Double,_ restaurantlongitude: Double, _ deepLinkURL: String?,_ restaurantimage: Restaurantimage ){
         self.id = id
         self.restaurantname = restaurantname
         self.restaurantlocation = restaurantlocation
@@ -102,7 +102,7 @@ enum TypeEnum: String, Decodable {
     case image = "image"
 }
 
-typealias Welcome = [Restaurant]
+
 
 extension Restaurant: Equatable { // in case we want to search for a particular restaurant
     static func == (lhs: Restaurant, rhs: Restaurant) -> Bool {

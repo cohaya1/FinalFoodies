@@ -20,7 +20,7 @@ class ImageLoaderViewModel: ObservableObject {
     
     func fetchImageData() {
         guard let url = url, let fetchURL = URL(string: url) else {
-            errorMessage = StatusCodes.failure
+            errorMessage = StatusCodes.networkError
             return
         }
         
@@ -32,7 +32,7 @@ class ImageLoaderViewModel: ObservableObject {
         let task = URLSession.shared.dataTask(with: fetchURL) {[weak self] (data, response, error) in
             DispatchQueue.main.async {
                 if error != nil {
-                    self?.errorMessage = StatusCodes.failure
+                    self?.errorMessage = StatusCodes.networkError
                     return
                 }else if let data = data, let image = UIImage(data: data){
                     self?.image = image

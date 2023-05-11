@@ -8,38 +8,38 @@
 import SwiftUI
 
 
-struct URlImage : View {
-   
-    @StateObject var imageLoader: ImageLoaderViewModel
-    init(url: String?) {
-        self._imageLoader = StateObject(wrappedValue: ImageLoaderViewModel(url: url))
-    }
-    var body: some View {
-        if imageLoader.image != nil {
-            Image(uiImage : imageLoader.image!)
-                .resizable()
-                            .clipShape(Circle())
-                            .overlay(Circle().stroke(Color.white, lineWidth: 4))
-                            .shadow(radius: 10)
-            .aspectRatio(contentMode: .fit)
-            .frame(width: 276.1, height: 183.1)
-            .clipped()
-        .frame(width: 276.1, height: 183.1)
-    }
-        else {
-            Image(" ")
-                .resizable()
-                            .clipShape(Circle())
-                            .overlay(Circle().stroke(Color.white, lineWidth: 4))
-                            .shadow(radius: 10)
-            .aspectRatio(contentMode: .fill)
-            .frame(width: 276.1, height: 183.1)
-            .clipped()
-        .frame(width: 276.1, height: 183.1)
-        .onAppear(perform: imageLoader.fetchImageData)
-        }
-    }
-}
+//struct URlImage : View {
+//
+//    @StateObject var imageLoader: ImageLoaderViewModel
+//    init(url: String?) {
+//        self._imageLoader = StateObject(wrappedValue: ImageLoaderViewModel(url: url))
+//    }
+//    var body: some View {
+//        if imageLoader.image != nil {
+//            Image(uiImage : imageLoader.image!)
+//                .resizable()
+//                            .clipShape(Circle())
+//                            .overlay(Circle().stroke(Color.white, lineWidth: 4))
+//                            .shadow(radius: 10)
+//            .aspectRatio(contentMode: .fit)
+//            .frame(width: 276.1, height: 183.1)
+//            .clipped()
+//        .frame(width: 276.1, height: 183.1)
+//    }
+//        else {
+//            Image(" ")
+//                .resizable()
+//                            .clipShape(Circle())
+//                            .overlay(Circle().stroke(Color.white, lineWidth: 4))
+//                            .shadow(radius: 10)
+//            .aspectRatio(contentMode: .fill)
+//            .frame(width: 276.1, height: 183.1)
+//            .clipped()
+//        .frame(width: 276.1, height: 183.1)
+//        .onAppear(perform: imageLoader.fetchImageData)
+//        }
+//    }
+//}
 
 struct RestaurantTableItem: View {
     
@@ -71,7 +71,15 @@ struct RestaurantTableItem: View {
                 Circle()
                 .strokeBorder(Color(#colorLiteral(red: 0.949999988079071, green: 0.949999988079071, blue: 0.949999988079071, alpha: 1)), lineWidth: 1)
                 if restaurant.restaurantimage?.url != nil {
-                    URlImage(url: restaurant.restaurantimage!.url)
+                    AsyncImage(url: URL(string: restaurant.restaurantimage!.url))
+                       // .resizable()
+                                    .clipShape(Circle())
+                                    .overlay(Circle().stroke(Color.white, lineWidth: 4))
+                                    .shadow(radius: 10)
+                    .aspectRatio(contentMode: .fit)
+                    .frame(width: 276.1, height: 183.1)
+                    .clipped()
+                .frame(width: 276.1, height: 183.1)
                                       
                                         
                                      }
@@ -98,7 +106,7 @@ struct RestaurantTableItem: View {
 
 struct RestaurantTableItem_Previews: PreviewProvider {
     static var previews: some View {
-        RestaurantTableItem(restaurant: Restaurant(0, 0, "", "", 0.0, "", 0,Int(0.0),Int(0.0), nil, Restaurantimage(path: "", name:"",type: .image, size: 0, mime: "", meta: Meta(width: 10, height: 10), url: "")))
+        RestaurantTableItem(restaurant: Restaurant(0, 0, "", "", 0.0, "", 0,Double(0.0),Double(0.0), nil, Restaurantimage(path: "", name:"",type: .image, size: 0, mime: "", meta: Meta(width: 10, height: 10), url: "")))
     }
 }
 

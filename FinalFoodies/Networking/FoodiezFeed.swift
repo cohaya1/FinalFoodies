@@ -8,225 +8,105 @@
 import Foundation
 import SwiftUI
 
+// Define a protocol for URLSession to enable dependency injection for easier testing
+
+protocol URLSessionProtocol {
+    func data(from url: URL) async throws -> (Data, URLResponse)
+}
+
+// Conform URLSession to URLSessionProtocol to be used as a default implementation
+
+extension URLSession: URLSessionProtocol {}
+
+// Define a protocol for API clients to make it possible to create mock API clients for testing
+
+
 // Create an enum so for diffent methods for http fucntionality to pass around other functions
-enum StatusCodes:  Error {
+enum StatusCodes: Error {
     case success
-    case failure
+    case notFound
+    case serverError
+    case networkError
+    case badurl
     
-    var localizedDescription: String {
+    init?(statusCode: Int) {
+        switch statusCode {
+        case 200: self = .success
+        case 404: self = .notFound
+        case 500: self = .serverError
+        case 401: self = .badurl
+        default: return nil
+        }
+    }
+
+    var description: String {
         switch self {
-        case .success: return
-            "200"
-        case .failure: return
-            "404 \(AlertView())"
+        case .success: return "Data successfully parsed."
+        case .notFound: return "Requested data not found."
+        case .serverError: return "Server error occurred."
+        case .networkError: return "Network or server is down."
+        case .badurl: return "Your Url is incorrect"
         }
     }
 }
 
-enum HTTPMethod: String {
-    case get = "GET"
-    case post = "POST"
-    case update = "UPDATE"
-    case delete = "DELETE"
-    case put = "PUT"
-    }
-// Create enum for different scenarios if http method is HTTP or HTTPS
-
-enum HTTPScheme: String {
-    case http = "http"
-    case https = "https"
-}
-
-// Create a protocol where the any endpoint we need to use can conform to
-// The API protocol will help separate the tasks of constructing a URL
-// For an API we need the scheme , paramaters, baseURL, path, meth
-protocol API {
-    
-    var scheme: HTTPScheme{get}
-   // var path: String {get}
-    var baseURL: String {get}
-  //  var parameters:[URLQueryItem] {get}
-    var method: HTTPMethod{get}
-}
 protocol FetchAPI {
-     func request(endpoint: API, completion: @escaping (Result<[Restaurant],StatusCodes>) -> Void)
+    func getAllRestaurants() async throws -> [Restaurant]
+    func handleNoInternetConnection()
 }
 
-enum FoodiezAPI: API {
-    case getRestaurants
-    
-    var scheme: HTTPScheme{
-        switch self {
-        case .getRestaurants:
-            return .https
-        }
+
+
+
+// Define a class named "NetworkManager" that adopts the protocols "FetchAPI" and "ObservableObject"
+class NetworkManager: FetchAPI, ObservableObject {
+    func handleNoInternetConnection() {
+        print("No internet connection")
+        // Show an alert or a message to the user indicating that there is no internet connection if I had more time I would show an alert for no internet connection
     }
-//    var path: String {
-//        switch self {
-//        case .getRestaurants:
-//            return "/api:zmetZ6cP/restaurants"
-//        }
-//    }
-    
-    var baseURL: String{
-        switch self {
-        case .getRestaurants:
-            return "https://x8ki-letl-twmt.n7.xano.io/api:zmetZ6cP/restaurants"
+    private let session: URLSessionProtocol
+
+        init(session: URLSessionProtocol = URLSession.shared) {
+            self.session = session
         }
-    }
-    
-//    var parameters: [URLQueryItem] {
-//        switch self {
-//        case.getRestaurants:
-//            let params : [URLQueryItem] = []
-//                //[  URLQueryItem(name: "restaurants_id ", value: "restaurants_id ")]
-//
-////            if let query = query{
-////                params.append(URLQueryItem(name: "keyword", value: query))
-////            }
-//           return params
-//
-//        }
-//
-//
-//    }
-//
-    var method: HTTPMethod {
-        switch self {
-        case .getRestaurants:
-            return .get
+
+    // Define an asynchronous function that retrieves all restaurants and returns an array of "Restaurant" objects
+    func getAllRestaurants() async throws -> [Restaurant]{
+        
+        
+        // Create a guard statement to ensure that the APIConstants baseUrl is a valid URL. If not, throw an "invalidURL" error.
+        let getrestaurantendpoint = APIEndpoint.restaurants
+        guard let url = getrestaurantendpoint.url else {
+            throw StatusCodes.badurl
+        }
+        
+        // Create a URLRequest with the URL and send a network request to retrieve data using URLSession.shared.
+        // The retrieved data and response are returned as a tuple.
+        
+        do {
+            let (data, response) = try await session.data(from: url)
+            guard let httpResponse = response as? HTTPURLResponse,
+                  let statusCode = StatusCodes(statusCode: httpResponse.statusCode),
+                  statusCode == .success else {
+                if let statusCode = StatusCodes(statusCode: (response as? HTTPURLResponse)?.statusCode ?? 0) {
+                    print(statusCode.description)
+                    throw statusCode
+                } else {
+                    print(StatusCodes.networkError.description)
+                    throw StatusCodes.networkError
+                }
+            }
+
+            let decoder = JSONDecoder()
+            let restaurants = try decoder.decode([Restaurant].self, from: data)
+           
+            return restaurants
+        } catch {
+            print("Error: \(error.localizedDescription)")
+            throw error
         }
     }
 }
-
-struct NetworkManager: FetchAPI {
-     func request(endpoint: API, completion: @escaping (Result<[Restaurant], StatusCodes>) -> Void) {
-//        func buildURL(endpoint: API) -> URLComponents {
-//          var components = URLComponents()
-//          components.scheme = endpoint.scheme.rawValue
-//          components.host = endpoint.baseURL
-////          components.path = endpoint.path
-////          components.queryItems = endpoint.parameters
-//          return components
-//
-//      }
-//
-//       let components = buildURL(endpoint: endpoint)
-//       guard let url = components.url else {
-//           print("Url creation is returning \(StatusCodes.failure)")
-//           return
-//       }
-       // create urlrequest variable
-       
-         
-//        var urlRequest = URLRequest(url: url)
-//       // assign the httpmethod need for URlRequest function
-//       urlRequest.httpMethod = endpoint.method.rawValue
-
-         var urlRequest = URLRequest(url: URL(string: endpoint.baseURL)!)
-         urlRequest.httpMethod = endpoint.method.rawValue
-         urlRequest.addValue("application/json", forHTTPHeaderField: "Content-Type")
-         
-         
-       let session = URLSession(configuration: .default)
-       // create datatask closure with urlrequest as params to begin JSON Decoding of Restaurants
-       let dataTask = session.dataTask(with: urlRequest) {
-           data,  response, error in
-           if let error = error {
-               completion(.failure(StatusCodes.failure))
-               print("Unknown Error", error)
-               return
-           }
-           // if response is not empty then data will return
-           guard response != nil, let data = data else {
-               return
-           }
-           
-           print("data = \(data)")
-           do{
-           let json = try JSONSerialization.jsonObject(with: data, options: .mutableLeaves)
-               print(json)
-           }
-           
-           catch _ {
-               print("Failed to load: \(StatusCodes.failure)")
-               
-           }
-           
-           // if data returns then the reponse will be decoded into swift language based on model
-           if let responseObject = try? JSONDecoder().decode([Restaurant].self, from: data){
-               completion(.success(responseObject))
-              // if any error then failure response will be invoked
-           } else {
-               let error = StatusCodes.failure
-               completion(.failure(error))
-           }
-       }
-       dataTask.resume()
-   }
-       
-    }
     
     
-
-
-    
-   
-    
-   
-
-
-
-
-//final class NetworkManager { // builds network layer for Url compoonents
-//    private class func buildURL(endpoint: API) -> URLComponents {
-//        var components = URLComponents()
-//        components.scheme = endpoint.scheme.rawValue
-//        components.host = endpoint.baseURL
-//        components.path = endpoint.path
-//        components.queryItems = endpoint.parameters
-//        return components
-//
-//    }
-    // Net we need to execute the http request and decode the json
-    // response is through a codable object in the model class I created
-    // parameters: would be the endpoint that we are making a request to and also completion will be the parsed respone form request by json conversion
-    // and object is returned is successful but and error is throwed if failed
-//    class func request(endpoint: API, completion: @escaping (Result<[Restaurant],StatusCodes>) -> Void) {
-//        let components = buildURL(endpoint: endpoint)
-//        guard let url = components.url else {
-//            print("Url creation is returning \(StatusCodes.failure)")
-//            return
-//        }
-//        // create urlrequest variable
-//         var urlRequest = URLRequest(url: url)
-//        // assign the httpmethod need for URlRequest function
-//        urlRequest.httpMethod = endpoint.method.rawValue
-//
-//        let session = URLSession(configuration: .default)
-//        // create datatask closure with urlrequest as params to begin JSON Decoding of Restaurants
-//        let dataTask = session.dataTask(with: urlRequest) {
-//            data,  response, error in
-//            if let error = error {
-//                completion(.failure(StatusCodes.failure))
-//                print("Unknown Error", error)
-//                return
-//            }
-//            // if response is not empty then data will return
-//            guard response != nil, let data = data else {
-//                return
-//            }
-//            // if data returns then the reponse will be decoded into swift language based on model
-//            if let responseObject = try? JSONDecoder().decode([Restaurant].self, from: data){
-//                completion(.success(responseObject))
-//               // if any error then failure response will be invoked
-//            } else {
-//                let error = StatusCodes.failure
-//                completion(.failure(error))
-//            }
-//        }
-//        dataTask.resume()
-//    }
-//
-//}
-
+//     f

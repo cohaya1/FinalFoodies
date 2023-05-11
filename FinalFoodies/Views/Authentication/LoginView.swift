@@ -10,6 +10,7 @@ import SwiftUI
 struct LoginView: View {
     @State private var email = ""
     @State private var password = ""
+    @ObservedObject var authvm = AuthViewModel()
     var body: some View {
         ZStack{
             RoundedRectangle(cornerRadius: 20)

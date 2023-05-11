@@ -70,7 +70,7 @@ struct DetailsPage: View {
             Circle()
                 .strokeBorder(Color(#colorLiteral(red: 0.949999988079071, green: 0.949999988079071, blue: 0.949999988079071, alpha: 0.25)), lineWidth: 1)
             if restaurant.restaurantimage?.url != nil {
-                URlImage(url: restaurant.restaurantimage!.url)
+                AsyncImage(url: URL(string: restaurant.restaurantimage!.url))
             }
         }
         .compositingGroup()
@@ -112,6 +112,6 @@ struct DetailsPage: View {
 
 struct DetailsPage_Previews: PreviewProvider {
     static var previews: some View {
-        DetailsPage(restaurant: Restaurant(0, 0, "", "", 0.0, "", 0,Int(0.0),Int(0.0), nil, Restaurantimage(path: "", name:"",type: .image, size: 0, mime: "", meta: Meta(width: 10, height: 10), url: "")))
+        DetailsPage(restaurant: Restaurant(0, 0, "", "", 0.0, "", 0,Double(0.0),Double(0.0), nil, Restaurantimage(path: "", name:"",type: .image, size: 0, mime: "", meta: Meta(width: 10, height: 10), url: "")))
     }
 }

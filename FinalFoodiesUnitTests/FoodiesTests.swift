@@ -1,23 +1,31 @@
 //
-//  FinalFoodiesTests.swift
+//  FoodiesTests.swift
 //  FinalFoodiesTests
 //
-//  Created by Chika Ohaya on 2/12/22.
+//  Created by Chika Ohaya on 2/18/23.
 //
-
+@testable import  FinalFoodies
 import XCTest
-@testable import FinalFoodies
 
-class FinalFoodiesTests: XCTestCase {
-    func test() {
-     XCTFail()
-    }
-    override func setUpWithError() throws {
-        // Put setup code here. This method is called before the invocation of each test method in the class.
-    }
+final class FoodiesTests: XCTestCase {
+    class RemoteFeedLoader {
+        func load() {
+            HTTPClient.shared.requestedURL = URL(string: APIConstants.baseUrl)
 
-    override func tearDownWithError() throws {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
+        }
+    }
+    class HTTPClient {
+        static let shared = HTTPClient()
+        
+        private init() {}
+        
+        var requestedURL: URL?
+    }
+    func test_init() {
+        let client = HTTPClient.shared
+        let sut = NetworkManager()
+        
+        XCTAssertNil(client.requestedURL)
     }
 
     func testExample() throws {
