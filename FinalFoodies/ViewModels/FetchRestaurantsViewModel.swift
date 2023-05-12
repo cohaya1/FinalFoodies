@@ -55,12 +55,15 @@ import Foundation
 import CoreLocation
 
 protocol RestaurantViewModel: ObservableObject, CLLocationManagerDelegate {
+    
     func getAllRestaurants() async
+    func search(_ query: String) async
 }
 
 // Strategy Protocol
 protocol RestaurantFetchingStrategy {
     func fetchRestaurants() async throws -> [Restaurant]
+    
 }
 
 // Fetching strategies
@@ -110,33 +113,34 @@ class ClosestRestaurantsFetchingStrategy: RestaurantFetchingStrategy {
 @MainActor
 final class RestaurantFetcher: NSObject, RestaurantViewModel, CLLocationManagerDelegate {
     @Published var closestRestaurants: [Restaurant] = []
+    @Published var searchResults: [Restaurant] = []
     @Published var userLocation: CLLocation?
-    
+
     private let service: FetchAPI
     private var strategy: RestaurantFetchingStrategy
     private let locationManager = CLLocationManager()
-    
+
     init(service: FetchAPI) {
         self.service = service
         self.strategy = AllRestaurantsFetchingStrategy(service: service)
         super.init()
         setupLocationManager()
     }
-    
+
     func setupLocationManager() {
         locationManager.delegate = self
         locationManager.desiredAccuracy = kCLLocationAccuracyBest
         locationManager.requestWhenInUseAuthorization()
         locationManager.startUpdatingLocation()
     }
-    
+
     private func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) async {
         guard let location = locations.last else { return }
         userLocation = location
         strategy = ClosestRestaurantsFetchingStrategy(service: service, userLocation: location)
         await getAllRestaurants()
     }
-    
+
     func getAllRestaurants() async {
         do {
             closestRestaurants = try await strategy.fetchRestaurants()
@@ -147,8 +151,9 @@ final class RestaurantFetcher: NSObject, RestaurantViewModel, CLLocationManagerD
             }
         }
     }
+
+    // Search function
+    func search(_ query: String) {
+        searchResults = closestRestaurants.filter { $0.restaurantname.contains(query) }
+    }
 }
-
-   
-
-

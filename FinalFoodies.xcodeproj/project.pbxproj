@@ -11,6 +11,8 @@
 		9802D84627E22E95006A7032 /* RestaurantTableItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9802D84427E22E95006A7032 /* RestaurantTableItem.swift */; };
 		9802D84727E22E95006A7032 /* RestaurantTableItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9802D84427E22E95006A7032 /* RestaurantTableItem.swift */; };
 		9852AA842A0C798500157D50 /* UrlComposer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9852AA832A0C798500157D50 /* UrlComposer.swift */; };
+		9852AA8A2A0D760B00157D50 /* NavigationLogicTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9852AA892A0D760B00157D50 /* NavigationLogicTests.swift */; };
+		9852AA8E2A0EDE1800157D50 /* SearchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9852AA8D2A0EDE1800157D50 /* SearchViewModel.swift */; };
 		985A893227F148DB00697F53 /* LocationAccessView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 985A893127F148DB00697F53 /* LocationAccessView.swift */; };
 		985A893327F148DB00697F53 /* LocationAccessView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 985A893127F148DB00697F53 /* LocationAccessView.swift */; };
 		985A893427F148DB00697F53 /* LocationAccessView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 985A893127F148DB00697F53 /* LocationAccessView.swift */; };
@@ -111,6 +113,9 @@
 /* Begin PBXFileReference section */
 		9802D84427E22E95006A7032 /* RestaurantTableItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantTableItem.swift; sourceTree = "<group>"; };
 		9852AA832A0C798500157D50 /* UrlComposer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UrlComposer.swift; sourceTree = "<group>"; };
+		9852AA882A0D760A00157D50 /* FinalFoodiesUnitTests-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "FinalFoodiesUnitTests-Bridging-Header.h"; sourceTree = "<group>"; };
+		9852AA892A0D760B00157D50 /* NavigationLogicTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationLogicTests.swift; sourceTree = "<group>"; };
+		9852AA8D2A0EDE1800157D50 /* SearchViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewModel.swift; sourceTree = "<group>"; };
 		985A893127F148DB00697F53 /* LocationAccessView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationAccessView.swift; sourceTree = "<group>"; };
 		98639A4128F0DA080048A6D2 /* URLs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLs.swift; sourceTree = "<group>"; };
 		987A55A227E23FE900E44B77 /* ImageLoaderViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageLoaderViewModel.swift; sourceTree = "<group>"; };
@@ -318,6 +323,7 @@
 				9883238727D167950052859D /* AuthViewModel.swift */,
 				988323CE27DEC7100052859D /* FetchRestaurantsViewModel.swift */,
 				987A55A227E23FE900E44B77 /* ImageLoaderViewModel.swift */,
+				9852AA8D2A0EDE1800157D50 /* SearchViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -351,6 +357,8 @@
 			children = (
 				98C7F60C29A1CC8E005273D2 /* FinalFoodies.xctestplan */,
 				98C7F60F29A1CD9B005273D2 /* FoodiesTests.swift */,
+				9852AA892A0D760B00157D50 /* NavigationLogicTests.swift */,
+				9852AA882A0D760A00157D50 /* FinalFoodiesUnitTests-Bridging-Header.h */,
 			);
 			path = FinalFoodiesUnitTests;
 			sourceTree = "<group>";
@@ -480,6 +488,7 @@
 					};
 					98C7F60129A1BE80005273D2 = {
 						CreatedOnToolsVersion = 14.2;
+						LastSwiftMigration = 1430;
 						TestTargetID = 9883232C27B8A2A90052859D;
 					};
 				};
@@ -570,6 +579,7 @@
 				985A893227F148DB00697F53 /* LocationAccessView.swift in Sources */,
 				988323C627D7E5460052859D /* Restaurants.swift in Sources */,
 				9883235D27B8A3330052859D /* AuthView.swift in Sources */,
+				9852AA8E2A0EDE1800157D50 /* SearchViewModel.swift in Sources */,
 				9883237F27C572D30052859D /* NoSearchResultsView.swift in Sources */,
 				9883233127B8A2A90052859D /* FinalFoodiesApp.swift in Sources */,
 			);
@@ -616,6 +626,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9852AA8A2A0D760B00157D50 /* NavigationLogicTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -907,6 +918,7 @@
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 8QHSLQU2WK;
@@ -916,6 +928,8 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com..FinalFoodiesUnitTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_OBJC_BRIDGING_HEADER = "FinalFoodiesUnitTests/FinalFoodiesUnitTests-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/FinalFoodies.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/FinalFoodies";
@@ -927,6 +941,7 @@
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 8QHSLQU2WK;
@@ -936,6 +951,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com..FinalFoodiesUnitTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_OBJC_BRIDGING_HEADER = "FinalFoodiesUnitTests/FinalFoodiesUnitTests-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/FinalFoodies.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/FinalFoodies";

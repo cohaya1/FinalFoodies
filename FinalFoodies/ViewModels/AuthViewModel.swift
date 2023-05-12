@@ -44,7 +44,7 @@ import FirebaseAuth
     }
     
     
-    func register(withEmail email: String, password: String, username: String, name: String?) {
+    func register(withEmail email: String, password: String,  name: String?) {
         Auth.auth().createUser(withEmail: email, password: password ) {
             (result,err) in
             if let err = err{
@@ -52,7 +52,7 @@ import FirebaseAuth
                 return
             }
             guard let user = result?.user else {return}
-            let data = ["email": email,"username": username,"name":name,"uid":user.uid]
+            let data = ["email": email,"name":name,"uid":user.uid]
             Firestore.firestore().collection("users").document(user.uid).setData(data as [String : Any]) {
                 err in
                 if let err = err {

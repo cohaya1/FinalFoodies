@@ -62,7 +62,9 @@ struct LoginView: View {
    
     }
     var loginbutton: some View{
-        Button(action: {}, label: {
+        Button(action: {
+            authvm.login(withEmail: email, password: password)
+        }, label: {
             //Rectangle 2
             ZStack {
                 //Login

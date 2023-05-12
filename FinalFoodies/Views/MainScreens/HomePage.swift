@@ -40,7 +40,9 @@ struct HomePage: View {
                 VStack {
                     ScrollView(Axis.Set.horizontal, showsIndicators: false) {
                         HStack(spacing: 45) { // pass in restaurant object for view to show up in other view
-                            ForEach(viewModel.closestRestaurants, id: \.self) { restaurant in
+                            let restaurants = searchText.isEmpty ? viewModel.closestRestaurants : viewModel.searchResults
+                            
+                            ForEach(restaurants, id: \.self) { restaurant in
                                 NavigationLink(destination: DetailsPage(restaurant: restaurant), label: {
                                     RestaurantTableItem(restaurant: restaurant)
                                 })
@@ -61,8 +63,14 @@ struct HomePage: View {
             await viewModel.getAllRestaurants()
             
         }
+        .onChange(of: searchText) { newValue in
+            withAnimation(.easeInOut(duration: 0.5)) {
+                viewModel.search(newValue)
+            }
+        }
+        .scaleEffect(searchText.isEmpty ? 1.0 : 1.2)
+        .animation(.easeInOut(duration: 0.2), value: searchText)
     }
-              
 
               
 
@@ -81,40 +89,23 @@ struct HomePage: View {
         //Delicious food for you
         Text("Delicious \nfood for you").font(.system(size: 34, weight: .bold, design: .rounded))
     }
-    var SearchTextField: some View{
-        ZStack(alignment: .leading) {
-            if searchText.isEmpty { // adds serach placeholder
-                //Search
-                Text("Search")
-                    .foregroundColor(.gray)
-                    .font(.system(size: 17, weight: .semibold, design: .rounded))
-                    .padding(.leading,130)
-            }
+    var SearchTextField: some View {
         HStack {
-            TextField("", text: $searchText)
-        .foregroundColor(.black)
-        //Search
-       .font(.system(size: 17, weight: .semibold, design: .rounded))
-          
-            Button(action: {}, label: {
-                Image("searchicon")
-                    .resizable()
-                    .frame(width: 18, height: 18)
-                    .padding(.trailing,330)
-                
-        })
+            Image(systemName: "magnifyingglass")
+                .foregroundColor(.gray)
+            TextField("Search", text: $searchText)
+                .font(.system(size: 17, weight: .semibold, design: .rounded))
+                .foregroundColor(.black)
         }
-            TextField("",text: $searchText)
-                .padding(.leading,-2)
-    }
-        .padding(EdgeInsets(top: 4, leading: 10,bottom: 4,trailing: 10))
+        .padding(EdgeInsets(top: 4, leading: 10, bottom: 4, trailing: 10))
         .background(
-            //Rectangle 7
             RoundedRectangle(cornerRadius: 30)
                 .fill(Color(#colorLiteral(red: 0.9375, green: 0.93359375, blue: 0.93359375, alpha: 1)))
-            .frame(width: 314, height: 60))
-        
-}
+                .frame(height: 60)
+        )
+        .padding(.horizontal)
+    }
+
 
    
 

@@ -11,6 +11,8 @@ struct SignUpView: View {
     @State private var name = ""
     @State private var email = ""
     @State private var password = ""
+    @ObservedObject var authvm = AuthViewModel()
+
     var body: some View {
         ZStack{
             RoundedRectangle(cornerRadius: 20)
@@ -73,7 +75,9 @@ struct SignUpView: View {
    
     }
     var SignUPbutton: some View{
-        Button(action: {}, label: {
+        Button(action: {
+          authvm.register(withEmail: email, password: password, name: name)
+        }, label: {
             //Rectangle 2
             ZStack {
                 //Login
