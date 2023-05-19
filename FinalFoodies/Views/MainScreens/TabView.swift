@@ -11,36 +11,50 @@ struct TabViewUI: View {
     @State var isPresenting = false
     @State var tabSelection = 1
     var body: some View {
-        tabviewselection
-    }
-    var tabviewselection: some View {
-        
         TabView(selection: $tabSelection){
-           HomePage()
-        .tabItem{ Image("homeicon")
-                   .renderingMode(.original)
-                   .resizable(resizingMode: .stretch)
-                   .aspectRatio(contentMode: .fill)
-                   .foregroundColor(Color.red)
-                  
-                   .frame(width:144.565,height: 90)
-        }.tag(1)
+            HomePage()
+                .tabItem {
+                    VStack {
+                        Image("homeicon")
+                            .renderingMode(.template)
+                            .resizable()
+                            .aspectRatio(contentMode: .fit)
+                            .frame(width: 24, height: 24)
+                        Text("Home")
+                    }
+                }.tag(1)
          
             // second tab
-            FavoritesResultsView().tabItem { Image("heart") }.tag(2)
+            FavoritesResultsView()
+                .tabItem {
+                    VStack {
+                        Image("heart")
+                            .renderingMode(.template)
+                            .resizable()
+                            .aspectRatio(contentMode: .fit)
+                            .frame(width: 24, height: 24)
+                        Text("Favorites")
+                    }
+                }.tag(2)
     
-            SettingsView().tabItem { Image("user") }.tag(3)
+            SettingsView()
+                .tabItem {
+                    VStack {
+                        Image("user")
+                            .renderingMode(.template)
+                            .resizable()
+                            .aspectRatio(contentMode: .fit)
+                            .frame(width: 24, height: 24)
+                        Text("Settings")
+                    }
+                }.tag(3)
         }
+        .accentColor(.red)
     }
 }
-    
-
 
 struct TabView_Previews: PreviewProvider {
     static var previews: some View {
         TabViewUI()
-//            .padding(.all,-30)
-//            .allowsTightening(true)
-            
     }
 }

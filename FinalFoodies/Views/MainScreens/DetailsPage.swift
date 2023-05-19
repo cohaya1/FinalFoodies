@@ -14,43 +14,54 @@ struct DetailsPage: View {
     let restaurant: Restaurant
     @StateObject var viewModel = DetailsPageViewModel()
     @State private var isShareSheetShowing = false
-
+    
     @State private var mapCoordinate =
     MKCoordinateRegion()
     var body: some View {
         NavigationView {
-            ZStack {
-                RoundedRectangle(cornerRadius: 20)
-                    .fill(Color(#colorLiteral(red: 0.949999988079071, green: 0.949999988079071, blue: 0.949999988079071, alpha: 1)))
-                    .frame(width: 464, height: 956)
-                HStack(spacing: 260){
-                    backarrowicon
-                    hearticon
-                }.padding(.bottom,700)
-                VStack{
-                    dinnerplate
-                }.padding(.bottom,400)
-                VStack(spacing: 20) {
-                    restaurantname
-                    restaurantaddress
-                    HStack {
-                        sharebutton
+            GeometryReader { geometry in
+                ScrollView {
+                    ZStack {
+                        RoundedRectangle(cornerRadius: 20)
+                            .fill(Color(#colorLiteral(red: 0.949999988079071, green: 0.949999988079071, blue: 0.949999988079071, alpha: 1)))
+                            .frame(width: geometry.size.width * 0.9, height: geometry.size.height * 0.9)
+                            .edgesIgnoringSafeArea(.all)
+                        
+                        VStack {
+                            HStack {
+                                backarrowicon
+                                Spacer()
+                                hearticon
+                            }.padding(.top, 30)
+                            Spacer()
+                            
+                            dinnerplate
+                            Spacer()
+                            
+                            VStack(spacing: 20) {
+                                restaurantname
+                                restaurantaddress
+                                sharebutton
+                            }
+                            Spacer()
+                            
+                            VStack {
+                                restaurantdescription
+                                GoTolocationbutton
+                            }
+                            Spacer()
+                            
+                            Text("Deliver to Me").font(.system(size: 17, weight: .semibold, design: .rounded)).foregroundColor(Color(#colorLiteral(red: 0.98, green: 0.29, blue: 0.05, alpha: 1))).multilineTextAlignment(.center)
+                        }
+                        .padding()
                     }
                 }
-                VStack(spacing: 200){
-                    restaurantdescription
-                    GoTolocationbutton
-                        .padding(.leading,30)
-                        .padding(.bottom,-200)
-                }.padding(.top,400)
-                VStack(alignment: .center) {
-                    Text("Deliver to Me").font(.system(size: 17, weight: .semibold, design: .rounded)).foregroundColor(Color(#colorLiteral(red: 0.98, green: 0.29, blue: 0.05, alpha: 1))).multilineTextAlignment(.center)
-                        .padding(.leading,25)
-                }.padding(.top,600)
             }.navigationBarHidden(true)
-            
         }.navigationBarHidden(true )
     }
+
+        
+    
     var backarrowicon: some View {
         NavigationLink(destination: HomePage(), label: {
             Image("backarrowicon")
