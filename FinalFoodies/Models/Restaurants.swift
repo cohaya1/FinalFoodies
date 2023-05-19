@@ -13,7 +13,7 @@
 import Foundation
 
 // MARK: - WelcomeElement
-struct Restaurant: Hashable, Decodable {
+struct Restaurant:Hashable, Decodable {
     
     
     let id: Int

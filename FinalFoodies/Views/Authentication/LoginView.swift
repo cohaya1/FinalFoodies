@@ -10,7 +10,10 @@ import SwiftUI
 struct LoginView: View {
     @State private var email = ""
     @State private var password = ""
-    @ObservedObject var authvm = AuthViewModel()
+    @EnvironmentObject var authvm: AuthViewModel
+    @State private var navigateToHome = false
+    @ObservedObject var activityVM = ActivityIndicatorViewModel()
+
     var body: some View {
         ZStack{
             RoundedRectangle(cornerRadius: 20)
@@ -61,24 +64,34 @@ struct LoginView: View {
     
    
     }
-    var loginbutton: some View{
+    var loginbutton: some View {
         Button(action: {
+            // Start the async task when the button is clicked
+            Task {
+                await activityVM.performAsyncTask()
+            }
+            // Log in
             authvm.login(withEmail: email, password: password)
         }, label: {
-            //Rectangle 2
             ZStack {
-                //Login
-                
-                //Forgot passcode?
-            //Rectangle 2
-            RoundedRectangle(cornerRadius: 30)
-                .fill(Color(#colorLiteral(red: 0.9803921580314636, green: 0.29019609093666077, blue: 0.0470588244497776, alpha: 1)))
-            .frame(width: 314, height: 70)
-                Text("Login").font(.system(size: 17, weight: .semibold)).foregroundColor(Color(#colorLiteral(red: 0.96, green: 0.96, blue: 0.98, alpha: 1)))
+                // Show an activity indicator while the async task is in progress
+                if activityVM.isLoading {
+                    ProgressView()
+                } else {
+                    RoundedRectangle(cornerRadius: 30)
+                        .fill(Color(#colorLiteral(red: 0.9803921580314636, green: 0.29019609093666077, blue: 0.0470588244497776, alpha: 1)))
+                        .frame(width: 314, height: 70)
+                    Text("Login")
+                        .font(.system(size: 17, weight: .semibold))
+                        .foregroundColor(Color(#colorLiteral(red: 0.96, green: 0.96, blue: 0.98, alpha: 1)))
+                }
             }
-               })
-    
+        })
+        .alert(isPresented: $authvm.hasError) {
+            Alert(title: Text("Login Error"), message: Text(authvm.errorString))
+        }
     }
+
                
     var forgetpasscodebutton: some View {
         Button(action: {}, label: {

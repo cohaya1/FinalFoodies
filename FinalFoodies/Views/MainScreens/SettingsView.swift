@@ -8,6 +8,10 @@
 import SwiftUI
 
 struct SettingsView: View {
+
+    @EnvironmentObject var authvm: AuthViewModel
+    @State private var isShowingAuthView = false
+
     var body: some View {
         ZStack{
             //iPhone 11 Pro Max - 10
@@ -23,14 +27,14 @@ struct SettingsView: View {
                 .padding(.bottom,700)
             VStack {
                 HStack(spacing:185){
-                    personaldetailslabel
+                   // personaldetailslabel
                     changepasswordbutton
                 }
                 
             }.padding(.bottom,500)
             VStack(spacing:25){
-                profileholdview
-                locationview
+             //   profileholdview
+              //  locationview
                 donationsview
                 requestrestaurantview
             
@@ -48,20 +52,39 @@ struct SettingsView: View {
     }
     var myprofilelabel: some View {
         //My profile
-        Text("My profile").font(.system(size: 34, weight: .semibold))
+        Text("Settings").font(.system(size: 34, weight: .semibold))
             .foregroundColor(Color(#colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)))
     }
-    var personaldetailslabel: some View {
-        //Personal details
-        Text("Personal details").font(.system(size: 18, weight: .semibold))
-            .foregroundColor(Color(#colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)))
-        
-    }
+//    var personaldetailslabel: some View {
+//        //Personal details
+//        Text("Personal details : \(restaurant.)").font(.system(size: 18, weight: .semibold))
+//            .foregroundColor(Color(#colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)))
+//
+//    }
     var changepasswordbutton: some View {
         //change
-        Text("change").font(.system(size: 15, weight: .regular)).foregroundColor(Color(#colorLiteral(red: 0.98, green: 0.29, blue: 0.05, alpha: 1)))
+        Text("change password").font(.system(size: 15, weight: .regular)).foregroundColor(Color(#colorLiteral(red: 0.98, green: 0.29, blue: 0.05, alpha: 1)))
     }
-    
+    var signoutbutton: some View {
+        Button(action: {
+            authvm.logout()
+            isShowingAuthView = true
+        }){
+            ZStack {
+                RoundedRectangle(cornerRadius: 30)
+                .fill(Color(#colorLiteral(red: 0.9803921580314636, green: 0.29019609093666077, blue: 0.0470588244497776, alpha: 1)))
+                .frame(width: 314, height: 70)
+                Text("SignOut")
+                    .font(.system(size: 17, weight: .semibold))
+                    .foregroundColor(Color(#colorLiteral(red: 0.96, green: 0.96, blue: 0.98, alpha: 1)))
+                    .multilineTextAlignment(.center)
+            }
+        }
+        .fullScreenCover(isPresented: $isShowingAuthView, content: {
+            AuthView()
+        })
+    }
+
     var profileholdview: some View {
         ZStack{
             //Rectangle 10
@@ -99,7 +122,7 @@ struct SettingsView: View {
                     addresslabel.padding(.leading,200)
                         .padding(.top,80)
                     
-                        
+                    
                 }
             }
             }
@@ -135,6 +158,7 @@ var emaillabel: some View {
         
 }
 var lineseparator: some View {
+    
     Image("Line 1")
         .resizable()
         .frame(width: 165, height: 1, alignment: .center)
@@ -143,6 +167,7 @@ var phonenumber: some View {
     //+234 9011039271
     Text("+234 9011039271").font(.system(size: 15, weight: .regular))
 }
+
 var addresslabel: some View {
     //No 15 uti street off ovie ...
     Text("No 15 uti street off ovie palace road effurun delta state").font(.system(size: 15, weight: .regular))
@@ -222,20 +247,7 @@ var requestrestaurantview: some View {
         
     }
 }
-    var signoutbutton: some View {
-        Button(action: {}){
-            ZStack {
-            //Update
-                RoundedRectangle(cornerRadius: 30)
-                .fill(Color(#colorLiteral(red: 0.9803921580314636, green: 0.29019609093666077, blue: 0.0470588244497776, alpha: 1)))
-                .frame(width: 314, height: 70)
-                Text("SignOut").font(.system(size: 17, weight: .semibold)).foregroundColor(Color(#colorLiteral(red: 0.96, green: 0.96, blue: 0.98, alpha: 1))).multilineTextAlignment(.center)
-
-            //Rectangle 2
-            
-            }
-        }
-    }
+   
 
 //Vector
 

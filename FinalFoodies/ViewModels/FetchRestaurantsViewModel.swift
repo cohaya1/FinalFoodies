@@ -140,6 +140,22 @@ final class RestaurantFetcher: NSObject, RestaurantViewModel, CLLocationManagerD
         strategy = ClosestRestaurantsFetchingStrategy(service: service, userLocation: location)
         await getAllRestaurants()
     }
+    func requestLocationPermission() {
+        let status = CLLocationManager.authorizationStatus()
+
+        switch status {
+            case .notDetermined:
+                locationManager.requestWhenInUseAuthorization()
+            case .denied, .restricted:
+                // Show an alert to the user explaining that they have disabled location permissions and how they can enable it in Settings.
+                break
+            case .authorizedWhenInUse, .authorizedAlways:
+                // Permissions are already granted.
+                break
+            @unknown default:
+                break
+        }
+    }
 
     func getAllRestaurants() async {
         do {

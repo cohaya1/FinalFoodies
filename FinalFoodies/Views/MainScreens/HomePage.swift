@@ -9,69 +9,77 @@ import SwiftUI
 
 struct HomePage: View {
     @State private var searchText = ""
-    @StateObject var viewModel = RestaurantFetcher(service: NetworkManager())
-    
-    var body: some View {
-        NavigationView {
-            ZStack {
-                RoundedRectangle(cornerRadius: 20)
-                    .fill(Color(#colorLiteral(red: 0.949999988079071, green: 0.949999988079071, blue: 0.949999988079071, alpha: 1)))
-                    .frame(width: 464, height: 956)
-                VStack {
-                    settingsicon
-                        .padding(.bottom,700)
-                        .padding(.trailing,270)
-                }
-                VStack(spacing:55){
-                    delicioustext
-                        .padding(.trailing,105)
-                    SearchTextField
-                    
-                    
-                }.padding(.bottom,400)
-                VStack {
-                    Button(action: {}, label: {
-                        //see more
-                        Text("see more").font(.system(size: 15, weight: .regular, design: .rounded)).foregroundColor(Color(#colorLiteral(red: 0.98, green: 0.29, blue: 0.05, alpha: 1)))
-                            .padding(.leading,230)
-                        
-                    })
-                }.padding(.top,30)
-                VStack {
-                    ScrollView(Axis.Set.horizontal, showsIndicators: false) {
-                        HStack(spacing: 45) { // pass in restaurant object for view to show up in other view
-                            let restaurants = searchText.isEmpty ? viewModel.closestRestaurants : viewModel.searchResults
-                            
-                            ForEach(restaurants, id: \.self) { restaurant in
-                                NavigationLink(destination: DetailsPage(restaurant: restaurant), label: {
-                                    RestaurantTableItem(restaurant: restaurant)
-                                })
-                            }
-                        }
-                        .background(Color(#colorLiteral(red: 0.949999988079071, green: 0.949999988079071, blue: 0.949999988079071, alpha: 1)))
-                        .frame(height: 300)
-                        .padding(.top, -2)
+        @StateObject var viewModel = RestaurantFetcher(service: NetworkManager())
+        @State private var selectedRestaurant: Restaurant?
+        
+        var body: some View {
+            NavigationView {
+                ZStack {
+                    RoundedRectangle(cornerRadius: 20)
+                        .fill(Color(#colorLiteral(red: 0.949999988079071, green: 0.949999988079071, blue: 0.949999988079071, alpha: 1)))
+                        .frame(width: 464, height: 956)
+                    VStack {
+                        settingsicon
+                            .padding(.bottom,700)
+                            .padding(.trailing,270)
                     }
-                    .padding(.top, 430)
-                    .frame(height: 400)
+                    VStack(spacing:55){
+                        delicioustext
+                            .padding(.trailing,105)
+                        SearchTextField
+                    }.padding(.bottom,400)
+                    VStack {
+                        Button(action: {}, label: {
+                            //see more
+                            Text("see more").font(.system(size: 15, weight: .regular, design: .rounded)).foregroundColor(Color(#colorLiteral(red: 0.98, green: 0.29, blue: 0.05, alpha: 1)))
+                                .padding(.leading,230)
+                        })
+                    }.padding(.top,30)
+                    VStack {
+                        ScrollView(Axis.Set.horizontal, showsIndicators: false) {
+                            HStack(spacing: 45) {
+                                let restaurants = searchText.isEmpty ? viewModel.closestRestaurants : viewModel.searchResults
+                                ForEach(restaurants, id: \.self) { restaurant in
+                                    Button(action: {
+                                        self.selectedRestaurant = restaurant
+                                    }, label: {
+                                        RestaurantTableItem(restaurant: restaurant)
+                                    })
+                                }
+                            }
+                            .background(
+                                Group {
+                                                if let selectedRestaurant = selectedRestaurant {
+                                                    NavigationLink(
+                                                        destination: DetailsPage(restaurant: selectedRestaurant),
+                                                        tag: selectedRestaurant,
+                                                        selection: $selectedRestaurant
+                                                    ) {
+                                                        EmptyView()
+                                                    }
+                                                }
+                                            }
+                                        )
+                            .frame(height: 300)
+                            .padding(.top, -2)
+                        }
+                        .padding(.top, 430)
+                        .frame(height: 400)
+                    }
                 }
             }
-        }
-        .navigationBarHidden(true)
-        .task {
-            
-            await viewModel.getAllRestaurants()
-            
-        }
-        .onChange(of: searchText) { newValue in
-            withAnimation(.easeInOut(duration: 0.5)) {
-                viewModel.search(newValue)
+            .navigationBarHidden(true)
+            .task {
+                await viewModel.getAllRestaurants()
             }
+            .onChange(of: searchText) { newValue in
+                withAnimation(.easeInOut(duration: 0.5)) {
+                    viewModel.search(newValue)
+                }
+            }
+            .scaleEffect(searchText.isEmpty ? 1.0 : 1.2)
+            .animation(.easeInOut(duration: 0.2), value: searchText)
         }
-        .scaleEffect(searchText.isEmpty ? 1.0 : 1.2)
-        .animation(.easeInOut(duration: 0.2), value: searchText)
-    }
-
               
 
         

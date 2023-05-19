@@ -11,7 +11,8 @@ struct SignUpView: View {
     @State private var name = ""
     @State private var email = ""
     @State private var password = ""
-    @ObservedObject var authvm = AuthViewModel()
+    @EnvironmentObject var authvm: AuthViewModel
+    @ObservedObject var activityVM = ActivityIndicatorViewModel()
 
     var body: some View {
         ZStack{
@@ -76,23 +77,33 @@ struct SignUpView: View {
     }
     var SignUPbutton: some View{
         Button(action: {
+            // Start the async task when the button is clicked
+            Task {
+                await activityVM.performAsyncTask()
+            }
+
           authvm.register(withEmail: email, password: password, name: name)
         }, label: {
             //Rectangle 2
             ZStack {
                 //Login
-                
-                //Forgot passcode?
-            //Rectangle 2
-            RoundedRectangle(cornerRadius: 30)
-                .fill(Color(#colorLiteral(red: 0.9803921580314636, green: 0.29019609093666077, blue: 0.0470588244497776, alpha: 1)))
-            .frame(width: 314, height: 70)
-                Text("Sign Up").font(.system(size: 17, weight: .semibold)).foregroundColor(Color(#colorLiteral(red: 0.96, green: 0.96, blue: 0.98, alpha: 1)))
+                if activityVM.isLoading {
+                    ProgressView()
+                } else {
+                    RoundedRectangle(cornerRadius: 30)
+                        .fill(Color(#colorLiteral(red: 0.9803921580314636, green: 0.29019609093666077, blue: 0.0470588244497776, alpha: 1)))
+                        .frame(width: 314, height: 70)
+                    Text("Sign Up")
+                        .font(.system(size: 17, weight: .semibold))
+                        .foregroundColor(Color(#colorLiteral(red: 0.96, green: 0.96, blue: 0.98, alpha: 1)))
+                }
             }
-               })
-    
+        })
+        .alert(isPresented: $authvm.hasError) {
+            Alert(title: Text("Sign Up Error"), message: Text(authvm.errorString))
+        }
     }
-               
+
     
     var emailtextfield: some View{
         TextField("", text: $email)
@@ -101,7 +112,7 @@ struct SignUpView: View {
            
     }
     var Nametextfield: some View{
-        TextField("", text: $email)
+        TextField("", text: $name)
         .foregroundColor(.black)
         .font(.system(size: 17, weight: .semibold))
            

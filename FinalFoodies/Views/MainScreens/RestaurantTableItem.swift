@@ -95,8 +95,10 @@ struct RestaurantTableItem: View {
                     .lineLimit(3)
                     .frame(width: 220, height: 70, alignment: .center)
                     .foregroundColor(Color(.black))
+                Text(String(format:"%.1f",restaurant.restaurantstypeID)).font(.system(size: 17, weight: .bold, design: .rounded)).foregroundColor(Color(#colorLiteral(red: 0.98, green: 0.29, blue: 0.05, alpha: 1))).multilineTextAlignment(.center)
                 
                 Text(String(format:"%.1f",restaurant.restaurantrating)).font(.system(size: 17, weight: .bold, design: .rounded)).foregroundColor(Color(#colorLiteral(red: 0.98, green: 0.29, blue: 0.05, alpha: 1))).multilineTextAlignment(.center)
+                
 //                Text("N1,900").font(.system(size: 17, weight: .bold, design: .rounded)).foregroundColor(Color(#colorLiteral(red: 0.98, green: 0.29, blue: 0.05, alpha: 1))).multilineTextAlignment(.center)
            
             }.padding(.top,100)

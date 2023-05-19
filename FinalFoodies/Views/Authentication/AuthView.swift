@@ -21,11 +21,11 @@ struct AuthView: View {
             default: LoginView()
                 
             }
-//            RoundedRectangle(cornerRadius: 20)
-//                .fill(Color(#colorLiteral(red: 0.949999988079071, green: 0.949999988079071, blue: 0.949999988079071, alpha: 1)))
-//            .frame(width: 464, height: 966)
-           
-                
+            //            RoundedRectangle(cornerRadius: 20)
+            //                .fill(Color(#colorLiteral(red: 0.949999988079071, green: 0.949999988079071, blue: 0.949999988079071, alpha: 1)))
+            //            .frame(width: 464, height: 966)
+            
+            
             authselection
                 .padding(.bottom,600)
             //Bella Olonje logo 111 1
@@ -34,11 +34,11 @@ struct AuthView: View {
                 .frame(width: 131.5, height: 162.4)
                 .clipped()
                 .scaledToFit()
-                
-            .padding(.bottom,565)
+            
+                .padding(.bottom,565)
             HStack(spacing: 60){
                 
-            loginbutton
+                loginbutton
                     .buttonStyle(PlainButtonStyle())
                     .pressAction {
                         isPressed = true
@@ -59,65 +59,49 @@ struct AuthView: View {
         
     }
     
-//    var subviews: some View {
-//        ZStack {
-//            //iPhone 11 Pro Max - 2
-////            RoundedRectangle(cornerRadius: 20)
-////                .fill(Color(#colorLiteral(red: 0.949999988079071, green: 0.949999988079071, blue: 0.949999988079071, alpha: 1)))
-////            .frame(width: 464, height: 966)
-//            switch subviewSelected{
-//            case .showlogin: (LoginView())
-//            case .showregister:(SignUPView))
-//           default:
-//                LoginView()
-//            }
-//        }
-//    }
-    var loginbutton: some View {// login button
-       
-            
+    //    var subviews: some View {
+    //        ZStack {
+    //            //iPhone 11 Pro Max - 2
+    ////            RoundedRectangle(cornerRadius: 20)
+    ////                .fill(Color(#colorLiteral(red: 0.949999988079071, green: 0.949999988079071, blue: 0.949999988079071, alpha: 1)))
+    ////            .frame(width: 464, height: 966)
+    //            switch subviewSelected{
+    //            case .showlogin: (LoginView())
+    //            case .showregister:(SignUPView))
+    //           default:
+    //                LoginView()
+    //            }
+    //        }
+    //    }
+    var loginbutton: some View {
         Button(action: {
-        
             subviewSelected = .showlogin
-//                                        presentationMode.wrappedValue.dismiss()
         }, label: {
-                //Rectangle 2
-                VStack(spacing:20) {
-                    Text("Login").font(.system(size: 18, weight: .semibold)).foregroundColor(Color(#colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)))
-                    //Rectangle 1
-                    Image(!isPressed ? "":"redline")
+            VStack(spacing:20) {
+                Text("Login").font(.system(size: 18, weight: .semibold)).foregroundColor(Color(#colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)))
+                if subviewSelected == .showlogin {
+                    Image("redline")
                         .resizable()
                         .frame(width: 124, height: 10)
-                       
-                    
                 }
-                   })
-                   }
-    var SignUpbutton: some View {// signup button
-       
-            
-        
-            Button(action: {
-            
-                subviewSelected = .showregister
-//                                        presentationMode.wrappedValue.dismiss()
-            }, label: {
-                //Rectangle 2
-                VStack(spacing:20) {
-                    Text("Sign-up").font(.system(size: 18, weight: .semibold)).foregroundColor(Color(#colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)))
-                    Image(!isPressed2 ? "":"redline")
+            }
+        })
+    }
+    
+    var SignUpbutton: some View {
+        Button(action: {
+            subviewSelected = .showregister
+        }, label: {
+            VStack(spacing:20) {
+                Text("Sign-up").font(.system(size: 18, weight: .semibold)).foregroundColor(Color(#colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)))
+                if subviewSelected == .showregister {
+                    Image("redline")
                         .resizable()
                         .frame(width: 124, height: 10)
-                    //Rectangle 1
-//                    RoundedRectangle(cornerRadius: 40)
-//                        .fill(Color(#colorLiteral(red: 0.9803921580314636, green: 0.29019609093666077, blue: 0.0470588244497776, alpha: 1)))
-//                    .frame(width: 134, height: 3)
-//                    .shadow(color: Color(#colorLiteral(red: 0.7666666507720947, green: 0.24712221324443817, blue: 0.08305555582046509, alpha: 0.10000000149011612)), radius:4, x:0, y:4)
-                
                 }
-            
-                   })
-                   }
+            }
+        })
+    }
 }
 var authselection: some View{
     //Rectangle 3
