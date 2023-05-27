@@ -10,9 +10,11 @@ import SwiftUI
 struct TabViewUI: View {
     @State var isPresenting = false
     @State var tabSelection = 1
+    @MainActor let viewModel = RestaurantFetcher( using: NetworkManager())
+
     var body: some View {
         TabView(selection: $tabSelection){
-            HomePage()
+            HomePage(viewModel: viewModel)
                 .tabItem {
                     VStack {
                         Image("homeicon")

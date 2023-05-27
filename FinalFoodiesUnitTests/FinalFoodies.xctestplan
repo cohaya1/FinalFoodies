@@ -17,7 +17,6 @@
   },
   "testTargets" : [
     {
-      "enabled" : false,
       "target" : {
         "containerPath" : "container:FinalFoodies.xcodeproj",
         "identifier" : "9883234627B8A2A90052859D",
@@ -25,7 +24,6 @@
       }
     },
     {
-      "enabled" : false,
       "target" : {
         "containerPath" : "container:FinalFoodies.xcodeproj",
         "identifier" : "98C7F60129A1BE80005273D2",
@@ -33,6 +31,7 @@
       }
     },
     {
+      "enabled" : false,
       "parallelizable" : true,
       "target" : {
         "containerPath" : "container:FinalFoodies.xcodeproj",

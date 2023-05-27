@@ -21,26 +21,25 @@ class AppDelegate: NSObject, UIApplicationDelegate {
 struct FinalFoodiesApp: App {
     
     @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
-        @StateObject private var authVM = AuthViewModel(authenticator: FirebaseAuthenticator())
-//    init() {
-//        FirebaseApp.configure()
-//    }
-    
+    @StateObject private var authVM = AuthViewModel(authenticator: FirebaseAuthenticator())
+    @StateObject private var favoritesViewModel = FavoritesViewModel<Restaurant>()  // Adding this line
+
     var body: some Scene {
-            WindowGroup {
-                if authVM.userSession != nil {
-                    TabViewUI() // your main app view
-                        .environmentObject(authVM)
-                        .onAppear {
-                            authVM.listenToAuthChanges()
-                        }
-                } else {
-                    AuthView() // your authentication view
-                        .environmentObject(authVM)
-                        .onAppear {
-                            authVM.listenToAuthChanges()
-                        }
-                }
+        WindowGroup {
+            if authVM.userSession != nil {
+                TabViewUI() // your main app view
+                    .environmentObject(authVM)
+                    .environmentObject(favoritesViewModel) // Supplying the ViewModel here
+                    .onAppear {
+                        authVM.listenToAuthChanges()
+                    }
+            } else {
+                AuthView() // your authentication view
+                    .environmentObject(authVM)
+                    .onAppear {
+                        authVM.listenToAuthChanges()
+                    }
             }
         }
     }
+}

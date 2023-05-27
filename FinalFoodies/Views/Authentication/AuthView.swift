@@ -13,6 +13,8 @@ struct AuthView: View {
     @State private var isPressed2 = false
     @State private var showlogin = true
     @State private var showregister = false
+    //@StateObject var viewModel : RestaurantFetcher
+
     var body: some View {
         ZStack {
             switch subviewSelected{
@@ -54,8 +56,10 @@ struct AuthView: View {
                     }
                 
             }.padding(.top,-153)
-            
         }
+//        }.onAppear() {
+//            viewModel.requestLocationPermission()
+//        }
         
     }
     
@@ -167,8 +171,8 @@ extension View { // adding an extension to View with the modifier function  for 
     }
 }
 
-struct AuthView_Previews: PreviewProvider {
-    static var previews: some View {
-        AuthView()
-    }
-}
+//struct AuthView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        AuthView()
+//    }
+//}

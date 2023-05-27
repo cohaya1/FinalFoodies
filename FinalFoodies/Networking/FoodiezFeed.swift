@@ -51,7 +51,7 @@ enum StatusCodes: Error {
 }
 
 protocol FetchAPI {
-    func getAllRestaurants() async throws -> [Restaurant]
+    func getAllRestaurantsService() async throws -> [Restaurant]
     func handleNoInternetConnection()
 }
 
@@ -71,7 +71,7 @@ class NetworkManager: FetchAPI, ObservableObject {
         }
 
     // Define an asynchronous function that retrieves all restaurants and returns an array of "Restaurant" objects
-    func getAllRestaurants() async throws -> [Restaurant]{
+    func getAllRestaurantsService() async throws -> [Restaurant]{
         
         
         // Create a guard statement to ensure that the APIConstants baseUrl is a valid URL. If not, throw an "invalidURL" error.

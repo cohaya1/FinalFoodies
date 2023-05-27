@@ -13,7 +13,7 @@
 import Foundation
 
 // MARK: - WelcomeElement
-struct Restaurant:Hashable, Decodable {
+struct Restaurant:Identifiable,Hashable, Decodable  {
     
     
     let id: Int
@@ -116,3 +116,5 @@ extension Restaurant: Equatable { // in case we want to search for a particular 
     
     
 }
+
+

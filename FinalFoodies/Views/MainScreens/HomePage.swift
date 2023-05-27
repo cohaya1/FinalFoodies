@@ -8,8 +8,9 @@
 import SwiftUI
 
 struct HomePage: View {
+    @State private var showingDetail = false
     @State private var searchText = ""
-        @StateObject var viewModel = RestaurantFetcher(service: NetworkManager())
+    @StateObject var viewModel : RestaurantFetcher
         @State private var selectedRestaurant: Restaurant?
     var body: some View {
         NavigationView {
@@ -44,49 +45,39 @@ struct HomePage: View {
                             
                             ScrollView(Axis.Set.horizontal, showsIndicators: false) {
                                 HStack(spacing: 45) {
-                                    let restaurants = searchText.isEmpty ? viewModel.closestRestaurants : viewModel.searchResults
+                                    let restaurants = searchText.isEmpty ? viewModel.restaurants : viewModel.searchResults
                                     ForEach(restaurants, id: \.self) { restaurant in
                                         Button(action: {
                                             self.selectedRestaurant = restaurant
-                                        }, label: {
+                                        }) {
                                             RestaurantTableItem(restaurant: restaurant)
-                                        })
-                                    }
-                                }
-                            }
-                            .background(
-                                Group {
-                                    if let selectedRestaurant = selectedRestaurant {
-                                        NavigationLink(
-                                            destination: DetailsPage(restaurant: selectedRestaurant),
-                                            tag: selectedRestaurant,
-                                            selection: $selectedRestaurant
-                                        ) {
-                                            EmptyView()
                                         }
                                     }
                                 }
-                            )
+                            }
                             .frame(height: 300)
-                        }.padding()
+                            .padding()
+                            .task {
+                                await viewModel.getAllRestaurants()
+                            }
+                            .onChange(of: searchText) { newValue in
+                                withAnimation(.easeInOut(duration: 0.5)) {
+                                    viewModel.search(newValue)
+                                }
+                            }
+                            .scaleEffect(searchText.isEmpty ? 1.0 : 1.2)
+                            .animation(.easeInOut(duration: 0.2), value: searchText)
+                            .navigationBarHidden(true)
+                            .fullScreenCover(item: $selectedRestaurant) { selectedRestaurant in
+                                DetailsPage(restaurant: selectedRestaurant)
+                            }
+                            
+                        }
                     }
                 }
             }
-            .navigationBarHidden(true)
-            .task {
-                await viewModel.getAllRestaurants()
-            }
-            .onChange(of: searchText) { newValue in
-                withAnimation(.easeInOut(duration: 0.5)) {
-                    viewModel.search(newValue)
-                }
-            }
-            .scaleEffect(searchText.isEmpty ? 1.0 : 1.2)
-            .animation(.easeInOut(duration: 0.2), value: searchText)
-        }            .navigationBarHidden(true)
-
+        }
     }
-
         
       
 
@@ -164,8 +155,8 @@ var restauranttable: some View {
 
 }
 }
-struct HomePage_Previews: PreviewProvider {
-    static var previews: some View {
-        HomePage()
-    }
-}
+//struct HomePage_Previews: PreviewProvider {
+//    static var previews: some View {
+//        HomePage()
+//    }
+//}

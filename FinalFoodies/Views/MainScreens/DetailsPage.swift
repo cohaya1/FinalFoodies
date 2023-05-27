@@ -14,11 +14,13 @@ struct DetailsPage: View {
     let restaurant: Restaurant
     @StateObject var viewModel = DetailsPageViewModel()
     @State private var isShareSheetShowing = false
+    @EnvironmentObject var favoritesViewModel: FavoritesViewModel<Restaurant>
+    @Environment(\.dismiss) var dismiss // <--- add this line
     
     @State private var mapCoordinate =
     MKCoordinateRegion()
     var body: some View {
-        NavigationView {
+        ZStack { // <-- Change NavigationView to ZStack
             GeometryReader { geometry in
                 ScrollView {
                     ZStack {
@@ -56,26 +58,39 @@ struct DetailsPage: View {
                         .padding()
                     }
                 }
-            }.navigationBarHidden(true)
-        }.navigationBarHidden(true )
+            }
+        }
     }
-
-        
     
     var backarrowicon: some View {
-        NavigationLink(destination: HomePage(), label: {
+        Button(action: { // <-- Replace NavigationLink with Button
+            dismiss() // <-- This is the dismiss action
+        }) {
             Image("backarrowicon")
                 .resizable()
                 .frame(width: 15, height: 24)
                 .scaledToFit()
-        })
+        }
     }
     var hearticon: some View {
-        Image("hearticon")
+        Button(action: {
+            if favoritesViewModel.favorites.contains(where: { $0.id == restaurant.id }) {
+                favoritesViewModel.removeFromFavorites(restaurant)
+            } else {
+                favoritesViewModel.addToFavorites(restaurant)
+            }
+        }) {
+            Image(
+                favoritesViewModel.favorites.contains(where: { $0.id == restaurant.id })
+                ? "hearticon_filled"
+                : "hearticon"
+            )
             .resizable()
             .frame(width: 29, height: 25)
             .scaledToFit()
+        }
     }
+
     var dinnerplate: some View {
         ZStack {
             
@@ -144,8 +159,8 @@ struct DetailsPage: View {
     }
 }
 
-struct DetailsPage_Previews: PreviewProvider {
-    static var previews: some View {
-        DetailsPage(restaurant: Restaurant(0, 0, "", "", 0.0, "", 0,Double(0.0),Double(0.0), nil, Restaurantimage(path: "", name:"",type: .image, size: 0, mime: "", meta: Meta(width: 10, height: 10), url: "")))
-    }
-}
+//struct DetailsPage_Previews: PreviewProvider {
+//    static var previews: some View {
+//        DetailsPage(restaurant: Restaurant(0, 0, "", "", 0.0, "", 0,Double(0.0),Double(0.0), nil, Restaurantimage(path: "", name:"",type: .image, size: 0, mime: "", meta: Meta(width: 10, height: 10), url: "")))
+//    }
+//}

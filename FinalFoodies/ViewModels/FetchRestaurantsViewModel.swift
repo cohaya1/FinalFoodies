@@ -1,128 +1,56 @@
-//
-//  FetchRestaurantsViewModel.swift
-//  FinalFoodies
-//
-//  Created by Chika Ohaya on 3/13/22.
-//
 
-//import Foundation
-//
-//protocol RestaurantViewModel: ObservableObject, CLLocationManagerDelegate {
-//    func getAllRestaurants() async
-//}
-//
-//// create fetcher for view model to pass to view
-//@MainActor
-//final class RestaurantFetcher: NSObject, RestaurantViewModel  {
-//
-//    @Published  var closestRestaurants : [Restaurant] = []
-//    @Published var userLocation: CLLocation?
-//
-//    //@Published var isLoading: Bool = false
-//    // @Published var errorMessage: String? = nil
-//
-//    private let service: FetchAPI
-//
-//
-//    init(service: FetchAPI ) {
-//        self.service = service
-//
-//    }// helps with unit testing this class independently. Also helps with injecting services into view models if they are sharing one service
-//
-//
-//    func getAllRestaurants() async {
-//            do {
-//
-//                // Try to fetch the schools data from the API.
-//                closestRestaurants = try await service.getAllRestaurants()
-//
-//            } catch {
-//                // If there is an error, print the error message.
-//                print("Error can't return any data: \(error)")
-//
-//                // Check if the error message is "Failure".
-//                if error.localizedDescription == "Failure" {
-//                    // If it is, call the `handleNoInternetConnection` method on the `service` object.
-//                    service.handleNoInternetConnection()
-//                }
-//
-//            }
-//
-//        }
-//    }
 
 import Foundation
 import CoreLocation
 
 protocol RestaurantViewModel: ObservableObject, CLLocationManagerDelegate {
-    
     func getAllRestaurants() async
     func search(_ query: String) async
 }
 
-// Strategy Protocol
-protocol RestaurantFetchingStrategy {
-    func fetchRestaurants() async throws -> [Restaurant]
-    
-}
 
-// Fetching strategies
-class AllRestaurantsFetchingStrategy: RestaurantFetchingStrategy {
-    private let service: FetchAPI
-    
-    init(service: FetchAPI) {
-        self.service = service
-    }
-    
-    func fetchRestaurants() async throws -> [Restaurant] {
-        // Try to fetch the restaurants data from the API.
-        return try await service.getAllRestaurants()
-    }
-}
 
-class ClosestRestaurantsFetchingStrategy: RestaurantFetchingStrategy {
-    private let service: FetchAPI
-    private let userLocation: CLLocation
-    
-    init(service: FetchAPI, userLocation: CLLocation) {
-        self.service = service
-        self.userLocation = userLocation
-    }
-    
-    func fetchRestaurants() async throws -> [Restaurant] {
-        // Fetch all restaurants.
-        let allRestaurants = try await service.getAllRestaurants()
-        
-        // Calculate the distance from the user's location to each restaurant.
-        let userLocationCoordinate = CLLocation(latitude: userLocation.coordinate.latitude, longitude: userLocation.coordinate.longitude)
-        
-        let sortedRestaurants = allRestaurants.map { restaurant -> (restaurant: Restaurant, distance: CLLocationDistance) in
-            let restaurantLocation = CLLocation(latitude: restaurant.restaurantlatitude, longitude: restaurant.restaurantlongitude)
-            let distance = userLocationCoordinate.distance(from: restaurantLocation)
-            return (restaurant, distance)
+class ClosestRestaurantSorter {
+    func sort(restaurants: [Restaurant], by userLocation: CLLocation?) async -> [Restaurant] {
+        guard let userLocation = userLocation else { return restaurants }
+
+        let geocoder = CLGeocoder()
+        var sortedRestaurants: [(restaurant: Restaurant, distance: CLLocationDistance)] = []
+
+        for restaurant in restaurants {
+            do {
+                let placemarks = try await geocoder.geocodeAddressString(restaurant.restaurantlocation)
+                guard let placemark = placemarks.first, let location = placemark.location else {
+                    print("No location found for this address: \(restaurant.restaurantlocation)")
+                    continue
+                }
+
+                let distance = userLocation.distance(from: location)
+                sortedRestaurants.append((restaurant, distance))
+            } catch {
+                print("Geocoding failed for restaurant: \(restaurant.restaurantname), error: \(error)")
+            }
         }
-        // Sort the restaurants by this distance.
-            .sorted { $0.distance < $1.distance }
-            .map { $0.restaurant } // After sorting, we don't need the distance anymore, so map the array back to just restaurants.
-        
-        // Return the sorted list of restaurants.
-        return sortedRestaurants
+
+        sortedRestaurants.sort { $0.distance < $1.distance }
+        sortedRestaurants = Array(sortedRestaurants.prefix(100))
+        return sortedRestaurants.map { $0.restaurant }
     }
 }
-// Fetcher for view model
+
 @MainActor
 final class RestaurantFetcher: NSObject, RestaurantViewModel, CLLocationManagerDelegate {
-    @Published var closestRestaurants: [Restaurant] = []
+    @Published var restaurants: [Restaurant] = []
     @Published var searchResults: [Restaurant] = []
     @Published var userLocation: CLLocation?
 
-    private let service: FetchAPI
-    private var strategy: RestaurantFetchingStrategy
+    private let restaurantAPI: FetchAPI
+    private var restaurantSorter = ClosestRestaurantSorter()
     private let locationManager = CLLocationManager()
 
-    init(service: FetchAPI) {
-        self.service = service
-        self.strategy = AllRestaurantsFetchingStrategy(service: service)
+    init(using apiMock: FetchAPI = NetworkManager() ){
+        self.restaurantAPI = apiMock
+        self.restaurantSorter = ClosestRestaurantSorter()
         super.init()
         setupLocationManager()
     }
@@ -136,10 +64,12 @@ final class RestaurantFetcher: NSObject, RestaurantViewModel, CLLocationManagerD
 
     private func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) async {
         guard let location = locations.last else { return }
+        print("User Location: \(location)") // Debug
         userLocation = location
-        strategy = ClosestRestaurantsFetchingStrategy(service: service, userLocation: location)
+        restaurantSorter = ClosestRestaurantSorter()
         await getAllRestaurants()
     }
+
     func requestLocationPermission() {
         let status = CLLocationManager.authorizationStatus()
 
@@ -147,10 +77,10 @@ final class RestaurantFetcher: NSObject, RestaurantViewModel, CLLocationManagerD
             case .notDetermined:
                 locationManager.requestWhenInUseAuthorization()
             case .denied, .restricted:
-                // Show an alert to the user explaining that they have disabled location permissions and how they can enable it in Settings.
+                // Handle disabled location permissions
                 break
             case .authorizedWhenInUse, .authorizedAlways:
-                // Permissions are already granted.
+                // Permissions are already granted
                 break
             @unknown default:
                 break
@@ -159,17 +89,19 @@ final class RestaurantFetcher: NSObject, RestaurantViewModel, CLLocationManagerD
 
     func getAllRestaurants() async {
         do {
-            closestRestaurants = try await strategy.fetchRestaurants()
+            let fetchedRestaurants = try await restaurantAPI.getAllRestaurantsService()
+            restaurants = await restaurantSorter.sort(restaurants: fetchedRestaurants, by: userLocation)
+            print("Fetched restaurants: \(restaurants)") // Debug
         } catch {
             print("Error can't return any data: \(error)")
             if error.localizedDescription == "Failure" {
-                service.handleNoInternetConnection()
+                // service.handleNoInternetConnection() // Uncomment if you have this function in service.
             }
         }
     }
 
     // Search function
     func search(_ query: String) {
-        searchResults = closestRestaurants.filter { $0.restaurantname.contains(query) }
+        searchResults = restaurants.filter { $0.restaurantname.contains(query) }
     }
 }

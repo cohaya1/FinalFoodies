@@ -95,7 +95,7 @@ struct RestaurantTableItem: View {
                     .lineLimit(3)
                     .frame(width: 220, height: 70, alignment: .center)
                     .foregroundColor(Color(.black))
-                Text(String(format:"%.1f",restaurant.restaurantstypeID)).font(.system(size: 17, weight: .bold, design: .rounded)).foregroundColor(Color(#colorLiteral(red: 0.98, green: 0.29, blue: 0.05, alpha: 1))).multilineTextAlignment(.center)
+                Text(restaurant.restaurantlocation).font(.system(size: 17, weight: .bold, design: .rounded)).foregroundColor(Color(#colorLiteral(red: 0.98, green: 0.29, blue: 0.05, alpha: 1))).multilineTextAlignment(.center)
                 
                 Text(String(format:"%.1f",restaurant.restaurantrating)).font(.system(size: 17, weight: .bold, design: .rounded)).foregroundColor(Color(#colorLiteral(red: 0.98, green: 0.29, blue: 0.05, alpha: 1))).multilineTextAlignment(.center)
                 
@@ -106,9 +106,9 @@ struct RestaurantTableItem: View {
     }
 }
 
-struct RestaurantTableItem_Previews: PreviewProvider {
-    static var previews: some View {
-        RestaurantTableItem(restaurant: Restaurant(0, 0, "", "", 0.0, "", 0,Double(0.0),Double(0.0), nil, Restaurantimage(path: "", name:"",type: .image, size: 0, mime: "", meta: Meta(width: 10, height: 10), url: "")))
-    }
-}
-
+//struct RestaurantTableItem_Previews: PreviewProvider {
+//    static var previews: some View {
+//        RestaurantTableItem(restaurant: Restaurant(0, 0, "", "", 0.0, "", 0,Double(0.0),Double(0.0), nil, Restaurantimage(path: "", name:"",type: .image, size: 0, mime: "", meta: Meta(width: 10, height: 10), url: "")))
+//    }
+//}
+//
