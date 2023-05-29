@@ -11,38 +11,58 @@ struct HomePage: View {
     @State private var showingDetail = false
     @State private var searchText = ""
     @StateObject var viewModel : RestaurantFetcher
-        @State private var selectedRestaurant: Restaurant?
+    @State private var selectedRestaurant: Restaurant?
+    @ObservedObject var activityVM = ActivityIndicatorViewModel()
+
+    var refreshButton: some View {
+        Button(action: {
+            Task {
+                await activityVM.performAsyncTask()
+                await viewModel.refresh()
+            }
+        }) {
+            Image(systemName: "arrow.clockwise")
+                .resizable()
+                .frame(width: 24, height: 24)
+        }
+    }
+
     var body: some View {
         NavigationView {
             GeometryReader { geometry in
-                ScrollView {
-                    ZStack {
-                        RoundedRectangle(cornerRadius: 20)
-                            .fill(Color(#colorLiteral(red: 0.949999988079071, green: 0.949999988079071, blue: 0.949999988079071, alpha: 1)))
-                            .frame(width: geometry.size.width, height: geometry.size.height)
-                            .edgesIgnoringSafeArea(.all)
-                        
+                ZStack {
+                    RoundedRectangle(cornerRadius: 20)
+                        .fill(Color(#colorLiteral(red: 0.949999988079071, green: 0.949999988079071, blue: 0.949999988079071, alpha: 1)))
+                        .frame(width: geometry.size.width, height: geometry.size.height)
+                        .edgesIgnoringSafeArea(.all)
+                    
+                    VStack {
+                        HStack {
+                            Spacer()
+                            settingsicon
+                        }.padding(.top, 30)
+                        Spacer()
+
                         VStack {
-                            HStack {
-                                Spacer()
-                                settingsicon
-                            }.padding(.top, 30)
+                            delicioustext
+                            SearchTextField
+                        }
+                        Spacer()
+
+                        HStack {
                             Spacer()
-                            
-                            VStack {
-                                delicioustext
-                                SearchTextField
-                            }
+                            Button(action: {}, label: {
+                                Text("see more").font(.system(size: 15, weight: .regular, design: .rounded)).foregroundColor(Color(#colorLiteral(red: 0.98, green: 0.29, blue: 0.05, alpha: 1)))
+                            })
                             Spacer()
-                            
-                            HStack {
-                                Spacer()
-                                Button(action: {}, label: {
-                                    Text("see more").font(.system(size: 15, weight: .regular, design: .rounded)).foregroundColor(Color(#colorLiteral(red: 0.98, green: 0.29, blue: 0.05, alpha: 1)))
-                                })
-                            }
-                            Spacer()
-                            
+                            refreshButton
+                        }
+                        Spacer()
+
+                        if activityVM.isLoading {
+                            ProgressView() // shows loading indicator
+                                .progressViewStyle(CircularProgressViewStyle())
+                        } else {
                             ScrollView(Axis.Set.horizontal, showsIndicators: false) {
                                 HStack(spacing: 45) {
                                     let restaurants = searchText.isEmpty ? viewModel.restaurants : viewModel.searchResults
@@ -71,18 +91,20 @@ struct HomePage: View {
                             .fullScreenCover(item: $selectedRestaurant) { selectedRestaurant in
                                 DetailsPage(restaurant: selectedRestaurant)
                             }
-                            
                         }
                     }
                 }
             }
         }
     }
-        
+
+
+    // Your other variables
+
+
       
 
     // Components
-    
     var settingsicon: some View {
         Image("settingsicon")
             .resizable()

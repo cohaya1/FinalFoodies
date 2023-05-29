@@ -16,7 +16,7 @@ protocol ActivityIndicatorProtocol: AnyObject {
 enum LongRunningTaskError: Error {
     case generalError
 }
-
+@MainActor
 class ActivityIndicatorViewModel: ObservableObject, ActivityIndicatorProtocol {
     @Published var isLoading: Bool = false
     

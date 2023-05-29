@@ -1,5 +1,5 @@
 
-
+import SwiftUI
 import Foundation
 import CoreLocation
 
@@ -38,11 +38,14 @@ class ClosestRestaurantSorter {
     }
 }
 
+
+
 @MainActor
 final class RestaurantFetcher: NSObject, RestaurantViewModel, CLLocationManagerDelegate {
     @Published var restaurants: [Restaurant] = []
     @Published var searchResults: [Restaurant] = []
     @Published var userLocation: CLLocation?
+    @Published var dataFetched = false
 
     private let restaurantAPI: FetchAPI
     private var restaurantSorter = ClosestRestaurantSorter()
@@ -62,12 +65,16 @@ final class RestaurantFetcher: NSObject, RestaurantViewModel, CLLocationManagerD
         locationManager.startUpdatingLocation()
     }
 
-    private func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) async {
-        guard let location = locations.last else { return }
-        print("User Location: \(location)") // Debug
-        userLocation = location
-        restaurantSorter = ClosestRestaurantSorter()
-        await getAllRestaurants()
+    internal func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation])  {
+        userLocation = locations.first
+        print("User Location: \(userLocation as Any)") // Debug
+        Task {
+            await getAllRestaurants()
+        }
+    }
+
+    nonisolated func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
+      print("Location manager error:", error)
     }
 
     func requestLocationPermission() {
@@ -88,16 +95,24 @@ final class RestaurantFetcher: NSObject, RestaurantViewModel, CLLocationManagerD
     }
 
     func getAllRestaurants() async {
+        guard !dataFetched else { return }
+
         do {
             let fetchedRestaurants = try await restaurantAPI.getAllRestaurantsService()
             restaurants = await restaurantSorter.sort(restaurants: fetchedRestaurants, by: userLocation)
             print("Fetched restaurants: \(restaurants)") // Debug
+            dataFetched = true
         } catch {
             print("Error can't return any data: \(error)")
             if error.localizedDescription == "Failure" {
                 // service.handleNoInternetConnection() // Uncomment if you have this function in service.
             }
         }
+    }
+
+    func refresh() async {
+        dataFetched = false
+        await getAllRestaurants()
     }
 
     // Search function

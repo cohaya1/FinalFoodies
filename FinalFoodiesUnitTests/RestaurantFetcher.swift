@@ -11,71 +11,88 @@ import FirebaseCore
 import CoreLocation
 import XCTest
 
-final class RestaurantFetcher: XCTestCase {
+final class RestaurantFetcherTests: XCTestCase {
     
     var fetcher: RestaurantFetcher!
     var mockAPI: MockFetchAPI!
-
+    var restaurantSorter: ClosestRestaurantSorter!
+    
     override func setUpWithError() throws {
-        // Put setup code here. This method is called before the invocation of each test method in the class.
         super.setUp()
-                mockAPI = MockFetchAPI()
-                fetcher = RestaurantFetcher(using: mockAPI)
-    }
-
-    override func tearDownWithError() throws {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
-    }
-
-    func testGetAllRestaurants() async {
-            // Arrange
-            mockAPI.restaurants = [Restaurant(restaurantname: "Test Restaurant", restaurantlocation: "3781 Presidential Pkwy Suite 306, Atlanta, GA 30340"),Restaurant(restaurantname: "Test Restaurant2", restaurantlocation: "1210 Tree Summit Pkwy, Duluth, GA 30096")]
-
-            // Act
-            await fetcher.getAllRestaurants()
-
-            // Assert
-            XCTAssertEqual(fetcher.restaurants.count, 1)
-            XCTAssertEqual(fetcher.restaurants.first?.restaurantname, "Test Restaurant")
-            XCTAssertEqual(fetcher.restaurants.first?.restaurantlocation, "Test Location")
-        }
-
-
-    func testSearchRestaurant() async {
-            // Arrange
-            mockAPI.restaurants = [Restaurant(restaurantname: "Test Restaurant", restaurantlocation: "Test Location")]
-            await fetcher.getAllRestaurants()
-
-            // Act
-            fetcher.search("Test")
-
-            // Assert
-            XCTAssertEqual(fetcher.searchResults.count, 1)
-            XCTAssertEqual(fetcher.searchResults.first?.restaurantname, "Test Restaurant")
-        }
-    }
-
-class MockFetchAPI: FetchAPI {
-    enum MockAPIError: Error {
-        case fakeError
+        mockAPI = MockFetchAPI()
+        fetcher = RestaurantFetcher(using: mockAPI)
+        restaurantSorter = ClosestRestaurantSorter()
     }
     
-    // You can specify the results you want to return for specific tests.
-    var restaurants: [Restaurant]?
-    var error: Error?
-
-    func getAllRestaurantsService() async throws -> [Restaurant] {
-        // If there's an error set, throw it
-        if let error = error {
-            throw error
-        }
-
-        // If restaurants are set, return them
-        if let restaurants = restaurants {
-            return restaurants
+    override func tearDownWithError() throws {
+        super.tearDown()
+        mockAPI = nil
+        fetcher = nil
+        restaurantSorter = nil
+    }
+    
+    func testGetAllRestaurants() async {
+        // Arrange
+        mockAPI.restaurants = [Restaurant(restaurantname: "Test Restaurant", restaurantlocation: "8980 Presidential Pkwy Suite 306, Atlanta, GA 30340"),Restaurant(restaurantname: "Test Restaurant2", restaurantlocation: "1210 Tree Summit Pkwy, Duluth, GA 30096")]
+        
+        // Act
+        await fetcher.getAllRestaurants()
+        
+        // Assert
+        XCTAssertEqual(fetcher.restaurants.count, 2)
+        XCTAssertEqual(fetcher.restaurants.first?.restaurantname, "Test Restaurant")
+        XCTAssertEqual(fetcher.restaurants.first?.restaurantlocation, "8980 Presidential Pkwy Suite 306, Atlanta, GA 30340")
+    }
+    
+    func testSearchRestaurant() async {
+        // Arrange
+        mockAPI.restaurants = [Restaurant(restaurantname: "Test Restaurant", restaurantlocation: "Test Location")]
+        await fetcher.getAllRestaurants()
+        
+        // Act
+        fetcher.search("Test")
+        
+        // Assert
+        XCTAssertEqual(fetcher.searchResults.count, 1)
+        XCTAssertEqual(fetcher.searchResults.first?.restaurantname, "Test Restaurant")
+    }
+    
+    func testSortRestaurantsByDistance() async {
+        // Arrange
+        let userLocation = CLLocation(latitude: 33.9888568, longitude: -84.1669992)
+        mockAPI.restaurants = [
+            Restaurant(restaurantname: "Restaurant 1", restaurantlocation: "8980 Presidential Pkwy Suite 306, Atlanta, GA 30340"),
+            Restaurant(restaurantname: "Restaurant 2", restaurantlocation: "1210 Tree Summit Pkwy, Duluth, GA 30096"),
+            Restaurant(restaurantname: "Restaurant 3", restaurantlocation: "140 Orchard Park drive, McDonough, GA 30253")
+        ]
+        await fetcher.getAllRestaurants()
+        
+        // Act
+        fetcher.restaurants = await restaurantSorter.sort(restaurants: fetcher.restaurants, by: userLocation)
+        
+        // Assert
+        XCTAssertEqual(fetcher.restaurants.first?.restaurantname, "Restaurant 1") // This will cause the test to fail
+    }
+    
+    
+    class MockFetchAPI: FetchAPI {
+        enum MockAPIError: Error {
+            case fakeError
         }
         
-        // Otherwise, throw an unexpected call error, or return a default value
-        throw MockAPIError.fakeError
+        var restaurants: [Restaurant]?
+        var error: Error?
+        
+        func getAllRestaurantsService() async throws -> [Restaurant] {
+            if let error = error {
+                throw error
+            }
+            
+            if let restaurants = restaurants {
+                return restaurants
+            }
+            
+            throw MockAPIError.fakeError
+        }
     }
 }
