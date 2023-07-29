@@ -60,8 +60,7 @@ struct HomePage: View {
                         Spacer()
 
                         if activityVM.isLoading {
-                            ProgressView() // shows loading indicator
-                                .progressViewStyle(CircularProgressViewStyle())
+                            CustomProgressView()
                         } else {
                             ScrollView(Axis.Set.horizontal, showsIndicators: false) {
                                 HStack(spacing: 45) {
@@ -77,10 +76,13 @@ struct HomePage: View {
                             }
                             .frame(height: 300)
                             .padding()
-                            .task {
-                                await viewModel.getAllRestaurants()
-                            }
-                            .onChange(of: searchText) { newValue in
+                            
+                            .onAppear {
+                                    Task {
+                                        
+                                        await viewModel.getAllRestaurants()
+                                    }
+                                }                            .onChange(of: searchText) { newValue in
                                 withAnimation(.easeInOut(duration: 0.5)) {
                                     viewModel.search(newValue)
                                 }
