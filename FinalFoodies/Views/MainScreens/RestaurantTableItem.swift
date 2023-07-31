@@ -70,21 +70,38 @@ struct RestaurantTableItem: View {
 
                 Circle()
                 .strokeBorder(Color(#colorLiteral(red: 0.949999988079071, green: 0.949999988079071, blue: 0.949999988079071, alpha: 1)), lineWidth: 1)
-                if restaurant.restaurantimage?.url != nil {
-                    AsyncImage(url: URL(string: restaurant.restaurantimage!.url))
-                       // .resizable()
-                                    .clipShape(Circle())
-                                    .overlay(Circle().stroke(Color.white, lineWidth: 4))
-                                    .shadow(radius: 10)
-                    .aspectRatio(contentMode: .fit)
-                    .frame(width: 276.1, height: 183.1)
-                    .clipped()
-                .frame(width: 276.1, height: 183.1)
-                                      
-                                        
-                                     }
-            }
-        
+                if let imageUrl = restaurant.restaurantimage?.url, let url = URL(string: imageUrl) {
+                                    CacheAsyncImage(url: url) { phase in
+                                        switch phase {
+                                        case .empty:
+                                            ProgressView()
+                                        case .success(let image):
+                                            image
+                                                .resizable()
+                                                .clipShape(Circle())
+                                                .overlay(Circle().stroke(Color.white, lineWidth: 4))
+                                                .shadow(radius: 10)
+                                                .aspectRatio(contentMode: .fit)
+                                                .frame(width: 276.1, height: 183.1)
+                                                .clipped()
+                                                .frame(width: 276.1, height: 183.1)
+                                        case .failure(_):
+                                            // Handle failure, perhaps with an error placeholder image
+                                            Image(systemName: "photo")
+                                                .resizable()
+                                                .clipShape(Circle())
+                                                .overlay(Circle().stroke(Color.white, lineWidth: 4))
+                                                .shadow(radius: 10)
+                                                .aspectRatio(contentMode: .fit)
+                                                .frame(width: 276.1, height: 183.1)
+                                                .clipped()
+                                                .frame(width: 276.1, height: 183.1)
+                                        @unknown default:
+                                            fatalError()
+                                        }
+                                    }
+                                }
+                            }
             
             .compositingGroup()
             .frame(width: 164.2, height: 174.2)

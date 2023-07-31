@@ -131,4 +131,29 @@ extension Restaurant: Equatable { // in case we want to search for a particular 
     
 }
 
-
+extension Restaurant {
+    static let sample = Self.init(
+        1, // id
+        1234567890, // createdAt
+        "Restaurant Name", // restaurantname
+        "Restaurant Location", // restaurantlocation
+        4.5, // restaurantrating
+        "Restaurant Description", // restaurantdescription
+        "Restaurant Type", // restaurantstype
+        40.7128, // restaurantlatitude
+        74.0060, // restaurantlongitude
+        "Restaurant Menu", // restaurantmenu
+        "Restaurant Photos", // restaurantphotos
+        "Restaurant Reviews", // restaurantreviews
+        "www.deepLinkURL.com", // deepLinkURL
+        Restaurantimage(
+            path: "path/to/image",
+            name: "image_name",
+            type: .image,
+            size: 1024,
+            mime: "image/jpeg",
+            meta: Meta(width: 800, height: 600),
+            url: "www.imageURL.com"
+        ) // restaurantimage
+    )
+}

@@ -72,6 +72,7 @@
 		988323CF27DEC7100052859D /* FetchRestaurantsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 988323CE27DEC7100052859D /* FetchRestaurantsViewModel.swift */; };
 		989179282A21A371008B179A /* RestaurantFetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 989179252A219E95008B179A /* RestaurantFetcher.swift */; };
 		989179292A21A39D008B179A /* FoodiesTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98C7F60F29A1CD9B005273D2 /* FoodiesTests.swift */; };
+		98CEE2C92A75A9C2006215E7 /* ImageCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98CEE2C82A75A9C2006215E7 /* ImageCache.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -135,6 +136,7 @@
 		98C7F60229A1BE80005273D2 /* FinalFoodiesUnitTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FinalFoodiesUnitTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		98C7F60C29A1CC8E005273D2 /* FinalFoodies.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; path = FinalFoodies.xctestplan; sourceTree = "<group>"; };
 		98C7F60F29A1CD9B005273D2 /* FoodiesTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodiesTests.swift; sourceTree = "<group>"; };
+		98CEE2C82A75A9C2006215E7 /* ImageCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCache.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -332,6 +334,7 @@
 			children = (
 				988323C127D19DA50052859D /* FoodiezFeed.swift */,
 				9852AA832A0C798500157D50 /* UrlComposer.swift */,
+				98CEE2C82A75A9C2006215E7 /* ImageCache.swift */,
 			);
 			path = Networking;
 			sourceTree = "<group>";
@@ -524,6 +527,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				98CEE2C92A75A9C2006215E7 /* ImageCache.swift in Sources */,
 				988323C227D19DA50052859D /* FoodiezFeed.swift in Sources */,
 				9883236827B8A59A0052859D /* NointernetView.swift in Sources */,
 				9883235B27B8A2C30052859D /* LoginView.swift in Sources */,

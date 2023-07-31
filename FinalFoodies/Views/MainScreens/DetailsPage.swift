@@ -101,14 +101,29 @@ struct DetailsPage: View {
             
             Circle()
                 .strokeBorder(Color(#colorLiteral(red: 0.949999988079071, green: 0.949999988079071, blue: 0.949999988079071, alpha: 0.25)), lineWidth: 1)
-            if restaurant.restaurantimage?.url != nil {
-                AsyncImage(url: URL(string: restaurant.restaurantimage!.url))
+            
+            if let imageURL = restaurant.restaurantimage?.url, let url = URL(string: imageURL) {
+                CacheAsyncImage(url: url) { phase in
+                    switch phase {
+                    case .empty:
+                        ProgressView()
+                    case .success(let image):
+                        image
+                            .resizable()
+                            .aspectRatio(contentMode: .fit)
+                    case .failure(_):
+                        Image(systemName: "photo") // You can replace this with a placeholder image
+                    @unknown default:
+                        fatalError()
+                    }
+                }
             }
         }
         .compositingGroup()
         .frame(width: 281.21, height: 251.21)
         .shadow(color: Color(#colorLiteral(red: 0, green: 0, blue: 0,alpha:1)), radius:4, x:0, y:4)
     }
+
     var restaurantname: some View {
         //Veggie tomato mix
         Text(restaurant.restaurantname).font(.system(size: 28, weight: .semibold, design: .rounded)).multilineTextAlignment(.center)
