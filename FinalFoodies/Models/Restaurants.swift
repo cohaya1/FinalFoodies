@@ -24,7 +24,7 @@ struct Restaurant: Identifiable, Hashable, Decodable  {
     let restaurantlatitude: Double?
     let restaurantlongitude: Double?
     let restaurantmenu: String?
-    let restaurantphotos: String
+    let restaurantphotos: String?
     let restaurantreviews: String?
     let deepLinkURL: String?
     let restaurantimage: Restaurantimage?

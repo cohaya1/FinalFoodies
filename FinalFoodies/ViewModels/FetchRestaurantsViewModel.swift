@@ -10,7 +10,44 @@ protocol RestaurantViewModel: ObservableObject, CLLocationManagerDelegate {
 
 
 
+
+class GeocodeCacheManager: ObservableObject {
+    @AppStorage("geocodeCache") private var storedCacheData: Data?
+    
+    var cache: [String: CLLocation] {
+        get {
+            if let data = storedCacheData {
+                if let storedCache = try? JSONDecoder().decode([String: [String: Double]].self, from: data) {
+                    var geocodeCache: [String: CLLocation] = [:]
+                    for (address, coordinates) in storedCache {
+                        let location = CLLocation(latitude: coordinates["latitude"] ?? 0, longitude: coordinates["longitude"] ?? 0)
+                        geocodeCache[address] = location
+                    }
+                    return geocodeCache
+                }
+            }
+            return [:]
+        }
+        set {
+            var newStoredCache: [String: [String: Double]] = [:]
+            for (address, location) in newValue {
+                newStoredCache[address] = ["latitude": location.coordinate.latitude, "longitude": location.coordinate.longitude]
+            }
+            DispatchQueue.main.async {
+                if let data = try? JSONEncoder().encode(newStoredCache) {
+                    self.storedCacheData = data
+                }
+            }
+
+        }
+    }
+}
+
+
 class ClosestRestaurantSorter {
+    private let geocodingDelay: TimeInterval = 1.2  // Delay to avoid rate limits
+    private var geocodeCacheManager = GeocodeCacheManager()
+
     func sort(restaurants: [Restaurant], by userLocation: CLLocation?) async -> [Restaurant] {
         guard let userLocation = userLocation else { return restaurants }
 
@@ -18,17 +55,24 @@ class ClosestRestaurantSorter {
         var sortedRestaurants: [(restaurant: Restaurant, distance: CLLocationDistance)] = []
 
         for restaurant in restaurants {
-            do {
-                let placemarks = try await geocoder.geocodeAddressString(restaurant.restaurantlocation)
-                guard let placemark = placemarks.first, let location = placemark.location else {
-                    print("No location found for this address: \(restaurant.restaurantlocation)")
-                    continue
-                }
-
-                let distance = userLocation.distance(from: location)
+            if let cachedLocation = geocodeCacheManager.cache[restaurant.restaurantlocation] {
+                let distance = userLocation.distance(from: cachedLocation)
                 sortedRestaurants.append((restaurant, distance))
-            } catch {
-                print("Geocoding failed for restaurant: \(restaurant.restaurantname), error: \(error)")
+            } else {
+                do {
+                    let placemarks = try await geocoder.geocodeAddressString(restaurant.restaurantlocation)
+                    try await Task.sleep(nanoseconds: UInt64(geocodingDelay * 1_000_000_000))  // Throttle geocoding requests
+                    guard let placemark = placemarks.first, let location = placemark.location else {
+                        print("No location found for this address: \(restaurant.restaurantlocation)")
+                        continue
+                    }
+                    
+                    geocodeCacheManager.cache[restaurant.restaurantlocation] = location
+                    let distance = userLocation.distance(from: location)
+                    sortedRestaurants.append((restaurant, distance))
+                } catch {
+                    print("Geocoding failed for restaurant: \(restaurant.restaurantname), error: \(error)")
+                }
             }
         }
 
@@ -37,6 +81,8 @@ class ClosestRestaurantSorter {
         return sortedRestaurants.map { $0.restaurant }
     }
 }
+
+
 
 
 

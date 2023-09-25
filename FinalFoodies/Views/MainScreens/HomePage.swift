@@ -65,7 +65,7 @@ struct HomePage: View {
                             ScrollView(Axis.Set.horizontal, showsIndicators: false) {
                                 HStack(spacing: 45) {
                                     let restaurants = searchText.isEmpty ? viewModel.restaurants : viewModel.searchResults
-                                    ForEach(restaurants, id: \.self) { restaurant in
+                                    ForEach(restaurants, id: \.self)   { restaurant in
                                         Button(action: {
                                             self.selectedRestaurant = restaurant
                                         }) {

@@ -10,23 +10,47 @@ import CoreLocationUI
 import MapKit
 import SwiftUI
 
+struct WebViewWithCloseButton: View {
+    let urlString: String
+    @Binding var isPresented: Bool
+
+    var body: some View {
+        NavigationView {
+            WebView(urlString: urlString)
+                .navigationBarItems(trailing: Button("Close") {
+                    isPresented = false
+                })
+        }
+    }
+}
+
+
 struct DetailsPage: View {
     let restaurant: Restaurant
     @StateObject var viewModel = DetailsPageViewModel()
     @State private var isShareSheetShowing = false
     @EnvironmentObject var favoritesViewModel: FavoritesViewModel<Restaurant>
     @Environment(\.dismiss) var dismiss // <--- add this line
+    @Environment(\.openURL) var openURL
     
     @State private var mapCoordinate =
     MKCoordinateRegion()
+    
+    @State private var showMenuModal: Bool = false
+    @State private var showPhotosModal: Bool = false
+    @State private var showReviewsModal: Bool = false
+    
     var body: some View {
+        
         ZStack { // <-- Change NavigationView to ZStack
             GeometryReader { geometry in
                 ScrollView {
+                    
                     ZStack {
+                        
                         RoundedRectangle(cornerRadius: 20)
                             .fill(Color(#colorLiteral(red: 0.949999988079071, green: 0.949999988079071, blue: 0.949999988079071, alpha: 1)))
-                            .frame(width: geometry.size.width * 0.9, height: geometry.size.height * 0.9)
+                            .frame(width: geometry.size.width * 0.95, height: geometry.size.height * 1.05)
                             .edgesIgnoringSafeArea(.all)
                         
                         VStack {
@@ -49,6 +73,7 @@ struct DetailsPage: View {
                             
                             VStack {
                                 restaurantdescription
+                                actionrows
                                 GoTolocationbutton
                             }
                             Spacer()
@@ -90,18 +115,29 @@ struct DetailsPage: View {
             .scaledToFit()
         }
     }
-
+    
     var dinnerplate: some View {
         ZStack {
-            
+            backgroundCircles
+            restaurantImage
+        }
+        .compositingGroup()
+        .frame(width: 281.21, height: 251.21)
+        .shadow(color: Color(#colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)), radius: 4, x: 0, y: 4)
+    }
+    
+    private var backgroundCircles: some View {
+        ZStack {
             Circle()
-                .fill(Color(#colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)))
-                .opacity(0.89)
-            
+                .fill(Color.white.opacity(0.89))
             
             Circle()
                 .strokeBorder(Color(#colorLiteral(red: 0.949999988079071, green: 0.949999988079071, blue: 0.949999988079071, alpha: 0.25)), lineWidth: 1)
-            
+        }
+    }
+    
+    private var restaurantImage: some View {
+        Group {
             if let imageURL = restaurant.restaurantimage?.url, let url = URL(string: imageURL) {
                 CacheAsyncImage(url: url) { phase in
                     switch phase {
@@ -111,19 +147,22 @@ struct DetailsPage: View {
                         image
                             .resizable()
                             .aspectRatio(contentMode: .fit)
+                            .clipShape(Circle()) // Clip the image to a circle shape
                     case .failure(_):
-                        Image(systemName: "photo") // You can replace this with a placeholder image
+                        Image(systemName: "photo") // Placeholder image
                     @unknown default:
                         fatalError()
                     }
                 }
+            } else {
+                Image(systemName: "photo") // Default placeholder image if the URL isn't available
+                    .clipShape(Circle())
             }
         }
-        .compositingGroup()
-        .frame(width: 281.21, height: 251.21)
-        .shadow(color: Color(#colorLiteral(red: 0, green: 0, blue: 0,alpha:1)), radius:4, x:0, y:4)
     }
-
+    
+    
+    
     var restaurantname: some View {
         //Veggie tomato mix
         Text(restaurant.restaurantname).font(.system(size: 28, weight: .semibold, design: .rounded)).multilineTextAlignment(.center)
@@ -146,19 +185,19 @@ struct DetailsPage: View {
     }
     var sharebutton: some View {
         VStack {
-                  // Your other view components here
-                  Button(action: {
-                      self.isShareSheetShowing = true
-                  }) {
-                      Text("Share")
-                  }
-                  .sheet(isPresented: $isShareSheetShowing) {
-                      ActivityViewController(activityItems: [restaurant.restaurantname, restaurant.restaurantlocation])
-                  }
-              }
-          }
+            // Your other view components here
+            Button(action: {
+                self.isShareSheetShowing = true
+            }) {
+                Text("Share")
+            }
+            .sheet(isPresented: $isShareSheetShowing) {
+                ActivityViewController(activityItems: [restaurant.restaurantname, restaurant.restaurantlocation])
+            }
+        }
+    }
     
-
+    
     var GoTolocationbutton: some View {
         Button(action: {
             viewModel.goToLocation(restaurant.restaurantlocation)
@@ -172,8 +211,54 @@ struct DetailsPage: View {
             }
         }
     }
+    
+    var actionrows: some View {
+        HStack(spacing: 20) {
+            
+            // Menu button
+            Button(action: {
+                showMenuModal = true
+            }, label: {
+                Text(restaurant.restaurantmenu != nil ? "Menu" : "Menu not available right now")
+            })
+            .sheet(isPresented: $showMenuModal) {
+                if let menuURL = restaurant.restaurantmenu {
+                    WebViewWithCloseButton(urlString: menuURL, isPresented: $showMenuModal)
+                } else {
+                    Text("Menu not available right now")
+                }
+            }
+            .foregroundColor(restaurant.restaurantmenu != nil ? .red : .gray)
+            
+            // Photos button
+            Button(action: {
+                showPhotosModal = true
+            }, label: {
+                Text("Photos")
+            })
+            .sheet(isPresented: $showPhotosModal) {
+                WebViewWithCloseButton(urlString: restaurant.restaurantphotos ?? "No Photos Available", isPresented: $showPhotosModal)
+            }
+            .foregroundColor(.red)
+            
+            // Reviews button
+            Button(action: {
+                showReviewsModal = true
+            }, label: {
+                Text(restaurant.restaurantreviews != nil ? "Reviews" : "Reviews not available right now")
+            })
+            .sheet(isPresented: $showReviewsModal) {
+                if let reviewsURL = restaurant.restaurantreviews {
+                    WebViewWithCloseButton(urlString: reviewsURL, isPresented: $showReviewsModal)
+                } else {
+                    Text("Reviews not available right now")
+                }
+            }
+            .foregroundColor(restaurant.restaurantreviews != nil ? .red : .gray)
+        }
+        .foregroundColor(.red)
+    }
 }
-
 //struct DetailsPage_Previews: PreviewProvider {
 //    static var previews: some View {
 //        DetailsPage(restaurant: Restaurant(0, 0, "", "", 0.0, "", 0,Double(0.0),Double(0.0), nil, Restaurantimage(path: "", name:"",type: .image, size: 0, mime: "", meta: Meta(width: 10, height: 10), url: "")))

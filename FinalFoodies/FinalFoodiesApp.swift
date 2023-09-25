@@ -7,7 +7,7 @@
 import Firebase
 import SwiftUI
 import FirebaseCore
-
+import GoogleSignIn
 
 class AppDelegate: NSObject, UIApplicationDelegate {
   func application(_ application: UIApplication,
@@ -22,7 +22,7 @@ struct FinalFoodiesApp: App {
     
     @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
     @StateObject private var authVM = AuthViewModel(authenticator: FirebaseAuthenticator())
-    @StateObject private var favoritesViewModel = FavoritesViewModel<Restaurant>()  // Adding this line
+    @StateObject private var favoritesViewModel = FavoritesViewModel<Restaurant>()
 
     var body: some Scene {
         WindowGroup {
@@ -33,11 +33,17 @@ struct FinalFoodiesApp: App {
                     .onAppear {
                         authVM.listenToAuthChanges()
                     }
+                    .onOpenURL { url in
+                        GIDSignIn.sharedInstance.handle(url)
+                    }
             } else {
                 AuthView() // your authentication view
                     .environmentObject(authVM)
                     .onAppear {
                         authVM.listenToAuthChanges()
+                    }
+                    .onOpenURL { url in
+                        GIDSignIn.sharedInstance.handle(url)
                     }
             }
         }

@@ -53,6 +53,7 @@ enum StatusCodes: Error {
 protocol FetchAPI {
     func getAllRestaurantsService() async throws -> [Restaurant]
     func handleNoInternetConnection()
+   
 }
 
 
@@ -65,48 +66,71 @@ class NetworkManager: FetchAPI, ObservableObject {
         // Show an alert or a message to the user indicating that there is no internet connection if I had more time I would show an alert for no internet connection
     }
     private let session: URLSessionProtocol
-
-        init(session: URLSessionProtocol = URLSession.shared) {
-            self.session = session
-        }
-
-    // Define an asynchronous function that retrieves all restaurants and returns an array of "Restaurant" objects
-    func getAllRestaurantsService() async throws -> [Restaurant]{
-        
-        
-        // Create a guard statement to ensure that the APIConstants baseUrl is a valid URL. If not, throw an "invalidURL" error.
-        let getrestaurantendpoint = APIEndpoint.restaurants
-        guard let url = getrestaurantendpoint.url else {
+    
+    init(session: URLSessionProtocol = URLSession.shared) {
+        self.session = session
+    }
+    // Function to generate the URL for a given page
+    func urlForPage(_ page: Int) throws -> URL {
+        guard let baseEndpointURL = APIEndpoint.restaurants.url else {
             throw StatusCodes.badurl
         }
         
-        // Create a URLRequest with the URL and send a network request to retrieve data using URLSession.shared.
-        // The retrieved data and response are returned as a tuple.
+        var urlComponents = URLComponents(url: baseEndpointURL, resolvingAgainstBaseURL: true)
+        urlComponents?.queryItems = [URLQueryItem(name: "page", value: "\(page)")]
         
-        do {
-            let (data, response) = try await session.data(from: url)
-            guard let httpResponse = response as? HTTPURLResponse,
-                  let statusCode = StatusCodes(statusCode: httpResponse.statusCode),
-                  statusCode == .success else {
-                if let statusCode = StatusCodes(statusCode: (response as? HTTPURLResponse)?.statusCode ?? 0) {
-                    print(statusCode.description)
-                    throw statusCode
-                } else {
-                    print(StatusCodes.networkError.description)
-                    throw StatusCodes.networkError
-                }
-            }
-
-            let decoder = JSONDecoder()
-            let restaurants = try decoder.decode([Restaurant].self, from: data)
-           
-            return restaurants
-        } catch {
-            print("Error: \(error.localizedDescription)")
-            throw error
+        guard let url = urlComponents?.url else {
+            throw StatusCodes.badurl
         }
+        
+        return url
     }
-}
+
+    // Main data-fetching loop
+    func getAllRestaurantsService() async throws -> [Restaurant] {
+        var allRestaurants: [Restaurant] = []
+        var currentPage = 1
+        var isLastPage = false
+
+        while !isLastPage {
+            do {
+                let url = try urlForPage(currentPage)
+
+                let (data, response) = try await session.data(from: url)
+                guard let httpResponse = response as? HTTPURLResponse,
+                      httpResponse.statusCode == 200 else {
+                    // Handle non-200 status codes, possibly breaking out of the loop for certain errors.
+                    break
+                }
+
+                let decoder = JSONDecoder()
+                let restaurants = try decoder.decode([Restaurant].self, from: data)
+                
+                // If no restaurants are returned, assume it's the last page.
+                if restaurants.isEmpty {
+                    isLastPage = true
+                    break
+                }
+                
+                allRestaurants.append(contentsOf: restaurants)
+                currentPage += 1
+                
+            } catch StatusCodes.badurl {
+                print(StatusCodes.badurl.description)
+                throw StatusCodes.badurl
+            } catch {
+                print("Error: \(error.localizedDescription)")
+                throw error
+            }
+        }
+        
+        return allRestaurants
+    }
+
+
+    }
+
+
     
     
 //     f

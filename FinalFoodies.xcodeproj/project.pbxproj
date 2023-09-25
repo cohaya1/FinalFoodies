@@ -73,6 +73,9 @@
 		989179282A21A371008B179A /* RestaurantFetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 989179252A219E95008B179A /* RestaurantFetcher.swift */; };
 		989179292A21A39D008B179A /* FoodiesTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98C7F60F29A1CD9B005273D2 /* FoodiesTests.swift */; };
 		98CEE2C92A75A9C2006215E7 /* ImageCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98CEE2C82A75A9C2006215E7 /* ImageCache.swift */; };
+		98CEE2CF2AB77E50006215E7 /* WebviewUIkit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98CEE2CE2AB77E50006215E7 /* WebviewUIkit.swift */; };
+		98CEE2D22ABA7066006215E7 /* GoogleSignIn in Frameworks */ = {isa = PBXBuildFile; productRef = 98CEE2D12ABA7066006215E7 /* GoogleSignIn */; };
+		98CEE2D42ABA7066006215E7 /* GoogleSignInSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 98CEE2D32ABA7066006215E7 /* GoogleSignInSwift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -137,6 +140,7 @@
 		98C7F60C29A1CC8E005273D2 /* FinalFoodies.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; path = FinalFoodies.xctestplan; sourceTree = "<group>"; };
 		98C7F60F29A1CD9B005273D2 /* FoodiesTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodiesTests.swift; sourceTree = "<group>"; };
 		98CEE2C82A75A9C2006215E7 /* ImageCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCache.swift; sourceTree = "<group>"; };
+		98CEE2CE2AB77E50006215E7 /* WebviewUIkit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebviewUIkit.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -149,6 +153,7 @@
 				988323A527D169A90052859D /* FirebaseDynamicLinks in Frameworks */,
 				988323BD27D169AA0052859D /* FirebaseStorageCombine-Community in Frameworks */,
 				988323B327D169A90052859D /* FirebaseInstallations in Frameworks */,
+				98CEE2D42ABA7066006215E7 /* GoogleSignInSwift in Frameworks */,
 				988323BF27D169AA0052859D /* FirebaseStorageSwift-Beta in Frameworks */,
 				988323B927D169A90052859D /* FirebaseRemoteConfigSwift-Beta in Frameworks */,
 				9883239727D169A90052859D /* FirebaseAppCheck in Frameworks */,
@@ -159,6 +164,7 @@
 				9883239927D169A90052859D /* FirebaseAppDistribution-Beta in Frameworks */,
 				9883239527D169A90052859D /* FirebaseAnalyticsWithoutAdIdSupport in Frameworks */,
 				988323AB27D169A90052859D /* FirebaseFirestoreSwift-Beta in Frameworks */,
+				98CEE2D22ABA7066006215E7 /* GoogleSignIn in Frameworks */,
 				9883239F27D169A90052859D /* FirebaseCrashlytics in Frameworks */,
 				988323A127D169A90052859D /* FirebaseDatabase in Frameworks */,
 				988323B527D169A90052859D /* FirebasePerformance in Frameworks */,
@@ -200,6 +206,7 @@
 			isa = PBXGroup;
 			children = (
 				9852AA972A10491100157D50 /* ShareFuncUiKit.swift */,
+				98CEE2CE2AB77E50006215E7 /* WebviewUIkit.swift */,
 			);
 			path = UikitWrappers;
 			sourceTree = "<group>";
@@ -407,6 +414,8 @@
 				988323BA27D169A90052859D /* FirebaseStorage */,
 				988323BC27D169AA0052859D /* FirebaseStorageCombine-Community */,
 				988323BE27D169AA0052859D /* FirebaseStorageSwift-Beta */,
+				98CEE2D12ABA7066006215E7 /* GoogleSignIn */,
+				98CEE2D32ABA7066006215E7 /* GoogleSignInSwift */,
 			);
 			productName = FinalFoodies;
 			productReference = 9883232D27B8A2A90052859D /* FinalFoodies.app */;
@@ -483,6 +492,7 @@
 			mainGroup = 9883232427B8A2A90052859D;
 			packageReferences = (
 				9883238F27D169A90052859D /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+				98CEE2D02ABA7066006215E7 /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */,
 			);
 			productRefGroup = 9883232E27B8A2A90052859D /* Products */;
 			projectDirPath = "";
@@ -541,6 +551,7 @@
 				987A55A327E23FE900E44B77 /* ImageLoaderViewModel.swift in Sources */,
 				9883238827D167950052859D /* AuthViewModel.swift in Sources */,
 				9852AA982A10491100157D50 /* ShareFuncUiKit.swift in Sources */,
+				98CEE2CF2AB77E50006215E7 /* WebviewUIkit.swift in Sources */,
 				9883235F27B8A39C0052859D /* SignUpView.swift in Sources */,
 				982883962A2558C30018C2CE /* CustomProgressView.swift in Sources */,
 				9883237B27C571870052859D /* FavoritesResultsView.swift in Sources */,
@@ -920,6 +931,14 @@
 				minimumVersion = 8.0.0;
 			};
 		};
+		98CEE2D02ABA7066006215E7 /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/google/GoogleSignIn-iOS";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 7.0.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -1042,6 +1061,16 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 9883238F27D169A90052859D /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = "FirebaseStorageSwift-Beta";
+		};
+		98CEE2D12ABA7066006215E7 /* GoogleSignIn */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 98CEE2D02ABA7066006215E7 /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */;
+			productName = GoogleSignIn;
+		};
+		98CEE2D32ABA7066006215E7 /* GoogleSignInSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 98CEE2D02ABA7066006215E7 /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */;
+			productName = GoogleSignInSwift;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

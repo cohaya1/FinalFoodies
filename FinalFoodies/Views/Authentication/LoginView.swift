@@ -53,6 +53,8 @@ struct LoginView: View {
               
              loginbutton
                 
+            googleSignInButton
+                
             }.padding(.top,530)
             
            
@@ -103,6 +105,27 @@ struct LoginView: View {
                })
     
     }
+    var googleSignInButton: some View {
+        Button(action: {
+            Task {
+                await authvm.signInWithGoogle()
+            }
+        }) {
+            HStack {
+                Image(systemName: "arrow.up.right.circle.fill")
+                    .resizable()
+                    .scaledToFit()
+                    .frame(width: 20, height: 20)
+                Text("Sign in with Google")
+                    .font(.headline)
+            }
+            .padding()
+            .background(Color.blue)
+            .foregroundColor(.white)
+            .cornerRadius(8)
+        }
+    }
+
     var emailtextfield: some View{
         TextField("", text: $email)
         .foregroundColor(.black)
