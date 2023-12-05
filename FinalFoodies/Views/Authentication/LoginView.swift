@@ -54,6 +54,7 @@ struct LoginView: View {
              loginbutton
                 
             googleSignInButton
+                    
                 
             }.padding(.top,530)
             

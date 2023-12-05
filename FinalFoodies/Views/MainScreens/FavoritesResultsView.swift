@@ -13,7 +13,8 @@ struct FavoritesResultsView: View {
     @State var rowspacing: CGFloat = 50
     @State private var selectedRestaurant: Restaurant? // Keep track of the selected restaurant
     @State private var showingDetail = false // Whether to show the detail view
-    
+    @State var restaurant: Restaurant?
+
   
     
     var body: some View {
@@ -49,6 +50,62 @@ struct FavoritesResultsView: View {
             }
         }
     }
+    
+
+    struct ResultsSearchItemView: View {
+        var restaurant : Restaurant
+        
+        var restaurantImage: some View {
+           Group {
+              if let imageURL = restaurant.restaurantimage?.url, let url = URL(string: imageURL) {
+                  CacheAsyncImage(url: url) { phase in
+                      switch phase {
+                      case .empty:
+                          ProgressView()
+                      case .success(let image):
+                          image
+                              .resizable()
+                              .aspectRatio(contentMode: .fit)
+                              .clipShape(Circle()) // Clip the image to a circle shape
+                      case .failure(_):
+                          Image(systemName: "photo") // Placeholder image
+                      @unknown default:
+                          fatalError()
+                      }
+                  }
+              } else {
+                  Image(systemName: "photo") // Default placeholder image if the URL isn't available
+                      .clipShape(Circle())
+              }
+          }
+      }
+        var dinnerplate: some View {
+            ZStack {
+                backgroundCircles
+                restaurantImage
+            }
+            .compositingGroup()
+            .frame(width: 281.21, height: 251.21)
+            .shadow(color: Color(#colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)), radius: 4, x: 0, y: 4)
+        }
+        
+        var body: some View {
+            ZStack {
+                dinnerplate
+                VStack(spacing: 15){
+                                  Text(restaurant.restaurantname)
+                                      .font(.system(size: 22, weight: .semibold, design: .rounded))
+                                      .multilineTextAlignment(.center)
+    //                              Text("N \(restaurant.restaurantrating)")
+    //                                  .font(.system(size: 17, weight: .bold, design: .rounded))
+    //                                  .foregroundColor(Color(#colorLiteral(red: 0.98, green: 0.29, blue: 0.05, alpha: 1)))
+    //                                  .multilineTextAlignment(.center)
+                              }.padding(.top,80)
+            }
+        }
+    }
+    
+   
     var resultsSearchLabel: some View {
         //Found 6 results
         Text("Favorites").font(.system(size: 28, weight: .bold, design: .rounded)).multilineTextAlignment(.center)
@@ -56,43 +113,22 @@ struct FavoritesResultsView: View {
     }
 }
 
-
-struct ResultsSearchItemView: View {
-    var restaurant: Restaurant
-    var body: some View {
-        ZStack {
-            RoundedRectangle(cornerRadius: 30)
-                .fill(Color(#colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)))
-            .frame(width: 145, height: 220)
-            .shadow(color: Color(#colorLiteral(red: 0.22499999403953552, green: 0.22499999403953552, blue: 0.22499999403953552, alpha:  0.10000000149011612)), radius:60, x:0, y:30)
-           
-            ZStack {
-                Circle()
-                .fill(Color(#colorLiteral(red: 0.949999988079071, green: 0.949999988079071, blue: 0.949999988079071, alpha: 1)))
-
-                Circle()
-                .strokeBorder(Color(#colorLiteral(red: 0.949999988079071, green: 0.949999988079071, blue: 0.949999988079071, alpha: 1)), lineWidth: 1)
-            }
-            .compositingGroup()
-            .frame(width: 114.2, height: 164.2)
-            .shadow(color: Color(#colorLiteral(red: 0, green: 0, blue: 0, alpha: 4)), radius:4, x:0, y:4)
-            .padding(.bottom,200)
-            VStack(spacing: 15){
-                              Text(restaurant.restaurantname)
-                                  .font(.system(size: 22, weight: .semibold, design: .rounded))
-                                  .multilineTextAlignment(.center)
-//                              Text("N \(restaurant.restaurantrating)")
-//                                  .font(.system(size: 17, weight: .bold, design: .rounded))
-//                                  .foregroundColor(Color(#colorLiteral(red: 0.98, green: 0.29, blue: 0.05, alpha: 1)))
-//                                  .multilineTextAlignment(.center)
-                          }.padding(.top,80)
-        }
+private var backgroundCircles: some View {
+    ZStack {
+        Circle()
+            .fill(Color.white.opacity(0.89))
+        
+        Circle()
+            .strokeBorder(Color(#colorLiteral(red: 0.949999988079071, green: 0.949999988079071, blue: 0.949999988079071, alpha: 0.25)), lineWidth: 1)
     }
 }
+  
 
-struct FavoritesResultsView_Previews: PreviewProvider {
-    static var previews: some View {
-        FavoritesResultsView()
-            .environmentObject(FavoritesViewModel<Restaurant>()) // Supplying the ViewModel here
-    }
-}
+
+
+//struct FavoritesResultsView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        FavoritesResultsView()
+//            .environmentObject(FavoritesViewModel<Restaurant>()) // Supplying the ViewModel here
+//    }
+//}

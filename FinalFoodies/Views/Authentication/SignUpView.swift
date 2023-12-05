@@ -63,10 +63,13 @@ struct SignUpView: View {
            
               
              SignUPbutton
-                
-            }.padding(.top,620)
             
-           
+            
+            }.padding(.top,580)
+            
+            VStack(spacing:190) {
+                googleSignUpButton
+            }.padding(.top,720)
       
            
                 
@@ -101,6 +104,27 @@ struct SignUpView: View {
         })
         .alert(isPresented: $authvm.hasError) {
             Alert(title: Text("Sign Up Error"), message: Text(authvm.errorString))
+        }
+    }
+
+    var googleSignUpButton: some View {
+        Button(action: {
+            Task {
+                await authvm.signInWithGoogle()
+            }
+        }) {
+            HStack {
+                Image(systemName: "arrow.up.right.circle.fill")
+                    .resizable()
+                    .scaledToFit()
+                    .frame(width: 20, height: 20)
+                Text("Sign in with Google")
+                    .font(.headline)
+            }
+            .padding()
+            .background(Color.blue)
+            .foregroundColor(.white)
+            .cornerRadius(8)
         }
     }
 

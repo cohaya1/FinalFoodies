@@ -11,7 +11,7 @@ struct TabViewUI: View {
     @State var isPresenting = false
     @State var tabSelection = 1
     @MainActor let viewModel = RestaurantFetcher( using: NetworkManager())
-
+    
     var body: some View {
         TabView(selection: $tabSelection){
             HomePage(viewModel: viewModel)
@@ -55,8 +55,8 @@ struct TabViewUI: View {
     }
 }
 
-struct TabView_Previews: PreviewProvider {
-    static var previews: some View {
-        TabViewUI()
-    }
-}
+//struct TabView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        TabViewUI()
+//    }
+//}

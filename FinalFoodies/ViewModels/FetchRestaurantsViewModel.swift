@@ -163,6 +163,6 @@ final class RestaurantFetcher: NSObject, RestaurantViewModel, CLLocationManagerD
 
     // Search function
     func search(_ query: String) {
-        searchResults = restaurants.filter { $0.restaurantname.contains(query) }
+        searchResults = restaurants.filter { $0.restaurantname.contains(query) || $0.restaurantstype.contains(query) }
     }
 }

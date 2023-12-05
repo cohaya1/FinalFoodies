@@ -28,7 +28,7 @@ struct SettingsView: View {
             VStack {
                 HStack(spacing:185){
                    // personaldetailslabel
-                    changepasswordbutton
+                    ChangePasswordView()
                 }
                 
             }.padding(.bottom,500)
@@ -61,10 +61,84 @@ struct SettingsView: View {
 //            .foregroundColor(Color(#colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)))
 //
 //    }
-    var changepasswordbutton: some View {
-        //change
-        Text("change password").font(.system(size: 15, weight: .regular)).foregroundColor(Color(#colorLiteral(red: 0.98, green: 0.29, blue: 0.05, alpha: 1)))
+    struct ChangePasswordView: View {
+        @State private var showingChangePasswordPopup = false
+        @State private var showAlert = false
+        @State private var alertMessage = ""
+
+        @EnvironmentObject var authViewModel: AuthViewModel
+
+        var body: some View {
+            ZStack {
+                // Your existing content here...
+
+                Button("Change Password") {
+                    self.showingChangePasswordPopup = true
+                }
+                .font(.system(size: 15, weight: .regular))
+                .foregroundColor(Color.blue) // Example styling
+                .padding()
+
+                if showingChangePasswordPopup {
+                    ChangePasswordPopup(showingChangePasswordPopup: $showingChangePasswordPopup, showAlert: $showAlert, alertMessage: $alertMessage, authViewModel: authViewModel)
+                }
+            }
+            .alert(isPresented: $showAlert) {
+                Alert(title: Text("Change Password"), message: Text(alertMessage), dismissButton: .default(Text("OK")))
+            }
+        }
     }
+
+
+    struct ChangePasswordPopup: View {
+        @Binding var showingChangePasswordPopup: Bool
+        @Binding var showAlert: Bool
+        @Binding var alertMessage: String
+        @State private var newPassword = ""
+        
+        var authViewModel: AuthViewModel
+
+        var body: some View {
+            ZStack {
+                Color.black.opacity(0.4)
+                    .ignoresSafeArea()
+                    .onTapGesture {
+                        self.showingChangePasswordPopup = false
+                    }
+
+                VStack(spacing: 20) {
+                    Text("Change Password")
+                        .bold().padding()
+                        .frame(maxWidth: .infinity)
+                        .background(Color.red)
+                        .foregroundColor(Color.white)
+
+                    SecureField("New Password", text: $newPassword)
+                        .textFieldStyle(RoundedBorderTextFieldStyle())
+                        .padding()
+
+                    Button("Update Password") {
+                        authViewModel.changePassword(newPassword: newPassword) { success, errorMessage in
+                            showAlert = true
+                            alertMessage = success ? "Password changed successfully" : (errorMessage ?? "Error changing password")
+                            showingChangePasswordPopup = false
+                        }
+                    }
+                    .padding()
+
+                    Button("Cancel") {
+                        showingChangePasswordPopup = false
+                    }
+                    .padding()
+                }
+                .frame(width: 300, height: 250)
+                .background(Color.white)
+                .cornerRadius(20).shadow(radius: 20)
+            }
+        }
+    }
+
+
     var signoutbutton: some View {
         Button(action: {
             authvm.logout()

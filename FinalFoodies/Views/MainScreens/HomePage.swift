@@ -65,15 +65,24 @@ struct HomePage: View {
                             ScrollView(Axis.Set.horizontal, showsIndicators: false) {
                                 HStack(spacing: 45) {
                                     let restaurants = searchText.isEmpty ? viewModel.restaurants : viewModel.searchResults
-                                    ForEach(restaurants, id: \.self)   { restaurant in
-                                        Button(action: {
-                                            self.selectedRestaurant = restaurant
-                                        }) {
-                                            RestaurantTableItem(restaurant: restaurant)
+                                    if restaurants.isEmpty {
+                                        Text("No results found")
+                                            .font(.title)
+                                            .foregroundColor(.gray)
+                                            .padding()
+                                    } else {
+                                        ForEach(restaurants, id: \.self) { restaurant in
+                                            Button(action: {
+                                                self.selectedRestaurant = restaurant
+                                            }) {
+                                                RestaurantTableItem(restaurant: restaurant)
+                                            }
                                         }
                                     }
                                 }
                             }
+                        
+
                             .frame(height: 300)
                             .padding()
                             
@@ -179,6 +188,8 @@ var restauranttable: some View {
 
 }
 }
+
+
 //struct HomePage_Previews: PreviewProvider {
 //    static var previews: some View {
 //        HomePage()

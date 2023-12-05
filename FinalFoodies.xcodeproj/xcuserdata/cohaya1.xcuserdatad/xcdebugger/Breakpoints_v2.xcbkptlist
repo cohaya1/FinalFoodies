@@ -164,5 +164,69 @@
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "DEA93359-B538-45F2-AF48-FD6C09BA733E"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "FinalFoodies/FinalFoodiesApp.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "15"
+            endingLineNumber = "15"
+            landmarkName = "application(_:didFinishLaunchingWithOptions:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "7E04DD3A-60CF-4815-B977-C4AAD32E26E5"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "FinalFoodies/FinalFoodiesApp.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "30"
+            endingLineNumber = "30"
+            landmarkName = "init()"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "7E04DD3A-60CF-4815-B977-C4AAD32E26E5 - c231339af3655b2a"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "FinalFoodies.FinalFoodiesApp.init() -&gt; FinalFoodies.FinalFoodiesApp"
+                  moduleName = "FinalFoodies"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/cohaya1/Documents/FinalFoodies/FinalFoodies/FinalFoodiesApp.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "22"
+                  endingLineNumber = "22"
+                  offsetFromSymbolStart = "160">
+               </Location>
+               <Location
+                  uuid = "7E04DD3A-60CF-4815-B977-C4AAD32E26E5 - c231339af3655b09"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "FinalFoodies.FinalFoodiesApp.init() -&gt; FinalFoodies.FinalFoodiesApp"
+                  moduleName = "FinalFoodies"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/cohaya1/Documents/FinalFoodies/FinalFoodies/FinalFoodiesApp.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "21"
+                  endingLineNumber = "21"
+                  offsetFromSymbolStart = "104">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
    </Breakpoints>
 </Bucket>

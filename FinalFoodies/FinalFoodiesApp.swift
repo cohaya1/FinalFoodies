@@ -12,17 +12,32 @@ import GoogleSignIn
 class AppDelegate: NSObject, UIApplicationDelegate {
   func application(_ application: UIApplication,
                    didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
-    FirebaseApp.configure()
 
     return true
   }
 }
 @main
 struct FinalFoodiesApp: App {
-    
     @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
-    @StateObject private var authVM = AuthViewModel(authenticator: FirebaseAuthenticator())
-    @StateObject private var favoritesViewModel = FavoritesViewModel<Restaurant>()
+    @StateObject private var authVM: AuthViewModel
+
+
+    // The favoritesViewModel should not be initialized here as it needs the user ID
+    @StateObject private var favoritesViewModel: FavoritesViewModel<Restaurant>
+
+
+
+    init() {
+            FirebaseApp.configure()
+            
+            let firebaseManager = FirebaseManager()
+            let authViewModel = AuthViewModel(authenticator: FirebaseAuthenticator(), firebaseManager: firebaseManager)
+            _authVM = StateObject(wrappedValue: authViewModel)
+
+            // Initialize FavoritesViewModel with the FirebaseManager and AuthViewModel
+            let favoritesVM = FavoritesViewModel<Restaurant>(firebaseManager: firebaseManager, authViewModel: authViewModel)
+            _favoritesViewModel = StateObject(wrappedValue: favoritesVM)
+        }
 
     var body: some Scene {
         WindowGroup {
@@ -32,6 +47,7 @@ struct FinalFoodiesApp: App {
                     .environmentObject(favoritesViewModel) // Supplying the ViewModel here
                     .onAppear {
                         authVM.listenToAuthChanges()
+                        favoritesViewModel.initializeFavorites()
                     }
                     .onOpenURL { url in
                         GIDSignIn.sharedInstance.handle(url)

@@ -8,9 +8,9 @@
 import Combine
 import Foundation
 import SwiftUI
-import Firebase
 import GoogleSignIn
 import FirebaseAuth
+import Firebase
 
 protocol Authenticator {
     func login(withEmail: String, password: String, completion: @escaping (Result<User, Error>) -> Void)
@@ -63,15 +63,29 @@ class AuthViewModel: ObservableObject {
     @Published var errorString = ""
 
     private var handle: AuthStateDidChangeListenerHandle?
+    private var firebaseManager: FirebaseManagerProtocol
+
+        var firebaseManagerPublic: FirebaseManagerProtocol {
+            return firebaseManager
+        }
 
    // private var cancellables = Set<AnyCancellable>()
     private var authenticator: Authenticator
     
-    init(authenticator: Authenticator) {
+    init(authenticator: Authenticator, firebaseManager: FirebaseManagerProtocol) {
         self.authenticator = authenticator
         userSession = authenticator.currentUser
+        self.firebaseManager = firebaseManager
+
+        listenToAuthChangesFav()
     }
-    
+    private func listenToAuthChangesFav() {
+           handle = Auth.auth().addStateDidChangeListener { [weak self] (auth, user) in
+               self?.userSession = user
+               self?.firebaseManager.setUserId(user?.uid)
+           }
+       }
+
     func login(withEmail email: String, password: String) {
         authenticator.login(withEmail: email, password: password) { [weak self] result in
             switch result {
@@ -163,4 +177,22 @@ extension AuthViewModel {
           }
       }
     
+}
+
+extension AuthViewModel {
+    func changePassword(newPassword: String, completion: @escaping (Bool, String?) -> Void) {
+        guard let currentUser = Auth.auth().currentUser else {
+            completion(false, "No user is currently logged in.")
+            return
+        }
+
+        currentUser.updatePassword(to: newPassword) { error in
+            if let error = error {
+                print(error.localizedDescription)
+                completion(false, error.localizedDescription)
+            } else {
+                completion(true, nil)
+            }
+        }
+    }
 }

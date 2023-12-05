@@ -13,7 +13,8 @@
 import Foundation
 
 // MARK: - WelcomeElement
-struct Restaurant: Identifiable, Hashable, Decodable  {
+
+struct Restaurant: Identifiable, Hashable, Codable  {
     
     let id: Int
     let createdAt: Int
@@ -83,36 +84,60 @@ struct Restaurant: Identifiable, Hashable, Decodable  {
         case deepLinkURL = "DeepLinkURL"
         case restaurantimage = "Restaurantimage"
     }
-}
+    func encode(to encoder: Encoder) throws {
+            var container = encoder.container(keyedBy: CodingKeys.self)
+            
+            try container.encode(id, forKey: .id)
+            try container.encode(createdAt, forKey: .createdAt)
+            try container.encode(restaurantname, forKey: .restaurantname)
+            try container.encode(restaurantlocation, forKey: .restaurantlocation)
+            try container.encode(restaurantrating, forKey: .restaurantrating)
+            try container.encode(restaurantdescription, forKey: .restaurantdescription)
+            try container.encode(restaurantstype, forKey: .restaurantstype)
+            try container.encode(restaurantlatitude, forKey: .restaurantlatitude)
+            try container.encode(restaurantlongitude, forKey: .restaurantlongitude)
+            try container.encode(restaurantmenu, forKey: .restaurantmenu)
+            try container.encode(restaurantphotos, forKey: .restaurantphotos)
+            try container.encode(restaurantreviews, forKey: .restaurantreviews)
+            try container.encode(deepLinkURL, forKey: .deepLinkURL)
+            try container.encode(restaurantimage, forKey: .restaurantimage)
+        }
+    }
+
 
 
 // MARK: - Restaurantimage
-struct Restaurantimage: Hashable,Decodable, Equatable {
+// MARK: - Restaurantimage
+struct Restaurantimage: Hashable, Codable, Equatable {
     static func == (lhs: Restaurantimage, rhs: Restaurantimage) -> Bool {
         lhs.path == rhs.path &&
         lhs.name == rhs.name
-        
     }
     
     let path, name: String
     let type: TypeEnum
     let size: Int
-    let mime: String
+    let mime: MIME
     let meta: Meta
     let url: String
-
+    
+    enum CodingKeys: String, CodingKey {
+        case path, name, type, size, mime, meta, url
+    }
 }
 
 // MARK: - Meta
-struct Meta: Hashable,Decodable {
+struct Meta: Hashable, Codable {
     let width, height: Int
 }
 
-enum MIME: String, Decodable {
+enum MIME: String, Codable {
     case imageJPEG = "image/jpeg"
+    case imagePNG = "image/png"
 }
 
-enum TypeEnum: String, Decodable {
+
+enum TypeEnum: String, Codable {
     case image = "image"
 }
 
@@ -151,7 +176,7 @@ extension Restaurant {
             name: "image_name",
             type: .image,
             size: 1024,
-            mime: "image/jpeg",
+            mime: MIME(rawValue: "image/jpeg")!,
             meta: Meta(width: 800, height: 600),
             url: "www.imageURL.com"
         ) // restaurantimage

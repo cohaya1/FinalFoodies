@@ -99,10 +99,12 @@ struct DetailsPage: View {
     }
     var hearticon: some View {
         Button(action: {
-            if favoritesViewModel.favorites.contains(where: { $0.id == restaurant.id }) {
-                favoritesViewModel.removeFromFavorites(restaurant)
-            } else {
-                favoritesViewModel.addToFavorites(restaurant)
+            Task {
+                if favoritesViewModel.favorites.contains(where: { $0.id == restaurant.id }) {
+                    await favoritesViewModel.removeFromFavorites(restaurant)
+                } else {
+                    await favoritesViewModel.addToFavorites(restaurant)
+                }
             }
         }) {
             Image(
@@ -115,6 +117,7 @@ struct DetailsPage: View {
             .scaledToFit()
         }
     }
+
     
     var dinnerplate: some View {
         ZStack {

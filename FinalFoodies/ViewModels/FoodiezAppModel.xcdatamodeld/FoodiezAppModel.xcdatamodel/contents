@@ -1,2 +1,19 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="22222" systemVersion="22G120" minimumToolsVersion="Automatic" sourceLanguage="Swift" usedWithSwiftData="YES" userDefinedModelVersionIdentifier=""/>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="22222" systemVersion="22G120" minimumToolsVersion="Automatic" sourceLanguage="Swift" usedWithSwiftData="YES" userDefinedModelVersionIdentifier="">
+    <entity name="RestaurantEntity" representedClassName="RestaurantEntity" syncable="YES" codeGenerationType="class">
+        <attribute name="createdAt" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="deepLinkURL" optional="YES" attributeType="String"/>
+        <attribute name="id" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="restaurantdescription" optional="YES" attributeType="String"/>
+        <attribute name="restaurantimage" optional="YES" attributeType="Binary"/>
+        <attribute name="restaurantlatitude" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="restaurantlocation" optional="YES" attributeType="String"/>
+        <attribute name="restaurantlongitude" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="restaurantmenu" optional="YES" attributeType="String"/>
+        <attribute name="restaurantname" optional="YES" attributeType="String"/>
+        <attribute name="restaurantphotos" optional="YES" attributeType="String"/>
+        <attribute name="restaurantrating" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="restaurantreviews" optional="YES" attributeType="String"/>
+        <attribute name="restaurantstype" optional="YES" attributeType="String"/>
+    </entity>
+</model>
