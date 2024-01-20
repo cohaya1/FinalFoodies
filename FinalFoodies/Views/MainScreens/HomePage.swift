@@ -13,6 +13,7 @@ struct HomePage: View {
     @StateObject var viewModel : RestaurantFetcher
     @State private var selectedRestaurant: Restaurant?
     @ObservedObject var activityVM = ActivityIndicatorViewModel()
+    @EnvironmentObject var networkStatusViewModel: NetworkStatusViewModel
 
     var refreshButton: some View {
         Button(action: {
@@ -77,6 +78,10 @@ struct HomePage: View {
                                             }) {
                                                 RestaurantTableItem(restaurant: restaurant)
                                             }
+                                            if !networkStatusViewModel.isNetworkAvailable {
+                                                NoInternetPopup()
+                                                    .transition(.opacity) // Transition effect for the popup
+                                            }
                                         }
                                     }
                                 }
@@ -91,16 +96,21 @@ struct HomePage: View {
                                         
                                         await viewModel.getAllRestaurants()
                                     }
-                                }                            .onChange(of: searchText) { newValue in
+                                }                            .onChange(of: searchText) 
+                            { newValue in
                                 withAnimation(.easeInOut(duration: 0.5)) {
                                     viewModel.search(newValue)
                                 }
+                                
                             }
                             .scaleEffect(searchText.isEmpty ? 1.0 : 1.2)
                             .animation(.easeInOut(duration: 0.2), value: searchText)
                             .navigationBarHidden(true)
                             .fullScreenCover(item: $selectedRestaurant) { selectedRestaurant in
                                 DetailsPage(restaurant: selectedRestaurant)
+                                
+                                // No Internet Connection Popup
+                                                   
                             }
                         }
                     }

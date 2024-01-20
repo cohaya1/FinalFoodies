@@ -78,6 +78,13 @@
             ReferencedContainer = "container:FinalFoodies.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
+      <EnvironmentVariables>
+         <EnvironmentVariable
+            key = "OPENAI_API_TOKEN"
+            value = "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"
+            isEnabled = "YES">
+         </EnvironmentVariable>
+      </EnvironmentVariables>
    </LaunchAction>
    <ProfileAction
       buildConfiguration = "Release"

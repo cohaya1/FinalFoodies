@@ -18,9 +18,9 @@ struct Restaurant: Identifiable, Hashable, Codable  {
     
     let id: Int
     let createdAt: Int
-    let restaurantname, restaurantlocation: String
+    let restaurantname, restaurantlocation: String?
     let restaurantrating: Double?
-    let restaurantdescription: String
+    let restaurantdescription: String?
     let restaurantstype: String
     let restaurantlatitude: Double?
     let restaurantlongitude: Double?
@@ -30,7 +30,7 @@ struct Restaurant: Identifiable, Hashable, Codable  {
     let deepLinkURL: String?
     let restaurantimage: Restaurantimage?
 
-    init(_ id: Int, _ createdAt: Int, _ restaurantname: String, _ restaurantlocation: String, _ restaurantrating: Double?, _ restaurantdescription: String, _ restaurantstype: String, _ restaurantlatitude: Double?, _ restaurantlongitude: Double?, _ restaurantmenu: String?, _ restaurantphotos: String, _ restaurantreviews: String?, _ deepLinkURL: String?, _ restaurantimage: Restaurantimage?) {
+    init(_ id: Int, _ createdAt: Int, _ restaurantname: String?, _ restaurantlocation: String?, _ restaurantrating: Double?, _ restaurantdescription: String?, _ restaurantstype: String, _ restaurantlatitude: Double?, _ restaurantlongitude: Double?, _ restaurantmenu: String?, _ restaurantphotos: String?, _ restaurantreviews: String?, _ deepLinkURL: String?, _ restaurantimage: Restaurantimage?) {
         self.id = id
         self.createdAt = createdAt
         self.restaurantname = restaurantname
@@ -119,7 +119,7 @@ struct Restaurantimage: Hashable, Codable, Equatable {
     let size: Int
     let mime: MIME
     let meta: Meta
-    let url: String
+    let url: String?
     
     enum CodingKeys: String, CodingKey {
         case path, name, type, size, mime, meta, url
@@ -128,17 +128,32 @@ struct Restaurantimage: Hashable, Codable, Equatable {
 
 // MARK: - Meta
 struct Meta: Hashable, Codable {
-    let width, height: Int
+    let width, height: Int?
 }
 
 enum MIME: String, Codable {
     case imageJPEG = "image/jpeg"
     case imagePNG = "image/png"
+    case imageWebP = "image/webp"
+    case unknown = ""
+
+    init(from decoder: Decoder) throws {
+        let container = try decoder.singleValueContainer()
+        let mimeString = try container.decode(String.self)
+        self = MIME(rawValue: mimeString) ?? .unknown
+    }
 }
 
 
 enum TypeEnum: String, Codable {
     case image = "image"
+    case unknown = ""
+
+    init(from decoder: Decoder) throws {
+        let container = try decoder.singleValueContainer()
+        let typeString = try container.decode(String.self)
+        self = TypeEnum(rawValue: typeString) ?? .unknown
+    }
 }
 
 

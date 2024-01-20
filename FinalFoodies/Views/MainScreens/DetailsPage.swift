@@ -11,6 +11,8 @@ import MapKit
 import SwiftUI
 
 struct WebViewWithCloseButton: View {
+    @EnvironmentObject var networkStatusViewModel: NetworkStatusViewModel
+
     let urlString: String
     @Binding var isPresented: Bool
 
@@ -168,11 +170,11 @@ struct DetailsPage: View {
     
     var restaurantname: some View {
         //Veggie tomato mix
-        Text(restaurant.restaurantname).font(.system(size: 28, weight: .semibold, design: .rounded)).multilineTextAlignment(.center)
+        Text(restaurant.restaurantname ?? " ").font(.system(size: 28, weight: .semibold, design: .rounded)).multilineTextAlignment(.center)
     }
     var restaurantaddress: some View {
         //N1,900
-        Text(restaurant.restaurantlocation).font(.system(size: 22, weight: .bold, design: .rounded)).foregroundColor(Color(#colorLiteral(red: 0.98, green: 0.29, blue: 0.05, alpha: 1))).multilineTextAlignment(.center)
+        Text(restaurant.restaurantlocation ?? "Online or Mobile Only").font(.system(size: 22, weight: .bold, design: .rounded)).foregroundColor(Color(#colorLiteral(red: 0.98, green: 0.29, blue: 0.05, alpha: 1))).multilineTextAlignment(.center)
     }
     var restaurantdescription: some View {
         VStack(spacing:10){
@@ -181,7 +183,7 @@ struct DetailsPage: View {
                 .foregroundColor(.black)
                 .padding(.trailing,220)
             //Delivered between monday a...
-            Text(restaurant.restaurantdescription).font(.system(size: 15, weight: .regular)).tracking(0.3)
+            Text(restaurant.restaurantdescription ?? " ").font(.system(size: 15, weight: .regular)).tracking(0.3)
                 .foregroundColor(.gray)
                 .multilineTextAlignment(.leading)
         }
@@ -203,7 +205,7 @@ struct DetailsPage: View {
     
     var GoTolocationbutton: some View {
         Button(action: {
-            viewModel.goToLocation(restaurant.restaurantlocation)
+            viewModel.goToLocation(restaurant.restaurantlocation ?? "Online Only")
         }) {
             ZStack {
                 RoundedRectangle(cornerRadius: 30)

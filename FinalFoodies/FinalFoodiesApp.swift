@@ -12,7 +12,10 @@ import GoogleSignIn
 class AppDelegate: NSObject, UIApplicationDelegate {
   func application(_ application: UIApplication,
                    didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
-
+      if let apiToken = ProcessInfo.processInfo.environment["OPENAI_API_TOKEN"] {
+                 let tokenManager = TokenManager()
+                 tokenManager.storeApiToken(token: apiToken)
+             }
     return true
   }
 }
@@ -20,6 +23,7 @@ class AppDelegate: NSObject, UIApplicationDelegate {
 struct FinalFoodiesApp: App {
     @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
     @StateObject private var authVM: AuthViewModel
+    @StateObject var networkStatusViewModel = NetworkStatusViewModel()
 
 
     // The favoritesViewModel should not be initialized here as it needs the user ID
@@ -52,6 +56,7 @@ struct FinalFoodiesApp: App {
                     .onOpenURL { url in
                         GIDSignIn.sharedInstance.handle(url)
                     }
+                    .environmentObject(networkStatusViewModel)
             } else {
                 AuthView() // your authentication view
                     .environmentObject(authVM)
@@ -61,6 +66,7 @@ struct FinalFoodiesApp: App {
                     .onOpenURL { url in
                         GIDSignIn.sharedInstance.handle(url)
                     }
+                    .environmentObject(networkStatusViewModel)
             }
         }
     }

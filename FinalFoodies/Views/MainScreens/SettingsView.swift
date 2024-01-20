@@ -11,7 +11,6 @@ struct SettingsView: View {
 
     @EnvironmentObject var authvm: AuthViewModel
     @State private var isShowingAuthView = false
-
     var body: some View {
         ZStack{
             //iPhone 11 Pro Max - 10
@@ -36,7 +35,7 @@ struct SettingsView: View {
              //   profileholdview
               //  locationview
                 donationsview
-                requestrestaurantview
+                RequestRestaurantView()
             
             }
             VStack{
@@ -276,29 +275,32 @@ var addresslabel: some View {
     }
 var locationview: some View {
     ZStack {
-    //chevron-left
-       
-    //Rectangle 10
+        //chevron-left
+        
+        //Rectangle 10
         RoundedRectangle(cornerRadius: 20)
-        .fill(Color(#colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)))
-        .frame(width: 325, height: 60)
-        .shadow(color: Color(#colorLiteral(red: 0, green: 0, blue: 0, alpha: 0.029999999329447746)), radius: 40, x: 0, y: 10)
+            .fill(Color(#colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)))
+            .frame(width: 325, height: 60)
+            .shadow(color: Color(#colorLiteral(red: 0, green: 0, blue: 0, alpha: 0.029999999329447746)), radius: 40, x: 0, y: 10)
         HStack(spacing:60) {
-       
-        
-        
-    //Orders
-        Text("Change Location").font(.system(size: 18, weight: .semibold))
+            
+            
+            
+            //Orders
+            Text("Change Location").font(.system(size: 18, weight: .semibold))
                 .padding(.trailing,40)
-        Image("Gotoarrow")
+            Image("Gotoarrow")
                 .resizable()
                 .frame(width: 24, height: 24, alignment: .leading)
         }
         
     }
 }
-var requestrestaurantview: some View {
-    ZStack {
+struct RequestRestaurantView: View  {
+    @State private var showWebView = false
+
+    var body: some View {
+            ZStack {
     //chevron-left
        
     //Rectangle 10
@@ -308,20 +310,24 @@ var requestrestaurantview: some View {
         .shadow(color: Color(#colorLiteral(red: 0, green: 0, blue: 0, alpha: 0.029999999329447746)), radius: 40, x: 0, y: 10)
         HStack(spacing:60) {
        
-        
-        
-    //Orders
-        Text("Request a Restaurant").font(.system(size: 18, weight: .semibold))
-                .padding(.trailing,1)
-        Image("Gotoarrow")
-                .resizable()
-                .frame(width: 24, height: 24, alignment: .leading)
-                .padding(.leading,2)
-        }
-        
-    }
-}
-   
+            Text("Request Restaurant").font(.system(size: 18, weight: .semibold))
+                    .padding(.trailing,100)
+            Button(action: {
+                                showWebView = true
+                            }) {
+                                Image("Gotoarrow")
+                                    .resizable()
+                                    .frame(width: 24, height: 24, alignment: .leading)
+                                    .padding(.leading, 2)
+                            }
+                        }
+                    }
+                    .sheet(isPresented: $showWebView) {
+                        // Present WebView when showWebView is true
+                        WebViewWithCloseButton(urlString: "https://jumpstarapps.com/", isPresented: $showWebView)
+                    }
+                }
+            }
 
 //Vector
 

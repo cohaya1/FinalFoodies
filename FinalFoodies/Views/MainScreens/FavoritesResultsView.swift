@@ -9,6 +9,7 @@ import SwiftUI
 
 struct FavoritesResultsView: View {
     @EnvironmentObject var favoritesViewModel: FavoritesViewModel<Restaurant>
+    @EnvironmentObject var networkStatusViewModel: NetworkStatusViewModel
 
     @State var rowspacing: CGFloat = 50
     @State private var selectedRestaurant: Restaurant? // Keep track of the selected restaurant
@@ -93,7 +94,7 @@ struct FavoritesResultsView: View {
             ZStack {
                 dinnerplate
                 VStack(spacing: 15){
-                                  Text(restaurant.restaurantname)
+                    Text(restaurant.restaurantname ?? " ")
                                       .font(.system(size: 22, weight: .semibold, design: .rounded))
                                       .multilineTextAlignment(.center)
     //                              Text("N \(restaurant.restaurantrating)")

@@ -196,3 +196,14 @@ extension AuthViewModel {
         }
     }
 }
+extension AuthViewModel {
+    func sendPasswordReset(withEmail email: String, completion: @escaping (Bool, String?) -> Void) {
+        Auth.auth().sendPasswordReset(withEmail: email) { error in
+            if let error = error {
+                completion(false, error.localizedDescription)
+            } else {
+                completion(true, nil)
+            }
+        }
+    }
+}

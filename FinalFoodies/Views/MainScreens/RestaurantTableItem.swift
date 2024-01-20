@@ -108,7 +108,7 @@ struct RestaurantTableItem: View {
             .shadow(color: Color(#colorLiteral(red: 0, green: 0, blue: 0, alpha: 4)), radius:4, x:0, y:4)
             .padding(.bottom,200)
             VStack(spacing: 25){
-                Text(restaurant.restaurantname).font(.system(size: 22, weight: .semibold, design: .rounded)).multilineTextAlignment(.center)
+                Text(restaurant.restaurantname ?? " ").font(.system(size: 22, weight: .semibold, design: .rounded)).multilineTextAlignment(.center)
                     .lineLimit(3)
                     .frame(width: 220, height: 70, alignment: .center)
                     .foregroundColor(Color(.black))

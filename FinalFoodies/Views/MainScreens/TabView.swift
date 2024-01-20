@@ -7,6 +7,7 @@
 
 import SwiftUI
 
+@available(iOS 17.0, *)
 struct TabViewUI: View {
     @State var isPresenting = false
     @State var tabSelection = 1
@@ -38,7 +39,15 @@ struct TabViewUI: View {
                         Text("Favorites")
                     }
                 }.tag(2)
-    
+            FoodiezMapView()
+                            .tabItem {
+                                VStack {
+                                    Image(systemName: "map.fill") // Example icon
+                                    Text("Map")
+                                }
+                            }
+                            .tag(3) // Ensure unique tag
+
             SettingsView()
                 .tabItem {
                     VStack {
@@ -49,7 +58,7 @@ struct TabViewUI: View {
                             .frame(width: 24, height: 24)
                         Text("Settings")
                     }
-                }.tag(3)
+                }.tag(4)
         }
         .accentColor(.red)
     }

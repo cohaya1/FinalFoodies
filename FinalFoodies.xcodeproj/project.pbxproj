@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		9802D84527E22E95006A7032 /* RestaurantTableItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9802D84427E22E95006A7032 /* RestaurantTableItem.swift */; };
+		9815DEBF2B5B51F70005FE07 /* CityPromptsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9815DEBE2B5B51F70005FE07 /* CityPromptsView.swift */; };
 		982883962A2558C30018C2CE /* CustomProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 982883952A2558C30018C2CE /* CustomProgressView.swift */; };
 		9852AA842A0C798500157D50 /* UrlComposer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9852AA832A0C798500157D50 /* UrlComposer.swift */; };
 		9852AA8A2A0D760B00157D50 /* NavigationLogicTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9852AA892A0D760B00157D50 /* NavigationLogicTests.swift */; };
@@ -37,6 +38,13 @@
 		985B7EAD2AD25E950053BAB6 /* CoreDataViewMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 985B7EAC2AD25E950053BAB6 /* CoreDataViewMode.swift */; };
 		98639A4228F0DA080048A6D2 /* URLs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98639A4128F0DA080048A6D2 /* URLs.swift */; };
 		987A55A327E23FE900E44B77 /* ImageLoaderViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 987A55A227E23FE900E44B77 /* ImageLoaderViewModel.swift */; };
+		987E33982B59D2F1003F9878 /* ChatGptService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 987E33972B59D2F1003F9878 /* ChatGptService.swift */; };
+		987E339B2B59D43B003F9878 /* OpenAI in Frameworks */ = {isa = PBXBuildFile; productRef = 987E339A2B59D43B003F9878 /* OpenAI */; };
+		987E339D2B59D4C5003F9878 /* PromptsViewMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 987E339C2B59D4C5003F9878 /* PromptsViewMode.swift */; };
+		987E339F2B5A0437003F9878 /* NetworkViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 987E339E2B5A0437003F9878 /* NetworkViewModel.swift */; };
+		987E33A12B5A05AA003F9878 /* NoInternetPopup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 987E33A02B5A05AA003F9878 /* NoInternetPopup.swift */; };
+		987E33A42B5B2403003F9878 /* KeychainSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 987E33A32B5B2403003F9878 /* KeychainSwift */; };
+		987E33A62B5B246D003F9878 /* utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 987E33A52B5B246D003F9878 /* utils.swift */; };
 		9883233127B8A2A90052859D /* FinalFoodiesApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9883233027B8A2A90052859D /* FinalFoodiesApp.swift */; };
 		9883233327B8A2A90052859D /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9883233227B8A2A90052859D /* ContentView.swift */; };
 		9883233527B8A2A90052859D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9883233427B8A2A90052859D /* Assets.xcassets */; };
@@ -63,6 +71,12 @@
 		988323C627D7E5460052859D /* Restaurants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 988323C527D7E5460052859D /* Restaurants.swift */; };
 		988323C827D7E5460052859D /* Restaurants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 988323C527D7E5460052859D /* Restaurants.swift */; };
 		988323CF27DEC7100052859D /* FetchRestaurantsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 988323CE27DEC7100052859D /* FetchRestaurantsViewModel.swift */; };
+		988BB69C2B2EC1BC00389E79 /* SettingsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 988BB69B2B2EC1BC00389E79 /* SettingsViewModel.swift */; };
+		988BB6A02B33E02E00389E79 /* FoodiezMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 988BB69F2B33E02E00389E79 /* FoodiezMapView.swift */; };
+		988BB6A22B33E81700389E79 /* DirectionsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 988BB6A12B33E81700389E79 /* DirectionsViewModel.swift */; };
+		988BB6A42B33E84700389E79 /* NearbyMapSearchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 988BB6A32B33E84700389E79 /* NearbyMapSearchViewModel.swift */; };
+		988BB6A62B33EB1800389E79 /* DirectionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 988BB6A52B33EB1800389E79 /* DirectionsView.swift */; };
+		988BB6A82B33EB8F00389E79 /* NearbySearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 988BB6A72B33EB8F00389E79 /* NearbySearchView.swift */; };
 		989179282A21A371008B179A /* RestaurantFetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 989179252A219E95008B179A /* RestaurantFetcher.swift */; };
 		989179292A21A39D008B179A /* FoodiesTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98C7F60F29A1CD9B005273D2 /* FoodiesTests.swift */; };
 		98CEE2C92A75A9C2006215E7 /* ImageCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98CEE2C82A75A9C2006215E7 /* ImageCache.swift */; };
@@ -90,6 +104,7 @@
 
 /* Begin PBXFileReference section */
 		9802D84427E22E95006A7032 /* RestaurantTableItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantTableItem.swift; sourceTree = "<group>"; };
+		9815DEBE2B5B51F70005FE07 /* CityPromptsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CityPromptsView.swift; sourceTree = "<group>"; };
 		982883952A2558C30018C2CE /* CustomProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomProgressView.swift; sourceTree = "<group>"; };
 		9852AA832A0C798500157D50 /* UrlComposer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UrlComposer.swift; sourceTree = "<group>"; };
 		9852AA882A0D760A00157D50 /* FinalFoodiesUnitTests-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "FinalFoodiesUnitTests-Bridging-Header.h"; sourceTree = "<group>"; };
@@ -107,6 +122,11 @@
 		98639A4128F0DA080048A6D2 /* URLs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLs.swift; sourceTree = "<group>"; };
 		987A55A227E23FE900E44B77 /* ImageLoaderViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageLoaderViewModel.swift; sourceTree = "<group>"; };
 		987B7F2E282AB332000DE991 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		987E33972B59D2F1003F9878 /* ChatGptService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatGptService.swift; sourceTree = "<group>"; };
+		987E339C2B59D4C5003F9878 /* PromptsViewMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PromptsViewMode.swift; sourceTree = "<group>"; };
+		987E339E2B5A0437003F9878 /* NetworkViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkViewModel.swift; sourceTree = "<group>"; };
+		987E33A02B5A05AA003F9878 /* NoInternetPopup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoInternetPopup.swift; sourceTree = "<group>"; };
+		987E33A52B5B246D003F9878 /* utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = utils.swift; sourceTree = "<group>"; };
 		9883232D27B8A2A90052859D /* FinalFoodies.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FinalFoodies.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9883233027B8A2A90052859D /* FinalFoodiesApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FinalFoodiesApp.swift; sourceTree = "<group>"; };
 		9883233227B8A2A90052859D /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -131,6 +151,12 @@
 		988323C127D19DA50052859D /* FoodiezFeed.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodiezFeed.swift; sourceTree = "<group>"; };
 		988323C527D7E5460052859D /* Restaurants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Restaurants.swift; sourceTree = "<group>"; };
 		988323CE27DEC7100052859D /* FetchRestaurantsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchRestaurantsViewModel.swift; sourceTree = "<group>"; };
+		988BB69B2B2EC1BC00389E79 /* SettingsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewModel.swift; sourceTree = "<group>"; };
+		988BB69F2B33E02E00389E79 /* FoodiezMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodiezMapView.swift; sourceTree = "<group>"; };
+		988BB6A12B33E81700389E79 /* DirectionsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DirectionsViewModel.swift; sourceTree = "<group>"; };
+		988BB6A32B33E84700389E79 /* NearbyMapSearchViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NearbyMapSearchViewModel.swift; sourceTree = "<group>"; };
+		988BB6A52B33EB1800389E79 /* DirectionsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DirectionsView.swift; sourceTree = "<group>"; };
+		988BB6A72B33EB8F00389E79 /* NearbySearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NearbySearchView.swift; sourceTree = "<group>"; };
 		989179252A219E95008B179A /* RestaurantFetcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantFetcher.swift; sourceTree = "<group>"; };
 		98C7F60229A1BE80005273D2 /* FinalFoodiesUnitTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FinalFoodiesUnitTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		98C7F60C29A1CC8E005273D2 /* FinalFoodies.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; path = FinalFoodies.xctestplan; sourceTree = "<group>"; };
@@ -144,7 +170,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				987E33A42B5B2403003F9878 /* KeychainSwift in Frameworks */,
 				985B7E9A2AC74F000053BAB6 /* FirebaseDatabaseSwift in Frameworks */,
+				987E339B2B59D43B003F9878 /* OpenAI in Frameworks */,
 				98CEE2D42ABA7066006215E7 /* GoogleSignInSwift in Frameworks */,
 				985B7E922AC74F000053BAB6 /* FirebaseAuth in Frameworks */,
 				98CEE2D22ABA7066006215E7 /* GoogleSignIn in Frameworks */,
@@ -184,6 +212,7 @@
 			isa = PBXGroup;
 			children = (
 				982883952A2558C30018C2CE /* CustomProgressView.swift */,
+				987E33A02B5A05AA003F9878 /* NoInternetPopup.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -235,6 +264,7 @@
 				988323C027D19D670052859D /* Networking */,
 				9883238627D1677B0052859D /* ViewModels */,
 				9883233027B8A2A90052859D /* FinalFoodiesApp.swift */,
+				987E33A52B5B246D003F9878 /* utils.swift */,
 				9883233227B8A2A90052859D /* ContentView.swift */,
 				9883233427B8A2A90052859D /* Assets.xcassets */,
 				9883233627B8A2A90052859D /* Preview Content */,
@@ -287,6 +317,7 @@
 			children = (
 				982883942A2558A70018C2CE /* Components */,
 				9883236127B8A4130052859D /* HomePage.swift */,
+				9815DEBE2B5B51F70005FE07 /* CityPromptsView.swift */,
 				9883236327B8A51C0052859D /* DetailsPage.swift */,
 				9883236B27B999220052859D /* SettingsView.swift */,
 				9883237627C474A60052859D /* SearchResultsView.swift */,
@@ -294,6 +325,9 @@
 				9883238227C575A20052859D /* TabView.swift */,
 				9802D84427E22E95006A7032 /* RestaurantTableItem.swift */,
 				985A893127F148DB00697F53 /* LocationAccessView.swift */,
+				988BB69F2B33E02E00389E79 /* FoodiezMapView.swift */,
+				988BB6A52B33EB1800389E79 /* DirectionsView.swift */,
+				988BB6A72B33EB8F00389E79 /* NearbySearchView.swift */,
 			);
 			path = MainScreens;
 			sourceTree = "<group>";
@@ -312,14 +346,19 @@
 			isa = PBXGroup;
 			children = (
 				9883238727D167950052859D /* AuthViewModel.swift */,
-				9852AA9D2A18407700157D50 /* FavoritesViewModel.swift */,
 				985B7EA72AD2568A0053BAB6 /* FoodiezAppModel.xcdatamodeld */,
+				9852AA9D2A18407700157D50 /* FavoritesViewModel.swift */,
 				988323CE27DEC7100052859D /* FetchRestaurantsViewModel.swift */,
 				987A55A227E23FE900E44B77 /* ImageLoaderViewModel.swift */,
 				9852AA8D2A0EDE1800157D50 /* SearchViewModel.swift */,
 				9852AA8F2A0EEF3A00157D50 /* DetailsPageViewModel.swift */,
 				9852AA9B2A182C0E00157D50 /* IndicatorViewModel.swift */,
 				985B7EAC2AD25E950053BAB6 /* CoreDataViewMode.swift */,
+				988BB69B2B2EC1BC00389E79 /* SettingsViewModel.swift */,
+				988BB6A12B33E81700389E79 /* DirectionsViewModel.swift */,
+				988BB6A32B33E84700389E79 /* NearbyMapSearchViewModel.swift */,
+				987E339C2B59D4C5003F9878 /* PromptsViewMode.swift */,
+				987E339E2B5A0437003F9878 /* NetworkViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -330,6 +369,7 @@
 				988323C127D19DA50052859D /* FoodiezFeed.swift */,
 				9852AA832A0C798500157D50 /* UrlComposer.swift */,
 				98CEE2C82A75A9C2006215E7 /* ImageCache.swift */,
+				987E33972B59D2F1003F9878 /* ChatGptService.swift */,
 			);
 			path = Networking;
 			sourceTree = "<group>";
@@ -395,6 +435,8 @@
 				985B7EA12AC74F000053BAB6 /* FirebaseMLModelDownloader */,
 				985B7EA32AC74F000053BAB6 /* FirebaseStorage */,
 				985B7EA52AC74F000053BAB6 /* FirebaseStorageCombine-Community */,
+				987E339A2B59D43B003F9878 /* OpenAI */,
+				987E33A32B5B2403003F9878 /* KeychainSwift */,
 			);
 			productName = FinalFoodies;
 			productReference = 9883232D27B8A2A90052859D /* FinalFoodies.app */;
@@ -472,6 +514,8 @@
 			packageReferences = (
 				98CEE2D02ABA7066006215E7 /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */,
 				985B7E8A2AC74CA20053BAB6 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+				987E33992B59D43B003F9878 /* XCRemoteSwiftPackageReference "OpenAI" */,
+				987E33A22B5B2403003F9878 /* XCRemoteSwiftPackageReference "keychain-swift" */,
 			);
 			productRefGroup = 9883232E27B8A2A90052859D /* Products */;
 			projectDirPath = "";
@@ -516,6 +560,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				987E33A62B5B246D003F9878 /* utils.swift in Sources */,
+				988BB6A02B33E02E00389E79 /* FoodiezMapView.swift in Sources */,
 				98CEE2C92A75A9C2006215E7 /* ImageCache.swift in Sources */,
 				988323C227D19DA50052859D /* FoodiezFeed.swift in Sources */,
 				9883236827B8A59A0052859D /* NointernetView.swift in Sources */,
@@ -523,12 +569,17 @@
 				98639A4228F0DA080048A6D2 /* URLs.swift in Sources */,
 				9883236227B8A4130052859D /* HomePage.swift in Sources */,
 				9883236C27B999220052859D /* SettingsView.swift in Sources */,
+				988BB6A42B33E84700389E79 /* NearbyMapSearchViewModel.swift in Sources */,
+				987E339D2B59D4C5003F9878 /* PromptsViewMode.swift in Sources */,
+				988BB6A22B33E81700389E79 /* DirectionsViewModel.swift in Sources */,
 				9883238327C575A20052859D /* TabView.swift in Sources */,
+				988BB6A82B33EB8F00389E79 /* NearbySearchView.swift in Sources */,
 				9852AA842A0C798500157D50 /* UrlComposer.swift in Sources */,
 				9852AA902A0EEF3A00157D50 /* DetailsPageViewModel.swift in Sources */,
 				988323CF27DEC7100052859D /* FetchRestaurantsViewModel.swift in Sources */,
 				987A55A327E23FE900E44B77 /* ImageLoaderViewModel.swift in Sources */,
 				9883238827D167950052859D /* AuthViewModel.swift in Sources */,
+				987E33A12B5A05AA003F9878 /* NoInternetPopup.swift in Sources */,
 				9852AA982A10491100157D50 /* ShareFuncUiKit.swift in Sources */,
 				98CEE2CF2AB77E50006215E7 /* WebviewUIkit.swift in Sources */,
 				9883235F27B8A39C0052859D /* SignUpView.swift in Sources */,
@@ -536,15 +587,20 @@
 				9883237B27C571870052859D /* FavoritesResultsView.swift in Sources */,
 				985B7EAD2AD25E950053BAB6 /* CoreDataViewMode.swift in Sources */,
 				9883237027B999D00052859D /* AlertView.swift in Sources */,
+				988BB69C2B2EC1BC00389E79 /* SettingsViewModel.swift in Sources */,
 				9883233327B8A2A90052859D /* ContentView.swift in Sources */,
+				987E33982B59D2F1003F9878 /* ChatGptService.swift in Sources */,
 				9883237727C474A60052859D /* SearchResultsView.swift in Sources */,
 				9852AA9C2A182C0E00157D50 /* IndicatorViewModel.swift in Sources */,
 				985B7EA92AD2568A0053BAB6 /* FoodiezAppModel.xcdatamodeld in Sources */,
+				988BB6A62B33EB1800389E79 /* DirectionsView.swift in Sources */,
 				9883236427B8A51C0052859D /* DetailsPage.swift in Sources */,
 				9802D84527E22E95006A7032 /* RestaurantTableItem.swift in Sources */,
 				985A893227F148DB00697F53 /* LocationAccessView.swift in Sources */,
 				9852AA9E2A18407700157D50 /* FavoritesViewModel.swift in Sources */,
 				988323C627D7E5460052859D /* Restaurants.swift in Sources */,
+				9815DEBF2B5B51F70005FE07 /* CityPromptsView.swift in Sources */,
+				987E339F2B5A0437003F9878 /* NetworkViewModel.swift in Sources */,
 				9883235D27B8A3330052859D /* AuthView.swift in Sources */,
 				9852AA8E2A0EDE1800157D50 /* SearchViewModel.swift in Sources */,
 				9883237F27C572D30052859D /* NoSearchResultsView.swift in Sources */,
@@ -643,7 +699,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.1;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -698,7 +754,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.1;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -730,7 +786,7 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -766,7 +822,7 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -914,6 +970,22 @@
 				minimumVersion = 10.15.0;
 			};
 		};
+		987E33992B59D43B003F9878 /* XCRemoteSwiftPackageReference "OpenAI" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/MacPaw/OpenAI.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.2.5;
+			};
+		};
+		987E33A22B5B2403003F9878 /* XCRemoteSwiftPackageReference "keychain-swift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/evgenyneu/keychain-swift.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 20.0.0;
+			};
+		};
 		98CEE2D02ABA7066006215E7 /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/google/GoogleSignIn-iOS";
@@ -994,6 +1066,16 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 985B7E8A2AC74CA20053BAB6 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = "FirebaseStorageCombine-Community";
+		};
+		987E339A2B59D43B003F9878 /* OpenAI */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 987E33992B59D43B003F9878 /* XCRemoteSwiftPackageReference "OpenAI" */;
+			productName = OpenAI;
+		};
+		987E33A32B5B2403003F9878 /* KeychainSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 987E33A22B5B2403003F9878 /* XCRemoteSwiftPackageReference "keychain-swift" */;
+			productName = KeychainSwift;
 		};
 		98CEE2D12ABA7066006215E7 /* GoogleSignIn */ = {
 			isa = XCSwiftPackageProductDependency;
