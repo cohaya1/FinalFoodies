@@ -83,6 +83,28 @@
 		98CEE2CF2AB77E50006215E7 /* WebviewUIkit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98CEE2CE2AB77E50006215E7 /* WebviewUIkit.swift */; };
 		98CEE2D22ABA7066006215E7 /* GoogleSignIn in Frameworks */ = {isa = PBXBuildFile; productRef = 98CEE2D12ABA7066006215E7 /* GoogleSignIn */; };
 		98CEE2D42ABA7066006215E7 /* GoogleSignInSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 98CEE2D32ABA7066006215E7 /* GoogleSignInSwift */; };
+		CAFE01010000000000000000 /* CravingRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAFE00010000000000000000 /* CravingRequest.swift */; };
+		CAFE01020000000000000000 /* MealOption.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAFE00020000000000000000 /* MealOption.swift */; };
+		CAFE01030000000000000000 /* EffortLevel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAFE00030000000000000000 /* EffortLevel.swift */; };
+		CAFE01040000000000000000 /* CraveCartError.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAFE00040000000000000000 /* CraveCartError.swift */; };
+		CAFE01050000000000000000 /* GenerateMealOptionsUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAFE00050000000000000000 /* GenerateMealOptionsUseCase.swift */; };
+		CAFE01060000000000000000 /* EstimateSavingsUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAFE00060000000000000000 /* EstimateSavingsUseCase.swift */; };
+		CAFE01070000000000000000 /* MealRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAFE00070000000000000000 /* MealRepository.swift */; };
+		CAFE01080000000000000000 /* OpenAIMealGenerationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAFE00080000000000000000 /* OpenAIMealGenerationService.swift */; };
+		CAFE01090000000000000000 /* MealOptionDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAFE00090000000000000000 /* MealOptionDTO.swift */; };
+		CAFE01100000000000000000 /* MealOptionMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAFE00100000000000000000 /* MealOptionMapper.swift */; };
+		CAFE01110000000000000000 /* MealPromptBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAFE00110000000000000000 /* MealPromptBuilder.swift */; };
+		CAFE01120000000000000000 /* DefaultMealRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAFE00120000000000000000 /* DefaultMealRepository.swift */; };
+		CAFE01130000000000000000 /* CravingHomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAFE00130000000000000000 /* CravingHomeViewModel.swift */; };
+		CAFE01140000000000000000 /* CravingHomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAFE00140000000000000000 /* CravingHomeView.swift */; };
+		CAFE01150000000000000000 /* MealResultsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAFE00150000000000000000 /* MealResultsView.swift */; };
+		CAFE01160000000000000000 /* MealCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAFE00160000000000000000 /* MealCardView.swift */; };
+		CAFE01170000000000000000 /* AppContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAFE00170000000000000000 /* AppContainer.swift */; };
+		CAFE03010000000000000000 /* GenerateMealOptionsUseCaseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAFE02010000000000000000 /* GenerateMealOptionsUseCaseTests.swift */; };
+		CAFE03020000000000000000 /* EstimateSavingsUseCaseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAFE02020000000000000000 /* EstimateSavingsUseCaseTests.swift */; };
+		CAFE03030000000000000000 /* MealOptionMapperTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAFE02030000000000000000 /* MealOptionMapperTests.swift */; };
+		CAFE03040000000000000000 /* CravingHomeViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAFE02040000000000000000 /* CravingHomeViewModelTests.swift */; };
+		CAFE03050000000000000000 /* MealPromptBuilderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAFE02050000000000000000 /* MealPromptBuilderTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -163,6 +185,28 @@
 		98C7F60F29A1CD9B005273D2 /* FoodiesTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodiesTests.swift; sourceTree = "<group>"; };
 		98CEE2C82A75A9C2006215E7 /* ImageCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCache.swift; sourceTree = "<group>"; };
 		98CEE2CE2AB77E50006215E7 /* WebviewUIkit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebviewUIkit.swift; sourceTree = "<group>"; };
+		CAFE00010000000000000000 /* CravingRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Domain/Models/CravingRequest.swift; sourceTree = "<group>"; };
+		CAFE00020000000000000000 /* MealOption.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Domain/Models/MealOption.swift; sourceTree = "<group>"; };
+		CAFE00030000000000000000 /* EffortLevel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Domain/Models/EffortLevel.swift; sourceTree = "<group>"; };
+		CAFE00040000000000000000 /* CraveCartError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Domain/Models/CraveCartError.swift; sourceTree = "<group>"; };
+		CAFE00050000000000000000 /* GenerateMealOptionsUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Domain/UseCases/GenerateMealOptionsUseCase.swift; sourceTree = "<group>"; };
+		CAFE00060000000000000000 /* EstimateSavingsUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Domain/UseCases/EstimateSavingsUseCase.swift; sourceTree = "<group>"; };
+		CAFE00070000000000000000 /* MealRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Domain/Repositories/MealRepository.swift; sourceTree = "<group>"; };
+		CAFE00080000000000000000 /* OpenAIMealGenerationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Data/Remote/OpenAIMealGenerationService.swift; sourceTree = "<group>"; };
+		CAFE00090000000000000000 /* MealOptionDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Data/Mapping/MealOptionDTO.swift; sourceTree = "<group>"; };
+		CAFE00100000000000000000 /* MealOptionMapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Data/Mapping/MealOptionMapper.swift; sourceTree = "<group>"; };
+		CAFE00110000000000000000 /* MealPromptBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Data/Mapping/MealPromptBuilder.swift; sourceTree = "<group>"; };
+		CAFE00120000000000000000 /* DefaultMealRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Data/Repositories/DefaultMealRepository.swift; sourceTree = "<group>"; };
+		CAFE00130000000000000000 /* CravingHomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Features/Home/CravingHomeViewModel.swift; sourceTree = "<group>"; };
+		CAFE00140000000000000000 /* CravingHomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Features/Home/CravingHomeView.swift; sourceTree = "<group>"; };
+		CAFE00150000000000000000 /* MealResultsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Features/MealResults/MealResultsView.swift; sourceTree = "<group>"; };
+		CAFE00160000000000000000 /* MealCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Features/MealResults/MealCardView.swift; sourceTree = "<group>"; };
+		CAFE00170000000000000000 /* AppContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = App/AppContainer.swift; sourceTree = "<group>"; };
+		CAFE02010000000000000000 /* GenerateMealOptionsUseCaseTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenerateMealOptionsUseCaseTests.swift; sourceTree = "<group>"; };
+		CAFE02020000000000000000 /* EstimateSavingsUseCaseTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EstimateSavingsUseCaseTests.swift; sourceTree = "<group>"; };
+		CAFE02030000000000000000 /* MealOptionMapperTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MealOptionMapperTests.swift; sourceTree = "<group>"; };
+		CAFE02040000000000000000 /* CravingHomeViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CravingHomeViewModelTests.swift; sourceTree = "<group>"; };
+		CAFE02050000000000000000 /* MealPromptBuilderTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MealPromptBuilderTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -271,6 +315,7 @@
 				98639A4028F0D9C50048A6D2 /* Constants */,
 				9883237327C1F9580052859D /* Views */,
 				988323C927D7E54D0052859D /* Models */,
+				CAFE09000000000000000001 /* CraveCart */,
 			);
 			path = FinalFoodies;
 			sourceTree = "<group>";
@@ -398,8 +443,45 @@
 				9852AA892A0D760B00157D50 /* NavigationLogicTests.swift */,
 				9852AA882A0D760A00157D50 /* FinalFoodiesUnitTests-Bridging-Header.h */,
 				989179252A219E95008B179A /* RestaurantFetcher.swift */,
+				CAFE09000000000000000002 /* CraveCart */,
 			);
 			path = FinalFoodiesUnitTests;
+			sourceTree = "<group>";
+		};
+		CAFE09000000000000000001 /* CraveCart */ = {
+			isa = PBXGroup;
+			children = (
+				CAFE00010000000000000000 /* CravingRequest.swift */,
+				CAFE00020000000000000000 /* MealOption.swift */,
+				CAFE00030000000000000000 /* EffortLevel.swift */,
+				CAFE00040000000000000000 /* CraveCartError.swift */,
+				CAFE00050000000000000000 /* GenerateMealOptionsUseCase.swift */,
+				CAFE00060000000000000000 /* EstimateSavingsUseCase.swift */,
+				CAFE00070000000000000000 /* MealRepository.swift */,
+				CAFE00080000000000000000 /* OpenAIMealGenerationService.swift */,
+				CAFE00090000000000000000 /* MealOptionDTO.swift */,
+				CAFE00100000000000000000 /* MealOptionMapper.swift */,
+				CAFE00110000000000000000 /* MealPromptBuilder.swift */,
+				CAFE00120000000000000000 /* DefaultMealRepository.swift */,
+				CAFE00130000000000000000 /* CravingHomeViewModel.swift */,
+				CAFE00140000000000000000 /* CravingHomeView.swift */,
+				CAFE00150000000000000000 /* MealResultsView.swift */,
+				CAFE00160000000000000000 /* MealCardView.swift */,
+				CAFE00170000000000000000 /* AppContainer.swift */,
+			);
+			path = CraveCart;
+			sourceTree = "<group>";
+		};
+		CAFE09000000000000000002 /* CraveCart */ = {
+			isa = PBXGroup;
+			children = (
+				CAFE02010000000000000000 /* GenerateMealOptionsUseCaseTests.swift */,
+				CAFE02020000000000000000 /* EstimateSavingsUseCaseTests.swift */,
+				CAFE02030000000000000000 /* MealOptionMapperTests.swift */,
+				CAFE02040000000000000000 /* CravingHomeViewModelTests.swift */,
+				CAFE02050000000000000000 /* MealPromptBuilderTests.swift */,
+			);
+			path = CraveCart;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -606,6 +688,23 @@
 				9883237F27C572D30052859D /* NoSearchResultsView.swift in Sources */,
 				985B7EAB2AD25DAB0053BAB6 /* RestaurantDataConverter.swift in Sources */,
 				9883233127B8A2A90052859D /* FinalFoodiesApp.swift in Sources */,
+				CAFE01010000000000000000 /* CravingRequest.swift in Sources */,
+				CAFE01020000000000000000 /* MealOption.swift in Sources */,
+				CAFE01030000000000000000 /* EffortLevel.swift in Sources */,
+				CAFE01040000000000000000 /* CraveCartError.swift in Sources */,
+				CAFE01050000000000000000 /* GenerateMealOptionsUseCase.swift in Sources */,
+				CAFE01060000000000000000 /* EstimateSavingsUseCase.swift in Sources */,
+				CAFE01070000000000000000 /* MealRepository.swift in Sources */,
+				CAFE01080000000000000000 /* OpenAIMealGenerationService.swift in Sources */,
+				CAFE01090000000000000000 /* MealOptionDTO.swift in Sources */,
+				CAFE01100000000000000000 /* MealOptionMapper.swift in Sources */,
+				CAFE01110000000000000000 /* MealPromptBuilder.swift in Sources */,
+				CAFE01120000000000000000 /* DefaultMealRepository.swift in Sources */,
+				CAFE01130000000000000000 /* CravingHomeViewModel.swift in Sources */,
+				CAFE01140000000000000000 /* CravingHomeView.swift in Sources */,
+				CAFE01150000000000000000 /* MealResultsView.swift in Sources */,
+				CAFE01160000000000000000 /* MealCardView.swift in Sources */,
+				CAFE01170000000000000000 /* AppContainer.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -629,6 +728,11 @@
 				989179282A21A371008B179A /* RestaurantFetcher.swift in Sources */,
 				9852AA8A2A0D760B00157D50 /* NavigationLogicTests.swift in Sources */,
 				989179292A21A39D008B179A /* FoodiesTests.swift in Sources */,
+				CAFE03010000000000000000 /* GenerateMealOptionsUseCaseTests.swift in Sources */,
+				CAFE03020000000000000000 /* EstimateSavingsUseCaseTests.swift in Sources */,
+				CAFE03030000000000000000 /* MealOptionMapperTests.swift in Sources */,
+				CAFE03040000000000000000 /* CravingHomeViewModelTests.swift in Sources */,
+				CAFE03050000000000000000 /* MealPromptBuilderTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
