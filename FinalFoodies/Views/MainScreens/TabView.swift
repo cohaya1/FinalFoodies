@@ -12,6 +12,7 @@ struct TabViewUI: View {
     @State var isPresenting = false
     @State var tabSelection = 1
     @MainActor let viewModel = RestaurantFetcher( using: NetworkManager())
+    @EnvironmentObject var appContainer: AppContainer
     
     var body: some View {
         TabView(selection: $tabSelection){
@@ -59,6 +60,12 @@ struct TabViewUI: View {
                         Text("Settings")
                     }
                 }.tag(4)
+
+            CravingHomeView(viewModel: appContainer.makeCravingHomeViewModel())
+                .tabItem {
+                    Label("CraveCart", systemImage: "fork.knife")
+                }
+                .tag(5)
         }
         .accentColor(.red)
     }

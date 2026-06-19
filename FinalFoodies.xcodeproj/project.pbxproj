@@ -105,6 +105,7 @@
 		CAFE03030000000000000000 /* MealOptionMapperTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAFE02030000000000000000 /* MealOptionMapperTests.swift */; };
 		CAFE03040000000000000000 /* CravingHomeViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAFE02040000000000000000 /* CravingHomeViewModelTests.swift */; };
 		CAFE03050000000000000000 /* MealPromptBuilderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAFE02050000000000000000 /* MealPromptBuilderTests.swift */; };
+		CAFE03060000000000000000 /* AppContainerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAFE02060000000000000000 /* AppContainerTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -207,6 +208,7 @@
 		CAFE02030000000000000000 /* MealOptionMapperTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MealOptionMapperTests.swift; sourceTree = "<group>"; };
 		CAFE02040000000000000000 /* CravingHomeViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CravingHomeViewModelTests.swift; sourceTree = "<group>"; };
 		CAFE02050000000000000000 /* MealPromptBuilderTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MealPromptBuilderTests.swift; sourceTree = "<group>"; };
+		CAFE02060000000000000000 /* AppContainerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppContainerTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -480,6 +482,7 @@
 				CAFE02030000000000000000 /* MealOptionMapperTests.swift */,
 				CAFE02040000000000000000 /* CravingHomeViewModelTests.swift */,
 				CAFE02050000000000000000 /* MealPromptBuilderTests.swift */,
+				CAFE02060000000000000000 /* AppContainerTests.swift */,
 			);
 			path = CraveCart;
 			sourceTree = "<group>";
@@ -733,6 +736,7 @@
 				CAFE03030000000000000000 /* MealOptionMapperTests.swift in Sources */,
 				CAFE03040000000000000000 /* CravingHomeViewModelTests.swift in Sources */,
 				CAFE03050000000000000000 /* MealPromptBuilderTests.swift in Sources */,
+				CAFE03060000000000000000 /* AppContainerTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
