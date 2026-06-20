@@ -24,7 +24,7 @@ struct FinalFoodiesApp: App {
     @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
     @StateObject private var authVM: AuthViewModel
     @StateObject var networkStatusViewModel = NetworkStatusViewModel()
-
+    @StateObject var appContainer = AppContainer()
 
     // The favoritesViewModel should not be initialized here as it needs the user ID
     @StateObject private var favoritesViewModel: FavoritesViewModel<Restaurant>
@@ -57,6 +57,7 @@ struct FinalFoodiesApp: App {
                         GIDSignIn.sharedInstance.handle(url)
                     }
                     .environmentObject(networkStatusViewModel)
+                    .environmentObject(appContainer)
             } else {
                 AuthView() // your authentication view
                     .environmentObject(authVM)
