@@ -30,7 +30,7 @@ Ordered. The skill picks the first unchecked item.
 - [x] **Slice 1 — `@main` cutover.** Launch `CravingHomeView` via `AppContainer`
   behind the existing auth gate; keep auth working. Guard `ChatGPTService()` when
   no token is present (no fatalError at launch).
-- [ ] **Slice 2 — SwiftData saved meals.** `SavedMealRepository` +
+- [x] **Slice 2 — SwiftData saved meals.** `SavedMealRepository` +
   `@Model` store; `SaveMealUseCase`; "Saved Meals" screen.
 - [ ] **Slice 3 — Pantry.** `PantryRepository` + SwiftData store; `PantryView`;
   pantry items feed into `CravingRequest` and lower estimated cost.
@@ -64,6 +64,17 @@ Ordered. The skill picks the first unchecked item.
   `AppContainerTests.swift` (2 tests); registered in the unit-test target.
   Architecture decision 8 updated: legacy restaurant flow still runs but CraveCart
   is now reachable post-login.
+- **2026-06-20 — Slice 2.** SwiftData saved meals: `SavedMealRepository` protocol,
+  `SaveMealUseCase`, `SavedMeal` (`@Model`, stores costs as Double to avoid
+  SwiftData/Decimal transformer edge cases), `SwiftDataSavedMealRepository`
+  (injectable `ModelContext` for testability), `SavedMealsViewModel` +
+  `SavedMealsView` (list + swipe-to-delete). `CravingHomeViewModel` gains an
+  optional `SaveMealUseCase` and `save(meal:)` method; `MealCardView` gains an
+  optional `onSave` callback showing a "Save meal" button; `MealResultsView`
+  threads the callback through. New "Saved" tab (tag 6, `bookmark.fill`) added to
+  `TabViewUI`. `AppContainer` creates the persistent `ModelContext` and wires
+  `SaveMealUseCase`. Added `SaveMealUseCaseTests` + `SavedMealsViewModelTests`
+  (8 new files, 8 registered in pbxproj, { } / ( ) balanced 289/289, 64/64).
 
 ## Open questions / follow-ups
 

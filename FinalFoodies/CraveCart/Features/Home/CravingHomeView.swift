@@ -46,7 +46,7 @@ struct CravingHomeView: View {
 
                 if !viewModel.mealOptions.isEmpty {
                     Section("Meal options") {
-                        MealResultsView(options: viewModel.mealOptions)
+                        MealResultsView(options: viewModel.mealOptions, onSave: { viewModel.save(meal: $0) })
                     }
                 }
             }

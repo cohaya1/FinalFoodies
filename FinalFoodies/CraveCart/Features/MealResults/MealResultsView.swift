@@ -10,10 +10,11 @@ import SwiftUI
 
 struct MealResultsView: View {
     let options: [MealOption]
+    var onSave: ((MealOption) -> Void)? = nil
 
     var body: some View {
         ForEach(options) { option in
-            MealCardView(option: option)
+            MealCardView(option: option, onSave: onSave.map { cb in { cb(option) } })
         }
     }
 }

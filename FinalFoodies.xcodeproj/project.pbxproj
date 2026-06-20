@@ -106,6 +106,14 @@
 		CAFE03040000000000000000 /* CravingHomeViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAFE02040000000000000000 /* CravingHomeViewModelTests.swift */; };
 		CAFE03050000000000000000 /* MealPromptBuilderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAFE02050000000000000000 /* MealPromptBuilderTests.swift */; };
 		CAFE03060000000000000000 /* AppContainerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAFE02060000000000000000 /* AppContainerTests.swift */; };
+		CAFE01180000000000000000 /* SavedMealRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAFE00180000000000000000 /* SavedMealRepository.swift */; };
+		CAFE01190000000000000000 /* SaveMealUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAFE00190000000000000000 /* SaveMealUseCase.swift */; };
+		CAFE01200000000000000000 /* SavedMeal.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAFE00200000000000000000 /* SavedMeal.swift */; };
+		CAFE01210000000000000000 /* SwiftDataSavedMealRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAFE00210000000000000000 /* SwiftDataSavedMealRepository.swift */; };
+		CAFE01220000000000000000 /* SavedMealsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAFE00220000000000000000 /* SavedMealsViewModel.swift */; };
+		CAFE01230000000000000000 /* SavedMealsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAFE00230000000000000000 /* SavedMealsView.swift */; };
+		CAFE03070000000000000000 /* SaveMealUseCaseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAFE02070000000000000000 /* SaveMealUseCaseTests.swift */; };
+		CAFE03080000000000000000 /* SavedMealsViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAFE02080000000000000000 /* SavedMealsViewModelTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -209,6 +217,14 @@
 		CAFE02040000000000000000 /* CravingHomeViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CravingHomeViewModelTests.swift; sourceTree = "<group>"; };
 		CAFE02050000000000000000 /* MealPromptBuilderTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MealPromptBuilderTests.swift; sourceTree = "<group>"; };
 		CAFE02060000000000000000 /* AppContainerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppContainerTests.swift; sourceTree = "<group>"; };
+		CAFE00180000000000000000 /* SavedMealRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Domain/Repositories/SavedMealRepository.swift; sourceTree = "<group>"; };
+		CAFE00190000000000000000 /* SaveMealUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Domain/UseCases/SaveMealUseCase.swift; sourceTree = "<group>"; };
+		CAFE00200000000000000000 /* SavedMeal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Data/Persistence/SavedMeal.swift; sourceTree = "<group>"; };
+		CAFE00210000000000000000 /* SwiftDataSavedMealRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Data/Repositories/SwiftDataSavedMealRepository.swift; sourceTree = "<group>"; };
+		CAFE00220000000000000000 /* SavedMealsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Features/SavedMeals/SavedMealsViewModel.swift; sourceTree = "<group>"; };
+		CAFE00230000000000000000 /* SavedMealsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Features/SavedMeals/SavedMealsView.swift; sourceTree = "<group>"; };
+		CAFE02070000000000000000 /* SaveMealUseCaseTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaveMealUseCaseTests.swift; sourceTree = "<group>"; };
+		CAFE02080000000000000000 /* SavedMealsViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavedMealsViewModelTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -470,6 +486,12 @@
 				CAFE00150000000000000000 /* MealResultsView.swift */,
 				CAFE00160000000000000000 /* MealCardView.swift */,
 				CAFE00170000000000000000 /* AppContainer.swift */,
+				CAFE00180000000000000000 /* SavedMealRepository.swift */,
+				CAFE00190000000000000000 /* SaveMealUseCase.swift */,
+				CAFE00200000000000000000 /* SavedMeal.swift */,
+				CAFE00210000000000000000 /* SwiftDataSavedMealRepository.swift */,
+				CAFE00220000000000000000 /* SavedMealsViewModel.swift */,
+				CAFE00230000000000000000 /* SavedMealsView.swift */,
 			);
 			path = CraveCart;
 			sourceTree = "<group>";
@@ -483,6 +505,8 @@
 				CAFE02040000000000000000 /* CravingHomeViewModelTests.swift */,
 				CAFE02050000000000000000 /* MealPromptBuilderTests.swift */,
 				CAFE02060000000000000000 /* AppContainerTests.swift */,
+				CAFE02070000000000000000 /* SaveMealUseCaseTests.swift */,
+				CAFE02080000000000000000 /* SavedMealsViewModelTests.swift */,
 			);
 			path = CraveCart;
 			sourceTree = "<group>";
@@ -708,6 +732,12 @@
 				CAFE01150000000000000000 /* MealResultsView.swift in Sources */,
 				CAFE01160000000000000000 /* MealCardView.swift in Sources */,
 				CAFE01170000000000000000 /* AppContainer.swift in Sources */,
+				CAFE01180000000000000000 /* SavedMealRepository.swift in Sources */,
+				CAFE01190000000000000000 /* SaveMealUseCase.swift in Sources */,
+				CAFE01200000000000000000 /* SavedMeal.swift in Sources */,
+				CAFE01210000000000000000 /* SwiftDataSavedMealRepository.swift in Sources */,
+				CAFE01220000000000000000 /* SavedMealsViewModel.swift in Sources */,
+				CAFE01230000000000000000 /* SavedMealsView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -737,6 +767,8 @@
 				CAFE03040000000000000000 /* CravingHomeViewModelTests.swift in Sources */,
 				CAFE03050000000000000000 /* MealPromptBuilderTests.swift in Sources */,
 				CAFE03060000000000000000 /* AppContainerTests.swift in Sources */,
+				CAFE03070000000000000000 /* SaveMealUseCaseTests.swift in Sources */,
+				CAFE03080000000000000000 /* SavedMealsViewModelTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

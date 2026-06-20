@@ -19,9 +19,11 @@ final class CravingHomeViewModel: ObservableObject {
     @Published var mealOptions: [MealOption] = []
 
     private let generateMealOptions: MealOptionsGenerating
+    private let saveMealUseCase: SaveMealUseCase?
 
-    init(generateMealOptions: MealOptionsGenerating) {
+    init(generateMealOptions: MealOptionsGenerating, saveMealUseCase: SaveMealUseCase? = nil) {
         self.generateMealOptions = generateMealOptions
+        self.saveMealUseCase = saveMealUseCase
     }
 
     func submitCraving() async {
@@ -47,6 +49,16 @@ final class CravingHomeViewModel: ObservableObject {
             errorMessage = error.userMessage
         } catch {
             errorMessage = CraveCartError.generationFailed(error.localizedDescription).userMessage
+        }
+    }
+
+    func save(meal: MealOption) {
+        do {
+            try saveMealUseCase?.execute(meal: meal)
+        } catch let error as CraveCartError {
+            errorMessage = error.userMessage
+        } catch {
+            errorMessage = error.localizedDescription
         }
     }
 }

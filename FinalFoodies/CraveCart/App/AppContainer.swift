@@ -2,32 +2,41 @@
 //  AppContainer.swift
 //  FinalFoodies / CraveCart
 //
-//  Lightweight manual dependency injection. Wires the object graph for the
-//  craving → meals slice:
+//  Lightweight manual dependency injection. Wires two object graphs:
 //
-//    ChatGPTService → OpenAIMealGenerationService → DefaultMealRepository
-//      → GenerateMealOptionsUseCase → CravingHomeViewModel
+//    Meal generation:
+//      ChatGPTService → OpenAIMealGenerationService → DefaultMealRepository
+//        → GenerateMealOptionsUseCase
+//
+//    Saved meals:
+//      ModelContext → SwiftDataSavedMealRepository → SaveMealUseCase
 //
 //  The convenience init() guards against a missing API token — it mirrors
 //  AppDelegate's env-var storage so the token is available even on first
-//  launch before UIApplicationDelegate fires. Without a token a stub service
-//  is used; it throws .generationFailed so the ViewModel surfaces a message
-//  instead of crashing.
+//  launch before UIApplicationDelegate fires.
 //
 
 import Foundation
+import SwiftData
 
 @MainActor
 final class AppContainer: ObservableObject {
     let mealRepository: MealRepository
     let generateMealOptionsUseCase: GenerateMealOptionsUseCase
     let estimateSavingsUseCase = EstimateSavingsUseCase()
+    let savedMealRepository: SavedMealRepository
+    let saveMealUseCase: SaveMealUseCase
 
     // Designated init — accepts any ChatGPTServiceProtocol for full testability.
     init(chatGPTService: ChatGPTServiceProtocol) {
         let generationService = OpenAIMealGenerationService(chatGPTService: chatGPTService)
         self.mealRepository = DefaultMealRepository(service: generationService)
         self.generateMealOptionsUseCase = GenerateMealOptionsUseCase(repository: mealRepository)
+
+        let context = Self.makePersistentContext()
+        let savedRepo = SwiftDataSavedMealRepository(context: context)
+        self.savedMealRepository = savedRepo
+        self.saveMealUseCase = SaveMealUseCase(repository: savedRepo)
     }
 
     // Convenience init for production: primes Keychain from env var if needed,
@@ -43,7 +52,22 @@ final class AppContainer: ObservableObject {
     }
 
     func makeCravingHomeViewModel() -> CravingHomeViewModel {
-        CravingHomeViewModel(generateMealOptions: generateMealOptionsUseCase)
+        CravingHomeViewModel(
+            generateMealOptions: generateMealOptionsUseCase,
+            saveMealUseCase: saveMealUseCase
+        )
+    }
+
+    func makeSavedMealsViewModel() -> SavedMealsViewModel {
+        SavedMealsViewModel(repository: savedMealRepository)
+    }
+
+    private static func makePersistentContext() -> ModelContext {
+        let schema = Schema([SavedMeal.self])
+        let config = ModelConfiguration(schema: schema, isStoredInMemoryOnly: false)
+        // Crash here is a programmer error (schema mismatch), not a runtime fault.
+        let container = try! ModelContainer(for: schema, configurations: config)
+        return ModelContext(container)
     }
 }
 

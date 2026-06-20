@@ -10,6 +10,7 @@ import SwiftUI
 
 struct MealCardView: View {
     let option: MealOption
+    var onSave: (() -> Void)? = nil
 
     private var costPerServing: String {
         CurrencyFormatter.string(from: option.estimatedCostPerServing)
@@ -33,6 +34,14 @@ struct MealCardView: View {
                 Text("Estimated savings: \(CurrencyFormatter.string(from: savings)) vs delivery")
                     .font(.subheadline.bold())
                     .foregroundColor(.green)
+            }
+
+            if let onSave {
+                Button(action: onSave) {
+                    Label("Save meal", systemImage: "bookmark")
+                        .font(.subheadline)
+                }
+                .buttonStyle(.borderless)
             }
         }
         .padding(.vertical, 4)
