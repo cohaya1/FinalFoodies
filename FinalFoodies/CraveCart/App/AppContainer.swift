@@ -2,7 +2,7 @@
 //  AppContainer.swift
 //  FinalFoodies / CraveCart
 //
-//  Lightweight manual dependency injection. Wires two object graphs:
+//  Lightweight manual dependency injection. Wires three object graphs:
 //
 //    Meal generation:
 //      ChatGPTService → OpenAIMealGenerationService → DefaultMealRepository
@@ -10,6 +10,9 @@
 //
 //    Saved meals:
 //      ModelContext → SwiftDataSavedMealRepository → SaveMealUseCase
+//
+//    Pantry:
+//      ModelContext → SwiftDataPantryRepository → PantryViewModel
 //
 //  The convenience init() guards against a missing API token — it mirrors
 //  AppDelegate's env-var storage so the token is available even on first
@@ -26,6 +29,7 @@ final class AppContainer: ObservableObject {
     let estimateSavingsUseCase = EstimateSavingsUseCase()
     let savedMealRepository: SavedMealRepository
     let saveMealUseCase: SaveMealUseCase
+    let pantryRepository: PantryRepository
 
     // Designated init — accepts any ChatGPTServiceProtocol for full testability.
     init(chatGPTService: ChatGPTServiceProtocol) {
@@ -37,6 +41,7 @@ final class AppContainer: ObservableObject {
         let savedRepo = SwiftDataSavedMealRepository(context: context)
         self.savedMealRepository = savedRepo
         self.saveMealUseCase = SaveMealUseCase(repository: savedRepo)
+        self.pantryRepository = SwiftDataPantryRepository(context: context)
     }
 
     // Convenience init for production: primes Keychain from env var if needed,
@@ -54,7 +59,8 @@ final class AppContainer: ObservableObject {
     func makeCravingHomeViewModel() -> CravingHomeViewModel {
         CravingHomeViewModel(
             generateMealOptions: generateMealOptionsUseCase,
-            saveMealUseCase: saveMealUseCase
+            saveMealUseCase: saveMealUseCase,
+            pantryRepository: pantryRepository
         )
     }
 
@@ -62,8 +68,12 @@ final class AppContainer: ObservableObject {
         SavedMealsViewModel(repository: savedMealRepository)
     }
 
+    func makePantryViewModel() -> PantryViewModel {
+        PantryViewModel(repository: pantryRepository)
+    }
+
     private static func makePersistentContext() -> ModelContext {
-        let schema = Schema([SavedMeal.self])
+        let schema = Schema([SavedMeal.self, PantryEntry.self])
         let config = ModelConfiguration(schema: schema, isStoredInMemoryOnly: false)
         // Crash here is a programmer error (schema mismatch), not a runtime fault.
         let container = try! ModelContainer(for: schema, configurations: config)

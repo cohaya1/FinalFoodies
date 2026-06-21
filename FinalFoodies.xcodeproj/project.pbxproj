@@ -114,6 +114,13 @@
 		CAFE01230000000000000000 /* SavedMealsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAFE00230000000000000000 /* SavedMealsView.swift */; };
 		CAFE03070000000000000000 /* SaveMealUseCaseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAFE02070000000000000000 /* SaveMealUseCaseTests.swift */; };
 		CAFE03080000000000000000 /* SavedMealsViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAFE02080000000000000000 /* SavedMealsViewModelTests.swift */; };
+		CAFE01240000000000000000 /* PantryItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAFE00240000000000000000 /* PantryItem.swift */; };
+		CAFE01250000000000000000 /* PantryRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAFE00250000000000000000 /* PantryRepository.swift */; };
+		CAFE01260000000000000000 /* PantryEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAFE00260000000000000000 /* PantryEntry.swift */; };
+		CAFE01270000000000000000 /* SwiftDataPantryRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAFE00270000000000000000 /* SwiftDataPantryRepository.swift */; };
+		CAFE01280000000000000000 /* PantryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAFE00280000000000000000 /* PantryViewModel.swift */; };
+		CAFE01290000000000000000 /* PantryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAFE00290000000000000000 /* PantryView.swift */; };
+		CAFE03090000000000000000 /* PantryViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAFE02090000000000000000 /* PantryViewModelTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -225,6 +232,13 @@
 		CAFE00230000000000000000 /* SavedMealsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Features/SavedMeals/SavedMealsView.swift; sourceTree = "<group>"; };
 		CAFE02070000000000000000 /* SaveMealUseCaseTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaveMealUseCaseTests.swift; sourceTree = "<group>"; };
 		CAFE02080000000000000000 /* SavedMealsViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavedMealsViewModelTests.swift; sourceTree = "<group>"; };
+		CAFE00240000000000000000 /* PantryItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Domain/Models/PantryItem.swift; sourceTree = "<group>"; };
+		CAFE00250000000000000000 /* PantryRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Domain/Repositories/PantryRepository.swift; sourceTree = "<group>"; };
+		CAFE00260000000000000000 /* PantryEntry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Data/Persistence/PantryEntry.swift; sourceTree = "<group>"; };
+		CAFE00270000000000000000 /* SwiftDataPantryRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Data/Repositories/SwiftDataPantryRepository.swift; sourceTree = "<group>"; };
+		CAFE00280000000000000000 /* PantryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Features/Pantry/PantryViewModel.swift; sourceTree = "<group>"; };
+		CAFE00290000000000000000 /* PantryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Features/Pantry/PantryView.swift; sourceTree = "<group>"; };
+		CAFE02090000000000000000 /* PantryViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PantryViewModelTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -492,6 +506,12 @@
 				CAFE00210000000000000000 /* SwiftDataSavedMealRepository.swift */,
 				CAFE00220000000000000000 /* SavedMealsViewModel.swift */,
 				CAFE00230000000000000000 /* SavedMealsView.swift */,
+				CAFE00240000000000000000 /* PantryItem.swift */,
+				CAFE00250000000000000000 /* PantryRepository.swift */,
+				CAFE00260000000000000000 /* PantryEntry.swift */,
+				CAFE00270000000000000000 /* SwiftDataPantryRepository.swift */,
+				CAFE00280000000000000000 /* PantryViewModel.swift */,
+				CAFE00290000000000000000 /* PantryView.swift */,
 			);
 			path = CraveCart;
 			sourceTree = "<group>";
@@ -507,6 +527,7 @@
 				CAFE02060000000000000000 /* AppContainerTests.swift */,
 				CAFE02070000000000000000 /* SaveMealUseCaseTests.swift */,
 				CAFE02080000000000000000 /* SavedMealsViewModelTests.swift */,
+				CAFE02090000000000000000 /* PantryViewModelTests.swift */,
 			);
 			path = CraveCart;
 			sourceTree = "<group>";
@@ -738,6 +759,12 @@
 				CAFE01210000000000000000 /* SwiftDataSavedMealRepository.swift in Sources */,
 				CAFE01220000000000000000 /* SavedMealsViewModel.swift in Sources */,
 				CAFE01230000000000000000 /* SavedMealsView.swift in Sources */,
+				CAFE01240000000000000000 /* PantryItem.swift in Sources */,
+				CAFE01250000000000000000 /* PantryRepository.swift in Sources */,
+				CAFE01260000000000000000 /* PantryEntry.swift in Sources */,
+				CAFE01270000000000000000 /* SwiftDataPantryRepository.swift in Sources */,
+				CAFE01280000000000000000 /* PantryViewModel.swift in Sources */,
+				CAFE01290000000000000000 /* PantryView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -769,6 +796,7 @@
 				CAFE03060000000000000000 /* AppContainerTests.swift in Sources */,
 				CAFE03070000000000000000 /* SaveMealUseCaseTests.swift in Sources */,
 				CAFE03080000000000000000 /* SavedMealsViewModelTests.swift in Sources */,
+				CAFE03090000000000000000 /* PantryViewModelTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

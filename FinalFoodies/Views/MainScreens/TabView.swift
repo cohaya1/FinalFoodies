@@ -72,6 +72,12 @@ struct TabViewUI: View {
                     Label("Saved", systemImage: "bookmark.fill")
                 }
                 .tag(6)
+
+            PantryView(viewModel: appContainer.makePantryViewModel())
+                .tabItem {
+                    Label("Pantry", systemImage: "cart.fill")
+                }
+                .tag(7)
         }
         .accentColor(.red)
     }

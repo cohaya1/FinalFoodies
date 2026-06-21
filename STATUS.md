@@ -32,7 +32,7 @@ Ordered. The skill picks the first unchecked item.
   no token is present (no fatalError at launch).
 - [x] **Slice 2 — SwiftData saved meals.** `SavedMealRepository` +
   `@Model` store; `SaveMealUseCase`; "Saved Meals" screen.
-- [ ] **Slice 3 — Pantry.** `PantryRepository` + SwiftData store; `PantryView`;
+- [x] **Slice 3 — Pantry.** `PantryRepository` + SwiftData store; `PantryView`;
   pantry items feed into `CravingRequest` and lower estimated cost.
 - [ ] **Slice 4 — Grocery list.** `CreateGroceryListUseCase`; `GroceryListView`;
   derive list from a chosen `MealOption`.
@@ -75,6 +75,18 @@ Ordered. The skill picks the first unchecked item.
   `TabViewUI`. `AppContainer` creates the persistent `ModelContext` and wires
   `SaveMealUseCase`. Added `SaveMealUseCaseTests` + `SavedMealsViewModelTests`
   (8 new files, 8 registered in pbxproj, { } / ( ) balanced 289/289, 64/64).
+
+- **2026-06-21 — Slice 3.** Pantry management: `PantryItem` domain model,
+  `PantryRepository` protocol, `PantryEntry` (`@Model`, shares the same
+  `ModelContext` container as `SavedMeal`), `SwiftDataPantryRepository` (injectable
+  `ModelContext`), `PantryViewModel` + `PantryView` (add/delete ingredients). Pantry
+  items are fed as `pantryItems` into `CravingRequest.submitCraving()` so the AI
+  prompt lists on-hand ingredients to lower estimated costs. New "Pantry" tab
+  (tag 7, `cart.fill`) added to `TabViewUI`. `AppContainer` wires `PantryRepository`
+  and passes it to both `CravingHomeViewModel` and `PantryViewModel`. Added
+  `PantryViewModelTests` (covers load, add, delete, empty-name guard, and pantry
+  items flowing into `CravingRequest`). 7 new files; 1 test file registered in
+  pbxproj ({ } / ( ) balanced 303/303, 64/64).
 
 ## Open questions / follow-ups
 

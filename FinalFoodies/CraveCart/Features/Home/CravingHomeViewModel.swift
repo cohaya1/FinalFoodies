@@ -20,10 +20,16 @@ final class CravingHomeViewModel: ObservableObject {
 
     private let generateMealOptions: MealOptionsGenerating
     private let saveMealUseCase: SaveMealUseCase?
+    private let pantryRepository: PantryRepository?
 
-    init(generateMealOptions: MealOptionsGenerating, saveMealUseCase: SaveMealUseCase? = nil) {
+    init(
+        generateMealOptions: MealOptionsGenerating,
+        saveMealUseCase: SaveMealUseCase? = nil,
+        pantryRepository: PantryRepository? = nil
+    ) {
         self.generateMealOptions = generateMealOptions
         self.saveMealUseCase = saveMealUseCase
+        self.pantryRepository = pantryRepository
     }
 
     func submitCraving() async {
@@ -37,10 +43,12 @@ final class CravingHomeViewModel: ObservableObject {
         errorMessage = nil
         defer { isLoading = false }
 
+        let pantryNames = (try? pantryRepository?.fetchAll())?.map(\.name) ?? []
         let request = CravingRequest(
             text: trimmed,
             budget: Decimal(string: budgetText),
-            servings: servings
+            servings: servings,
+            pantryItems: pantryNames
         )
 
         do {
